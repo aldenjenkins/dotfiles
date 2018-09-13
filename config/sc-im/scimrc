@@ -1,0 +1,8 @@
+map "s "e"
+map "t "E"
+nnoremap "n" "h"
+nnoremap "e" "j"
+nnoremap "i" "k"
+nnoremap "o" "l"
+
+

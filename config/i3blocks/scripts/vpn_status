@@ -1,0 +1,3 @@
+if ! ip route show | grep -q tun0 ; then
+echo "DOWN"
+fi

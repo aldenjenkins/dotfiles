@@ -1,0 +1,33 @@
+# some sane vim-like keybindings
+bind index,pager i previous-entry
+bind index,pager e next-entry
+bind index,pager g noop
+bind index,pager R group-reply
+bind index,pager u half-up
+bind index,pager d half-down
+macro index A \
+    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
+    "mark all new as read"
+
+# unbind index, pager z
+bind index gg first-entry
+bind index G last-entry
+bind index <tab> sync-mailbox
+bind index <space> collapse-thread
+
+bind pager gg top
+bind pager G bottom
+
+bind index f half-down
+bind index u half-up
+
+
+bind index s delete-message
+
+bind index,pager d reply
+bind index,pager h mail
+
+# Sidebar Navigation
+bind index,pager E sidebar-next
+bind index,pager I sidebar-prev
+bind index,pager O sidebar-open

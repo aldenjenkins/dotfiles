@@ -1,0 +1,50 @@
+command=$HOME/.scripts/$BLOCK_NAME
+separator_block_width=15
+markup=pango
+
+# [record]
+# command=cat ~/.scripts/.recording
+# interval=once
+# signal=9
+
+[i3mpd]
+label=mpd
+command=i3mpd
+interval=once
+align=left
+signal=11
+
+[i3weather]
+command=i3weather
+interval=3600
+
+[i3mail]
+label=mail📮
+command=i3mail
+interval=180
+align=left
+signal=12
+
+[i3volume]
+interval=once
+command=i3volume
+markup=pango
+signal=10
+
+# [iface]
+# #instance=wlan0
+# color=#00FF00
+# interval=10
+# 
+# [wifi]
+# #instance=wlp3s0
+# interval=10
+# 
+# [battery]
+# command=acpi | cut -d " " -f3-5 |  sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/❓/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g"
+# interval=5
+
+#[time]
+#label=time📅
+#command=echo $(date '+%Y %b %d %I:%M%p')🕓
+#interval=30

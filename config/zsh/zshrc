@@ -1,0 +1,139 @@
+python $HOME/creations/fortune.py | cowsay
+#KEYMAP=colemak
+
+
+function chpwd() {
+    emulate -L zsh
+    ls -a --color=auto
+}
+
+export TERM="xterm-256color"
+
+# Path to your oh-my-zsh installation.
+export ZSH=/home/alden/.oh-my-zsh
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git, zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
+
+DEFAULT_USER="alden"
+
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/bin/virtualenvwrapper.sh
+alias makemigrations="/home/alden/.virtualenvs/metoo/bin/python /home/alden/projects/django/metoo-backend/manage.py makemigrations"
+alias migrate="/home/alden/.virtualenvs/metoo/bin/python /home/alden/projects/django/metoo-backend/manage.py migrate"
+alias runserver="/home/alden/.virtualenvs/metoo/bin/python /home/alden/projects/django/metoo-backend/manage.py runserver"
+
+export PATH=$PATH:/usr/local/go/bin:/home/alden/go/binexport
+
+alias k=kubectl
+alias cat="pygmentize -O style=monokai -f console256 -g"
+alias ls="ls -a --color=auto"
+alias lsa="ls -la --color=auto"
+bindkey -v
+export EDITOR='vim'
+
+# Don't allow overwrite redirection ">" unless forced with ">|" as a safeguard.
+set -o noclobber
+
+# Binds for vi mode
+bindkey '^Z' undo
+bindkey -M vicmd 'n' vi-backward-char
+bindkey -M vicmd 'N' vi-first-non-blank
+bindkey -M vicmd 'i' vi-backward-char
+bindkey -M vicmd 'i' vi-backward-char
+bindkey -M vicmd 'o' vi-forward-char
+bindkey -M vicmd 'T' vi-add-eol
+bindkey -M vicmd 't' vi-add-next
+bindkey -M vicmd 'S' vi-insert-bol
+bindkey -M vicmd 's' vi-insert
+bindkey -M vicmd 'l' vi-backward-word
+bindkey -M vicmd 'L' vi-backward-blank-word
+bindkey -M vicmd 'u' vi-forward-word-end
+bindkey -M vicmd 'U' vi-forward-blank-word-end
+bindkey -M vicmd 'y' vi-forward-word
+bindkey -M vicmd 'Y' vi-forward-blank-word
+bindkey -M vicmd 'K' vi-rev-repeat-search
+bindkey -M vicmd 'k' vi-repeat-search
+bindkey -M vicmd 'c' vi-yank
+bindkey -M vicmd 'C' vi-yank-whole-line
+bindkey -M vicmd 'w' vi-change
+bindkey -M vicmd 'W' vi-change-eol
+bindkey -M vicmd 's' vi-insert
+bindkey -M vicmd 'S' vi-insert-bol
+bindkey -M vicmd 'z' undo
+bindkey -M vicmd 'Z' redo
+#bindkey -M vicmd 'l' vi-open-line-below
+
+# For vim mappings:
+	stty -ixon
+
+alias bell='echo'
+alias zshrc='vim /home/alden/.zshrc'
+
+ # Do menu-driven completion.
+ zstyle ':completion:*' menu select=2
+
+ # Color completion for some things.
+ # http://linuxshellaccount.blogspot.com/2008/12/color-completion-using-zsh-modules-on.html
+ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+ # formatting and messages
+ # http://www.masterzen.fr/2009/04/19/in-love-with-zsh-part-one/
+ zstyle ':completion:*' verbose yes
+ zstyle ':completion:*:descriptions' format "$fg[yellow]%B--- %d%b"
+ zstyle ':completion:*:messages' format '%d'
+ zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
+
+ # allows typing ..[TAB] for auto completion of / just like in bash
+ zstyle ':completion:*' special-dirs true
+
+alias inst='sudo pacman -S $@'
+alias search='sudo pacman -Ss $@'
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.config/zsh/prompt.sh
+
+
+export PATH=$PATH:$HOME/.scripts
+alias cal=gcalcli
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:~/.gem/ruby/2.5.0/bin
+
+#[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+alias t='/usr/bin/t --task-dir ~/tasks --list tasks'
+
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/alden/Downloads/google-cloud-sdk/path.zsh.inc' ]; then 
+    source '/home/alden/Downloads/google-cloud-sdk/path.zsh.inc';
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/alden/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then
+    source '/home/alden/Downloads/google-cloud-sdk/completion.zsh.inc';
+fi
+alias k=kubectl
+
+
+#export PATH=/home/alden/Downloads/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/home/alden/.gem/ruby/2.5.0/bin:~/bin/pycharm-2018.1.4/bin/pycharm.sh/
+
+export JIRA_HOME='/home/alden/etc/jira_home'
+alias scrotclip= 'scrot -s ~/foo.png && xclip ~/foo.png && rm ~/foo.png'
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias vim=nvim
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/alden/src/node/static-site-form-submission/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/alden/src/node/static-site-form-submission/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/alden/src/node/static-site-form-submission/node_modules/tabtab/.completions/sls.zsh ]] && . /home/alden/src/node/static-site-form-submission/node_modules/tabtab/.completions/sls.zsh
+alias chromium-browser=chromium

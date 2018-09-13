@@ -1,0 +1,10 @@
+local/bash-pipes 1.2-2
+local/ffmpeg-compat-54 1.2.12-2
+local/package-query 1.9-3
+local/pcmciautils 018-8 (base)
+local/private-internet-access-vpn 3.3.3-6
+local/ripmime r13.a556ffe-2
+local/spotify 1.0.80.480-1
+local/urlscan 0.8.6-1
+local/urlview 0.9-12
+local/yaourt 1.9-1
