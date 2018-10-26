@@ -11,7 +11,6 @@ fortunes = [
    "A fresh start will put you on your way.",
    "A friend asks only for your time not your money.",
    "A friend is a present you give yourself.",
-   "A gambler not only will lose what he has, but also will lose what he doesn’t have.",
    "A golden egg of opportunity falls into your lap this month.",
    "A good friendship is often more important than a passionate romance.",
    "A good time to finish up old tasks. (2)",
@@ -354,7 +353,12 @@ fortunes = [
    "Your reputation is your wealth.",
    "Your success will astonish everyone. (2)",
    "Your talents will be recognized and suitably rewarded.",
-   "Your work interests can capture the highest status or prestige. "
+   "Your work interests can capture the highest status or prestige. ",
+   "Who looks outside, dreams; who looks inside, awakes.",
+   "Everything that irritates us about others can lead us to an understanding of ourselves.",
+   "Even a happy life cannot be without a measure of darkness",
+   "The word happy would lose its meaning if it were not balanced by sadness.",
+   "It is far better take things as they come along with patience and equanimity.",
 ]
 
 def main():

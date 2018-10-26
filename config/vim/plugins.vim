@@ -61,7 +61,7 @@ Plug 'mattn/gist-vim'
     let g:gist_update_on_write = 2
     " Only :w! updates a gist
 " }
-Plug 'mattn/webapi-vim'
+"Plug 'mattn/webapi-vim'
 " < Auxiliary library > {
 " }
 "Plug 'vim-scripts/TaskList.vim'
@@ -140,7 +140,7 @@ Plug 'tmhedberg/matchit'
 " < Extended matching with "%" > {
 " }
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'JamshedVesuna/vim-markdown-preview'
+"Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tmhedberg/SimpylFold'
 Plug 'vimwiki/vimwiki'
@@ -165,36 +165,44 @@ Plug 'fisadev/vim-ctrlp-cmdpalette'
 " Zen coding
 Plug 'mattn/emmet-vim'
 " Python autocompletion, go to definition.
-Plug 'davidhalter/jedi-vim'
-" All these mappings work only for python code:
-" Go to definition
-let g:jedi#goto_command = '<leader>d'
-" Find ocurrences
-let g:jedi#usages_command = '<leader>o'
-" Find assignments
-let g:jedi#goto_assignments_command = '<leader>a'
-" Go to definition in new tab
-nmap <leader>t :tab split<CR>:call jedi#goto()<CR>
+"Plug 'davidhalter/jedi-vim'
+"" All these mappings work only for python code:
+"" Go to definition
+"let g:jedi#completions_enabled = 0
+"
+"let g:jedi#goto_command = '<leader>d'
+"" Find ocurrences
+"let g:jedi#usages_command = '<leader>o'
+"" Find assignments
+"let g:jedi#goto_assignments_command = '<leader>a'
+"let g:jedi#auto_initialization = 0
+"autocmd Filetype py,c,h,php,java let g:jedi#auto_initialization = 1
+"" Go to definition in new tab
+"nmap <leader>t :tab split<CR>:call jedi#goto()<CR>
 " Better autocompletion
-Plug 'Shougo/neocomplcache.vim'
-" most of them not documented because I'm not sure how they work
-" (docs aren't good, had to do a lot of trial and error to make
-" it play nice)
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_ignore_case = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_auto_select = 1
-let g:neocomplcache_enable_fuzzy_completion = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_fuzzy_completion_start_length = 1
-let g:neocomplcache_auto_completion_start_length = 1
-let g:neocomplcache_manual_completion_start_length = 1
-let g:neocomplcache_min_keyword_length = 1
-let g:neocomplcache_min_syntax_length = 1
-" complete with workds from any opened file
-let g:neocomplcache_same_filetype_lists = {}
-let g:neocomplcache_same_filetype_lists._ = '_'
+" Plug 'Shougo/neocomplcache.vim'
+" " most of them not documented because I'm not sure how they work
+" " (docs aren't good, had to do a lot of trial and error to make
+" " it play nice)
+" let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_enable_ignore_case = 1
+" let g:neocomplcache_enable_smart_case = 1
+" let g:neocomplcache_enable_auto_select = 1
+" let g:neocomplcache_enable_fuzzy_completion = 1
+" let g:neocomplcache_enable_camel_case_completion = 1
+" let g:neocomplcache_enable_underbar_completion = 1
+" let g:neocomplcache_fuzzy_completion_start_length = 1
+" let g:neocomplcache_auto_completion_start_length = 1
+" let g:neocomplcache_manual_completion_start_length = 1
+" let g:neocomplcache_min_keyword_length = 1
+" let g:neocomplcache_min_syntax_length = 1
+" " complete with workds from any opened file
+" let g:neocomplcache_same_filetype_lists = {}
+" let g:neocomplcache_same_filetype_lists._ = '_'
+" " Disable NeoComplCache for certain filetypes
+" if has('autocmd')
+"   autocmd FileType rmd,md,pandoc,markdown nested NeoComplCacheLock
+"  endif
 
 " ... some plugins left out here intentionally
 " Git/mercurial/others diff icons on the side of the file lines
@@ -215,7 +223,7 @@ Plug 'mhinz/vim-signify'
 " Window Chooser ------------------------------
 
 " mapping
-nmap  -  <Plug>(choosewin)
+"nmap  -  <Plug>(choosewin)
 " show big letters
 let g:choosewin_overlay_enable = 1
 " Python and other languages code checker
@@ -234,6 +242,25 @@ let g:syntastic_enable_signs = 0
 "let g:syntastic_style_warning_symbol = '⚠'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
+Plug 'christoomey/vim-tmux-navigator' "{
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <c-n> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-e> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-o> :TmuxNavigateRight<cr>
+" Disable tmux navigator when zooming the Vim pane
+map <Tab> <silent>
+nnoremap <Tab> <silent>
+autocmd Filetype rmd nnoremap <Tab> 6i&nbsp;<esc>l
+nnoremap <silent> <c-i> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-.> :TmuxNavigatePrevious<cr><Paste>
+"let g:tmux_navigator_disable_when_zoomed = 1
+"}
+
 
 "}
+
 

@@ -30,10 +30,10 @@
 <secondary_color_source type="string"></secondary_color_source>
 <vertical_paned_position type="int32">0</vertical_paned_position>
 <window type="dynv">
-<height type="int32">991</height>
-<width type="int32">492</width>
-<x type="int32">1236</x>
-<y type="int32">54</y>
+<height type="int32">919</height>
+<width type="int32">757</width>
+<x type="int32">1732</x>
+<y type="int32">90</y>
 </window>
 </main>
 <picker type="dynv">

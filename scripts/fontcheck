@@ -1,0 +1,8 @@
+#!/bin/bash
+echo -e "| worksheet |
+| buffering |
+| difficult |
+| finishing |
+| different |
+| 🤷 Shrug ¯\_(ツ)_/¯ |
+| efficient |" | pango-view --font="$@" /dev/stdin

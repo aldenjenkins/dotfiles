@@ -4,7 +4,7 @@ python $HOME/creations/fortune.py | cowsay
 
 function chpwd() {
     emulate -L zsh
-    ls -a --color=auto
+    ls -a --color=auto --group-directories-first
 }
 
 export TERM="xterm-256color"
@@ -32,8 +32,8 @@ export PATH=$PATH:/usr/local/go/bin:/home/alden/go/binexport
 
 alias k=kubectl
 alias cat="pygmentize -O style=monokai -f console256 -g"
-alias ls="ls -a --color=auto"
-alias lsa="ls -la --color=auto"
+alias ls="ls -a --color=auto --group-directories-first"
+alias lsa="ls -la --color=auto --group-directories-first"
 bindkey -v
 export EDITOR='vim'
 
@@ -105,9 +105,6 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/us
 
 #[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
-alias t='/usr/bin/t --task-dir ~/tasks --list tasks'
-
-
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/alden/Downloads/google-cloud-sdk/path.zsh.inc' ]; then 
@@ -137,3 +134,26 @@ alias vim=nvim
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/alden/src/node/static-site-form-submission/node_modules/tabtab/.completions/sls.zsh ]] && . /home/alden/src/node/static-site-form-submission/node_modules/tabtab/.completions/sls.zsh
 alias chromium-browser=chromium
+export PATH=~/.local/bin:/home/alden/Downloads/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/home/alden/.gem/ruby/2.5.0/bin:/home/alden/.fzf/bin
+
+alias pycharm='/home/alden/bin/pycharm-2018.1.4/bin/pycharm.sh'
+alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+
+alias metoo-shell="workon metoo && /home/alden/src/django/metoo-backend/metoo-backend && /home/alden/.virtualenvs/metoo/bin/python manage.py shell"
+
+# 10ms for key sequences
+KEYTIMEOUT=1
+
+# Fix up down fuzzy search with vim mode make search up and down work, so partially type and hit up/down to find relevant stuff
+# start typing + [Up-Arrow] - fuzzy find history forward
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+  autoload -U up-line-or-beginning-search
+  zle -N up-line-or-beginning-search
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+# start typing + [Down-Arrow] - fuzzy find history backward
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+  autoload -U down-line-or-beginning-search
+  zle -N down-line-or-beginning-search
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi

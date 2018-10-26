@@ -14,6 +14,7 @@ x-scheme-handler/mailto=thunderbird.desktop
 message/rfc822=thunderbird.desktop
 x-scheme-handler/about=chromium.desktop
 x-scheme-handler/unknown=chromium.desktop
+application/pdf=mupdf.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;

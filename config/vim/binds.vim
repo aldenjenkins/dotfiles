@@ -6,36 +6,17 @@ set pastetoggle=<F8>
 set showmode
 " }
 
+
+set guioptions+=a
+
+
 " Disable autocomment new lines below commented lines{
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " }
 
-" au BufNewFile,BufRead *.py
-"     \ set tabstop=4
-"     \ set softtabstop=4
-"     \ set shiftwidth=4
-"     \ set textwidth=79
-"     \ set expandtab
-"     \ set autoindent
-"     \ set fileformat=unix
-"
-" au BufNewFile,BufRead *.js,*.html,*.css
-"     \ set tabstop=2
-"     \ set softtabstop=2
-"     \ set shiftwidth=2
-"
-
-"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
 set encoding=utf-8
 
 set nowrap
-
-"------------------------------------------------------------
-" Features {{{1
-"
-" These options and commands enable some very useful features in Vim, that
-" no user should have to live without.
 
 " Set 'nocompatible' to ward off unexpected things that your distro might
 " have made, as well as sanely reset options when re-sourcing .vimrc
@@ -50,29 +31,13 @@ filetype indent plugin on
 syntax on
 
 " Leader - ( Spacebar )
-let mapleader = ","
+let mapleader = "," 
 " Enable folding with the spacebar
-nnoremap <space> za
+nnoremap "  " za
 
 syntax on
-"colorscheme onedark
-
 
 set number relativenumber
-
-"Description {{{
-"
-"   Original by Shai Coleman, 2008-04-21.  http://colemak.com/
-"   Modified by Esko, 2012-09-14.
-"
-"   Load colemak.vim after all other Vim scripts.
-"
-"   Refer to ../README.markdown for keymap explanations.
-" }}}
-" Require Vim >=7.0 {{{
-if v:version < 700 | echohl WarningMsg | echo "colemak.vim: You need Vim version 7.0 or later." | echohl None | finish | endif
-" }}}
-"
 
 """"" PYTHON DEV CONFIG
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
@@ -104,6 +69,32 @@ function! s:infer_filetype ()
         endif
     endfor
 endfunction
+
+" Compile document
+	map <leader>c :!compiler <c-r>%<CR>
+
+" Navigating with guides
+	inoremap ;<Space> <Esc>/<++><Enter>"_c4l
+	vnoremap ;<Space> <Esc>/<++><Enter>"_c4l
+	nnoremap ;<Space> <Esc>/<++><Enter>"_c4l
+
+"MARKDOWN
+	autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
+	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
+	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
+	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
+	autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
+	autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
+	autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
+	autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
+	autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc><Up>A
+	autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc><Up>A
+	autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc><Up>A
+	autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
+	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
+	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
+	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
+	autocmd Filetype rmd nnoremap <Tab> 6i&nbsp;<esc>l
 
 
 "=====[ Enable Nmap command for documented mappings ]================
@@ -190,8 +181,8 @@ nnoremap p t|xnoremap p t|onoremap p t|
 nnoremap P T|xnoremap P T|onoremap P T|
 nnoremap b ;|xnoremap b ;|onoremap b ;|
 nnoremap B ,|xnoremap B ,|onoremap B ,|
-nnoremap <C-i> gg|xnoremap <C-i> gg|onoremap <C-i> gg|
-nnoremap <C-e> G|xnoremap <C-e> G|onoremap <C-e> G|
+"nnoremap <C-i> gg|xnoremap <C-i> gg|onoremap <C-i> gg|
+"nnoremap <C-e> G|xnoremap <C-e> G|onoremap <C-e> G|
 " }}}
 
  " Easier to type, and I never use the default behavior.
@@ -242,10 +233,6 @@ set wildmenu
 
 " Show partial commands in the last line of the screen
 set showcmd
-
-" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
-" mapping of <C-L> below)
-set hlsearch
 
 " make searching better
 nnoremap <silent> <leader>, :noh<cr> " Stop highlight after searching
@@ -322,37 +309,37 @@ set sidescrolloff=15
 set sidescroll=1
 
 "Toggle relative numbering, and set to absolute on loss of focus or insert mode
-set rnu
-function! ToggleNumbersOn()
-    set nu!
-    set rnu
-endfunction
-function! ToggleRelativeOn()
-    set rnu!
-    set nu
-endfunction
-autocmd FocusLost * call ToggleRelativeOn()
-autocmd FocusGained * call ToggleRelativeOn()
-autocmd InsertEnter * call ToggleRelativeOn()
-autocmd InsertLeave * call ToggleRelativeOn()
+" set rnu
+" function! ToggleNumbersOn()
+"     set nu!
+"     set rnu
+" endfunction
+" function! ToggleRelativeOn()
+"     set rnu!
+"     set nu
+" endfunction
+" autocmd FocusLost * call ToggleRelativeOn()
+" autocmd FocusGained * call ToggleRelativeOn()
+" autocmd InsertEnter * call ToggleRelativeOn()
+" autocmd InsertLeave * call ToggleRelativeOn()
 
 "Use enter to create new lines w/o entering insert mode
 nnoremap <CR> o<Esc>
 
 "Below is to fix issues with the ABOVE mappings in quickfix window
-autocmd CmdwinEnter * nnoremap <CR> <CR>
-autocmd BufReadPost quickfix nnoremap <CR> <CR>
+"autocmd CmdwinEnter * nnoremap <CR> <CR>
+"autocmd BufReadPost quickfix nnoremap <CR> <CR>
 
 " Quicker window movement
-nnoremap <C-e> <C-w>j
-nnoremap <C-i> <C-w>k
-nnoremap <C-n> <C-w>h
-nnoremap <C-o> <C-w>l
-
+" nnoremap <C-e> <C-w>j
+" nnoremap <C-i> <C-w>k
+" nnoremap <C-n> <C-w>h
+" nnoremap <C-o> <C-w>l
+" 
 
 " Navigate properly when lines are wrapped
-nnoremap e gj
-nnoremap i gk
+"nnoremap e gj
+"nnoremap i gk
 
 
 " Always use vertical diffs
@@ -484,14 +471,16 @@ set incsearch       "Lookahead as search pattern is specified
 set ignorecase      "Ignore case in all searches...
 set smartcase       "...unless uppercase letters used
 
+" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
+" mapping of <C-L> below)
 set hlsearch        "Highlight all matches
 highlight clear Search
 highlight       Search    ctermfg=White  cterm=bold
 highlight    IncSearch    ctermfg=White  ctermbg=Red    cterm=bold
 
 " Absolute direction for n and N...
-nnoremap  <silent><expr> k  'Nn'[v:searchforward] . ":call HLNext()\<CR>"
-nnoremap  <silent><expr> K  'nN'[v:searchforward] . ":call HLNext()\<CR>"
+" nnoremap  <silent><expr> k  'Nn'[v:searchforward] . ":call HLNext()\<CR>"
+" nnoremap  <silent><expr> K  'nN'[v:searchforward] . ":call HLNext()\<CR>"
 
 "Delete in normal mode to switch off highlighting till next search and clear messages...
 "Nmap <silent> <BS> [Cancel highlighting]  :call HLNextOff() <BAR> :nohlsearch <BAR> :call VG_Show_CursorColumn('off')<CR>::HierClear<CR>
@@ -515,16 +504,16 @@ call matchadd('InvisibleSpaces', '\S\@<=\s\+\%#\ze\s*$', -10)
 
 
 
-augroup VisibleNaughtiness
-    autocmd!
-    autocmd BufEnter  *       set list
-    autocmd BufEnter  *       set list
-    autocmd BufEnter  *.txt   set nolist
-    autocmd BufEnter  *.vp*   set nolist
-    autocmd BufEnter  *       if !&modifiable
-    autocmd BufEnter  *           set nolist
-    autocmd BufEnter  *       endif
-augroup END
+" augroup VisibleNaughtiness
+"     autocmd!
+"     autocmd BufEnter  *       set list
+"     autocmd BufEnter  *       set list
+"     autocmd BufEnter  *.txt   set nolist
+"     autocmd BufEnter  *.vp*   set nolist
+"     autocmd BufEnter  *       if !&modifiable
+"     autocmd BufEnter  *           set nolist
+"     autocmd BufEnter  *       endif
+" augroup END
 
 "=====[ Highlight cursor ]===================
 
@@ -579,24 +568,28 @@ set nocursorline
 "     autocmd  BufEnter  *.vp*   :call MarkMargin(0)
 " augroup END
 
-function! FindDjangoSettings2() "{
-    if strlen($VIRTUAL_ENV) && has('python')
-        let django_check = system("pip freeze | grep -q Django")
-        if v:shell_error
-            echo 'django not installed.'
-        else
-            echo 'django is installed.'
-            let output = system("find $VIRTUAL_ENV \\( -wholename '*/lib/*' -or -wholename '*/install/' \\) -or \\( -name 'settings.py' -print0 \\) | tr '\n' ' '")
-            let outarray= split(output, '[\/]\+')
-            let module = outarray[-2] . '.' . 'settings'
-            let syspath = system("python -c 'import sys; print sys.path' | tr '\n' ' ' ")
-            let curpath = '/' . join(outarray[:-2], '/')
-            execute 'python import sys, os'
-            execute 'python sys.path.append("' . curpath . '")'
-            execute 'python sys.path.append("' . syspath . '")'
-            execute 'python sys.path = ' . syspath
-            execute 'python os.environ.setdefault("DJANGO_SETTINGS_MODULE", "' . module . '")'
-        endif
-    endif
-endfunction "}
+" function! FindDjangoSettings2() "{
+"     if strlen($VIRTUAL_ENV) && has('python')
+"         let django_check = system("pip freeze | grep -q Django")
+"         if v:shell_error
+"             echo 'django not installed.'
+"         else
+"             echo 'django is installed.'
+"             let output = system("find $VIRTUAL_ENV \\( -wholename '*/lib/*' -or -wholename '*/install/' \\) -or \\( -name 'settings.py' -print0 \\) | tr '\n' ' '")
+"             let outarray= split(output, '[\/]\+')
+"             let module = outarray[-2] . '.' . 'settings'
+"             let syspath = system("python -c 'import sys; print sys.path' | tr '\n' ' ' ")
+"             let curpath = '/' . join(outarray[:-2], '/')
+"             execute 'python import sys, os'
+"             execute 'python sys.path.append("' . curpath . '")'
+"             execute 'python sys.path.append("' . syspath . '")'
+"             execute 'python sys.path = ' . syspath
+"             execute 'python os.environ.setdefault("DJANGO_SETTINGS_MODULE", "' . module . '")'
+"         endif
+"     endif
+" endfunction "}
 
+
+
+" Eliminate delay from going from insert to normal mode
+set timeoutlen=1000 ttimeoutlen=0

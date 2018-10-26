@@ -13,9 +13,9 @@ exec --no-startup-id setxkbmap us -variant colemak -option caps:escape
 
 set $mod Mod1
 
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 4
 gaps inner 15
-gaps outer 15
+gaps outer 20
 
 set $term --no-startup-id st
 
@@ -60,6 +60,20 @@ bindsym $mod+Shift+a		exec $term -e ncpamixer
 bindsym $mod+l	        	[instance="vpn"] scratchpad show; [instance="vpn"] move position center
 #bindsym $mod+Shift+p		exec --no-startup-id "bash ~/.scripts/i3resize down"
 
+
+# Move any window to the scratchpad
+bindsym $mod+h move scratchpad
+bindsym $mod+minus scratchpad show
+
+
+bindsym $mod+w	        	[instance="peek"] scratchpad show; [instance="peek"] move position center
+for_window [instance="peek"] floating enable
+for_window [instance="peek"] resize set 1000 1000
+for_window [instance="peek"] move scratchpad
+for_window [instance="peek"] border pixel 5
+exec --no-startup-id $term -n peek -e peek
+
+
 # # First I have a tmux window used for background scripts.
 # # I'll later bind this to mod+u.
 # for_window [instance="dropdown"] floating enable
@@ -79,7 +93,7 @@ for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 5
-exec --no-startup-id $term -n math -f mono:pixelsize=24 -e python -q
+exec --no-startup-id $term -n math -f mono:pixelsize=14 python -q
 
 # Then I have a window running R I use for basic arithmetic
 # I'll later bind this to mod+a.
@@ -112,6 +126,7 @@ set $hibernate sudo systemctl suspend
 
 # keyboard repeat rate
 exec --no-startup-id xset r rate 290 25
+exec --no-startup-id greenclip daemon
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -137,6 +152,7 @@ client.background       $bg
 # PROTIP: You can also dynamically set dmenu's colors this way:
 # bindsym $mod+d exec --no-startup-id dmenu_run -fn "terminal-11" -nb "$fg" -nf "$bg" -sb "$bg" -sf "$fg"
 bindsym $mod+d exec rofi -show drun
+bindsym $mod+g exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 
 # bindsym $mod+n			focus left
@@ -215,6 +231,8 @@ bindsym $mod+f fullscreen toggle
 #bindsym $mod+x layout toggle split
 bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
 bindsym $mod+Shift+x		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
+
+#bindsym $mod+g exec --no-startup-id dmenurecord
 
 
 # toggle tiling / floating
