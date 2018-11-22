@@ -1,5 +1,5 @@
 <p align="center">
-![dotfiles](dotfiles-logo.png | width=550)
+<img src="dotfiles-logo.png" width=550px>
 </p>
 
 
