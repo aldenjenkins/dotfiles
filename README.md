@@ -1,4 +1,6 @@
-![dotfiles](dotfiles-logo.png)
+<p align="center">
+![dotfiles](dotfiles-logo.png | width=550)
+</p>
 
 
 My current setup
@@ -21,8 +23,8 @@ My current setup
 
 My current hardware setup:
 - Dell Latutude [E6410](https://engineering.purdue.edu/ECN/Support/KB/Docs/DellModelYears) 2010
-- [Kinesis Advantage Pro 1](https://www.amazon.co.uk/Kinesis-USB-Advantage-Pro-Keyboard/dp/B004X9B3JQ)
-- [KRK Rokit 5](https://www.amazon.co.uk/Kinesis-USB-Advantage-Pro-Keyboard/dp/B004X9B3JQ) for music
+- [Kinesis Advantage Pro 1](https://www.amazon.com/Kinesis-USB-Advantage-Pro-Keyboard/dp/B004X9B3JQ) Keyboard
+- [KRK Rokit 5](https://www.amazon.com/Kinesis-USB-Advantage-Pro-Keyboard/dp/B004X9B3JQ) pair for music listening, production.
 
 ![preview](preview.png)
 
