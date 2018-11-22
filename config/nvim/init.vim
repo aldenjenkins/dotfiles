@@ -45,3 +45,4 @@ if vim_plug_just_installed
 endif
 
 exe 'source $HOME/.config/vim/binds.vim' 
+exe 'source $HOME/.config/vim/etc.vim' 

@@ -1,0 +1,9 @@
+set adjust-open width
+
+map n scroll left
+map e scroll down
+map i scroll up
+map o scroll right
+
+map k search forward
+map K search backward

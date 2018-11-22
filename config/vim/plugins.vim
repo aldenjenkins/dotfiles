@@ -16,7 +16,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'https://github.com/junegunn/vim-plug.git'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/indentpython.vim'
-"Plug 'Valloric/YouCompleteMe'
+Plug 'nvie/vim-flake8'
+Plug 'Valloric/YouCompleteMe'
 "let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
 "let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 "let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
@@ -24,6 +25,8 @@ Plug 'vim-scripts/indentpython.vim'
 "let g:ycm_complete_in_strings = 1 " Completion in string
 Plug 'scrooloose/nerdtree'
 " Nerdtree config{
+    let g:NERDTreeHijackNetrw = 1
+    au VimEnter NERD_tree_1 enew | execute 'NERDTree '.argv()[0]
     " start nerdtree at startup if no file was specified
     autocmd StdinReadPre * let s:std_in=1
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -254,11 +257,27 @@ nnoremap <silent> <c-o> :TmuxNavigateRight<cr>
 " Disable tmux navigator when zooming the Vim pane
 map <Tab> <silent>
 nnoremap <Tab> <silent>
-autocmd Filetype rmd nnoremap <Tab> 6i&nbsp;<esc>l
+"autocmd Filetype rmd nnoremap <Tab> 6i&nbsp;<esc>l
 nnoremap <silent> <c-i> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-.> :TmuxNavigatePrevious<cr><Paste>
 "let g:tmux_navigator_disable_when_zoomed = 1
 "}
+
+Plug 'SkyLeach/pudb.vim'
+"if has('nvim')
+"  let g:python_host_prog='~/.virtualenvs/neovim2/bin/python'
+"  let g:python3_host_prog='~/.virtualenvs/neovim3/bin/python'
+"  " set the virtual env python used to launch the debugger
+"  let g:pudb_python='~/.virtualenvs/poweruser_tools/bin/python'
+"  " set the entry point (script) to use for pudb
+"  let g:pudb_entry_point='~/src/poweruser_tools/test/test_templates.py'
+"  " Unicode symbols work fine (nvim, iterm, tmux, nyovim tested)
+"  let g:pudb_breakpoint_symbol='☠'
+"endif
+
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
+Plug 'roxma/vim-tmux-clipboard'
 
 
 "}

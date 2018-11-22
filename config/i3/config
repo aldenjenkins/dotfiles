@@ -93,7 +93,7 @@ for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 5
-exec --no-startup-id $term -n math -f mono:pixelsize=14 python -q
+exec --no-startup-id $term -n math -f mono:pixelsize=14 qalc
 
 # Then I have a window running R I use for basic arithmetic
 # I'll later bind this to mod+a.

@@ -1,4 +1,3 @@
-colorscheme onedark
 
 " Pasting{
 "nnoremap <F5> :set invpaste paste?<CR>
@@ -7,68 +6,23 @@ set showmode
 " }
 
 
-set guioptions+=a
 
 
 " Disable autocomment new lines below commented lines{
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " }
 
-set encoding=utf-8
 
-set nowrap
 
-" Set 'nocompatible' to ward off unexpected things that your distro might
-" have made, as well as sanely reset options when re-sourcing .vimrc
-set nocompatible
-
-" Attempt to determine the type of a file based on its name and possibly its
-" contents. Use this to allow intelligent auto-indenting for each filetype,
-" and for plugins that are filetype specific.
-filetype indent plugin on
-
-" Enable syntax highlighting
-syntax on
 
 " Leader - ( Spacebar )
 let mapleader = "," 
 " Enable folding with the spacebar
 nnoremap "  " za
 
-syntax on
 
-set number relativenumber
-
-""""" PYTHON DEV CONFIG
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 
 onoremap c c
-" https://code.djangoproject.com/wiki/UsingVimWithDjango
-autocmd FileType python set sw=4
-autocmd FileType python set ts=4
-autocmd FileType python set sts=4
-
-"====[ Work out what kind of file this is ]========
-filetype plugin indent on
-augroup FiletypeInference
-    autocmd!
-    autocmd BufNewFile,BufRead  *.t      setfiletype perl
-    autocmd BufNewFile,BufRead  *.pod    setfiletype pod
-    autocmd BufNewFile,BufRead  *.itn    setfiletype itn
-    autocmd BufNewFile,BufRead  *        call s:infer_filetype()
-augroup END
-function! s:infer_filetype ()
-    for line in getline(1,20)
-        if line =~ '^\s*use\s*v\?5\.\S\+\s*;\s*$'
-            setfiletype perl
-            return
-        elseif line =~ '^\s*use\s*v\?6\s*;\s*$'
-            setfiletype perl6
-            return
-        endif
-    endfor
-endfunction
 
 " Compile document
 	map <leader>c :!compiler <c-r>%<CR>
@@ -94,19 +48,10 @@ endfunction
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
-	autocmd Filetype rmd nnoremap <Tab> 6i&nbsp;<esc>l
+	autocmd Filetype rmd inoremap <Tab> 6i&nbsp;<esc>l
 
 
-"=====[ Enable Nmap command for documented mappings ]================
-"runtime plugin/documap.vim
-
-"====[ Edit and auto-update this config file and plugins ]==========
-
-"augroup VimReload
-"autocmd!
-"    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-"augroup END
-
+nmap <silent>  ;v    :next $MYVIMRC<CR>
 "Nmap <silent>  ;v   [Edit .vimrc]          :next $MYVIMRC<CR>
 "Nmap           ;vv  [Edit .vim/plugin/...] :next ~/.vim/plugin/
 
@@ -202,37 +147,7 @@ noremap gi k
 noremap E G
 noremap I gg
 
-"------------------------------------------------------------
-" Must have options {{{1
-"
-" These are highly recommended options.
 
-" Vim with default settings does not allow easy switching between multiple files
-" in the same editor window. Users can use multiple split windows or multiple
-" tab pages to edit multiple files, but it is still best to enable an option to
-" allow easier switching between files.
-"
-" One such option is the 'hidden' option, which allows you to re-use the same
-" window and switch from an unsaved buffer without saving it first. Also allows
-" you to keep an undo history for multiple files when re-using the same window
-" in this way. Note that using persistent undo also lets you undo in multiple
-" files even in the same window, but is less efficient and is actually designed
-" for keeping undo history after closing Vim entirely. Vim will complain if you
-" try to quit without saving, and swap files will keep you safe if your computer
-" crashes.
-set hidden
-
-" Note that not everyone likes working this way (with the hidden option).
-" Alternatives include using tabs or split windows instead of re-using the same
-" window as mentioned above, and/or either of the following options:
-" set confirm
-" set autowriteall
-
-" Better command-line completion
-set wildmenu
-
-" Show partial commands in the last line of the screen
-set showcmd
 
 " make searching better
 nnoremap <silent> <leader>, :noh<cr> " Stop highlight after searching
@@ -243,117 +158,34 @@ set showmatch
 "set list listchars=tab:»·,trail:·,nbsp:·
 "set list listchars=tab:»·,trail:·,nbsp:·
 
-"Allow usage of mouse in iTerm
-set ttyfast
-
-" Modelines have historically been a source of security vulnerabilities. As
-" such, it may be a good idea to disable them and use the securemodelines
-" script, <http://www.vim.org/scripts/script.php?script_id=1876>.
-" set nomodeline
 
 
-"------------------------------------------------------------
-" Usability options {{{1
-"
-" These are options that users frequently set in their .vimrc. Some of them
-" change Vim's behaviour in ways which deviate from the true Vi way, but
-" which are considered to add usability. Which, if any, of these options to
-" use is very much a personal preference, but they are harmless.
-
-" Use case insensitive search, except when using capital letters
-set ignorecase
-set smartcase
-
-" Allow backspacing over autoindent, line breaks and start of insert action
-set backspace=indent,eol,start
-
-" When opening a new line and no filetype-specific indenting is enabled, keep
-" the same indent as the line you're currently on. Useful for READMEs, etc.
-set autoindent
-
-" Stop certain movements from always going to the first character of a line.
-" While this behaviour deviates from that of Vi, it does what most users
-" coming from other editors would expect.
-set nostartofline
-
-" Display the cursor position on the last line of the screen or in the status
-" line of a window
-set ruler
-
-set noswapfile  " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set history=50
 
 "set wrapmargin=0
 "set colorcolumn=+1
 
-" Open new split panes to right and bottom, which feels more natural
-" set splitbelow
-set splitright
-
-" Auto resize Vim splits to active split
-set winwidth=104
-set winheight=5
-set winminheight=5
-set winheight=999
-
-"HTML Editing
-set matchpairs+=<:>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
-" ================ Scrolling ========================
 
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1
-
-"Toggle relative numbering, and set to absolute on loss of focus or insert mode
-" set rnu
-" function! ToggleNumbersOn()
-"     set nu!
-"     set rnu
-" endfunction
-" function! ToggleRelativeOn()
-"     set rnu!
-"     set nu
-" endfunction
-" autocmd FocusLost * call ToggleRelativeOn()
-" autocmd FocusGained * call ToggleRelativeOn()
-" autocmd InsertEnter * call ToggleRelativeOn()
-" autocmd InsertLeave * call ToggleRelativeOn()
 
 "Use enter to create new lines w/o entering insert mode
 nnoremap <CR> o<Esc>
 
-"Below is to fix issues with the ABOVE mappings in quickfix window
-"autocmd CmdwinEnter * nnoremap <CR> <CR>
-"autocmd BufReadPost quickfix nnoremap <CR> <CR>
-
-" Quicker window movement
-" nnoremap <C-e> <C-w>j
-" nnoremap <C-i> <C-w>k
-" nnoremap <C-n> <C-w>h
-" nnoremap <C-o> <C-w>l
-" 
 
 " Navigate properly when lines are wrapped
 "nnoremap e gj
 "nnoremap i gk
 
 
-" Always use vertical diffs
-set diffopt+=vertical
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-      syntax on
-endif
+"if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+"      syntax on
+"endif
 
-"" MORE AWESOME HOTKEYS
-"
-"
 " Run the q macro
 nnoremap <leader>q @q
 
@@ -393,156 +225,17 @@ nnoremap <silent> <C-Up> :resize -5<cr>
 " Switch between the last two files
 "nnoremap <leader><leader> <c-^>
 
-
-
-" Always display the status line, even if only one window is displayed
-set laststatus=2
-
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
-set confirm
-
-" Use visual bell instead of beeping when doing something wrong
-set visualbell
-
-" And reset the terminal code for the visual bell. If visualbell is set, and
-" this line is also included, vim will neither flash nor beep. If visualbell
-" is unset, this does nothing.
-" set t_vb=
-
-" Enable use of the mouse for all modes
-set mouse=a
-
-set autowrite     " Automatically :write before running commands
-set autoread      " Reload files changed outside vim
-
-" Set the command window height to 2 lines, to avoid many cases of having to
-" "press <Enter> to continue"
-set cmdheight=2
-
-" Quickly time out on keycodes, but never time out on mappings
-set notimeout ttimeout ttimeoutlen=200
-
-"------------------------------------------------------------
-" Indentation options {{{1
-"
-" Indentation settings according to personal preference.
-
-" Indentation settings for using 4 spaces instead of tabs.
-" Do not change 'tabstop' from its default value of 8 with this setup.
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-
-" Indentation settings for using hard tabs for indent. Display tabs as
-" four characters wide.
-"set shiftwidth=4
-"set tabstop=4
-
-
-"------------------------------------------------------------
-" Mappings {{{1
-"
-" Useful mappings
-
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
 
 "------------------------------------------------------------
-let g:onedark_termcolors=256
-autocmd BufWritePost .vimrc source %
 nnoremap k n
 nnoremap K N
 
-function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
-endfunction
-com! DiffSaved call s:DiffWithSaved()
-
-
-"====[ Set up smarter search behaviour ]=======================
-
-set incsearch       "Lookahead as search pattern is specified
-set ignorecase      "Ignore case in all searches...
-set smartcase       "...unless uppercase letters used
-
-" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
-" mapping of <C-L> below)
-set hlsearch        "Highlight all matches
-highlight clear Search
-highlight       Search    ctermfg=White  cterm=bold
-highlight    IncSearch    ctermfg=White  ctermbg=Red    cterm=bold
-
-" Absolute direction for n and N...
-" nnoremap  <silent><expr> k  'Nn'[v:searchforward] . ":call HLNext()\<CR>"
-" nnoremap  <silent><expr> K  'nN'[v:searchforward] . ":call HLNext()\<CR>"
-
-"Delete in normal mode to switch off highlighting till next search and clear messages...
-"Nmap <silent> <BS> [Cancel highlighting]  :call HLNextOff() <BAR> :nohlsearch <BAR> :call VG_Show_CursorColumn('off')<CR>::HierClear<CR>
-
-"Double-delete to remove trailing whitespace...
-"Nmap <silent> <BS><BS>  [Remove trailing whitespace] mz:call TrimTrailingWS()<CR>`z
-
-"function! TrimTrailingWS ()
-"    if search('\s\+$', 'cnw')
-"        :%s/\s\+$//g
-"    endif
-"endfunction
-
-"====[ Toggle visibility of naughty characters ]============
-
-" Make naughty characters visible...
-" (uBB is right double angle, uB7 is middle dot)
-set lcs=tab:»·,trail:␣,nbsp:˷
-highlight InvisibleSpaces ctermfg=Black ctermbg=Black
-call matchadd('InvisibleSpaces', '\S\@<=\s\+\%#\ze\s*$', -10)
 
 
 
-" augroup VisibleNaughtiness
-"     autocmd!
-"     autocmd BufEnter  *       set list
-"     autocmd BufEnter  *       set list
-"     autocmd BufEnter  *.txt   set nolist
-"     autocmd BufEnter  *.vp*   set nolist
-"     autocmd BufEnter  *       if !&modifiable
-"     autocmd BufEnter  *           set nolist
-"     autocmd BufEnter  *       endif
-" augroup END
-
-"=====[ Highlight cursor ]===================
-
-" Inverse highlighting for cursor...
-"highlight CursorInverse ctermfg=black ctermbg=white
-
-" Set up highlighter at high priority (i.e. 99)
-"call matchadd('CursorInverse', '\%#.', 99)
-
-" Need an invisible cursor column to make it update on every cursor move...
-" (via the visualguide.vim plugin, so as to play nice)
-"runtime plugin/visualsmartia.vim
-"call VG_Show_CursorColumn('off')
-
-
-
-" "=====[ Highlight row and column on request ]===================
-"
-" " Toggle cursor row highlighting on request...
-" highlight CursorLine   term=bold ctermbg=darkgrey ctermfg=yellow  cterm=bold
-" Nmap <silent> ;c [Toggle cursor line highlighting] :set cursorline!<CR>
-"
-" " Toggle cursor column highlighting on request...
-" " (via visualguide.vim plugin, so as to play nice)
-" nmap     <silent> \  :silent call VG_Show_CursorColumn('flip')<CR>
-" xnoremap <silent> \  :<C-W>silent call VG_Show_CursorColumn('flip')<CR>gv
-" imap     <silent> <C-\>  <C-O>:silent call VG_Show_CursorColumn('flip')<CR>
-
-set nocursorline
 " "====[ Show when lines extend past column 80 ]=================================>!<============
 " 
 "set colorcolumn=80
@@ -591,5 +284,3 @@ set nocursorline
 
 
 
-" Eliminate delay from going from insert to normal mode
-set timeoutlen=1000 ttimeoutlen=0

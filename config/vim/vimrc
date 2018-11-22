@@ -14,4 +14,5 @@ call plug#begin('~/.vim/plugged')
 exec 'source $HOME/.config/vim/plugins.vim'
 call plug#end()
 
-exe 'source $HOME/.config/vim/binds.vim'
+exec 'source $HOME/.config/vim/etc.vim'
+exec 'source $HOME/.config/vim/binds.vim'
