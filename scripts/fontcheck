@@ -1,7 +1,12 @@
 #!/bin/bash
 echo -e "| worksheet |
 | buffering |
+| BUFFERING |
 | difficult |
+| DIFFICULT |
+| BottomText |
+| bottom-text |
+| BOTTOMTEXT |
 | finishing |
 | different |
 | 🤷 Shrug ¯\_(ツ)_/¯ |

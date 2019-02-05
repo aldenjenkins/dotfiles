@@ -1,0 +1,10 @@
+#!/bin/bash
+
+IMAGE=$(sxiv -fto $(find /home/alden/Photos/screenshots/$(ls ~/Photos/screenshots | grep -v "\." | rofi -dmenu -i -only-match -p "Select Screenshots to View") -maxdepth 1 -type f))
+if [[ -e "$IMAGE" ]]
+then
+notify-send "$IMAGE copied to clipboard"  
+xclip -selection clipboard -t image/png -i $IMAGE
+fi
+
+

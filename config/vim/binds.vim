@@ -9,7 +9,10 @@ set showmode
 
 
 " Disable autocomment new lines below commented lines{
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup myautocommentdisablehooks
+    au!
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup END
 " }
 
 
@@ -33,6 +36,8 @@ onoremap c c
 	nnoremap ;<Space> <Esc>/<++><Enter>"_c4l
 
 "MARKDOWN
+augroup mymarkdownhooks
+        au!
 	autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
 	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
 	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
@@ -49,9 +54,10 @@ onoremap c c
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
 	autocmd Filetype rmd inoremap <Tab> 6i&nbsp;<esc>l
+augroup END
 
 
-nmap <silent>  ;v    :next $MYVIMRC<CR>
+nmap <silent>  ;v    :split ~/.vim/<CR>
 "Nmap <silent>  ;v   [Edit .vimrc]          :next $MYVIMRC<CR>
 "Nmap           ;vv  [Edit .vim/plugin/...] :next ~/.vim/plugin/
 
@@ -101,6 +107,7 @@ nnoremap C yy|xnoremap C y|
 nnoremap V P|xnoremap V P|
 nnoremap gv gp|xnoremap gv gp|
 nnoremap gV gP|xnoremap gV gP|
+
 " }}}
 " insert tab switch t and d for colemak
 inoremap <C-t> <C-d>
@@ -201,7 +208,7 @@ let g:ag_working_path_mode="r"
 "Map Ctrl + S to save in any mode
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
-inoremap <silent> <C-S>         <C-O>:update<CR>
+"inoremap <silent> <C-S>         <C-O>:update<CR>
 " Also map leader + s
 map <leader>s <C-S>
 
@@ -214,8 +221,8 @@ nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 
 " resize panes
-nnoremap <silent> <C-Left> :vertical resize +5<cr>
-nnoremap <silent> <C-Right> :vertical resize -5<cr>
+nnoremap <silent> <C-Left> :vertical resize -5<cr>
+nnoremap <silent> <C-Right> :vertical resize +5<cr>
 nnoremap <silent> <C-Down> :resize +5<cr>
 nnoremap <silent> <C-Up> :resize -5<cr>
 
@@ -284,3 +291,9 @@ nnoremap K N
 
 
 
+vnoremap  <leader>r :w ! python3<CR>
+nnoremap  <leader>r :%w ! python3<CR>
+vnoremap  <leader>t :w ! python3 -m timeit<CR>
+nnoremap  <leader>t :%w ! python3 -m timeit<CR>
+vnoremap  <leader>u :w ! python3  -m unittest -v<CR>
+nnoremap  <leader>u :%w ! python3  -m unittest -v<CR>

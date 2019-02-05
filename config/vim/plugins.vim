@@ -15,12 +15,12 @@ Plug 'junegunn/goyo.vim'
 "Plug 'junegunn/limelight.vim'
 Plug 'https://github.com/junegunn/vim-plug.git'
 Plug 'sheerun/vim-polyglot'
-Plug 'vim-scripts/indentpython.vim'
+"Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
 Plug 'Valloric/YouCompleteMe'
 "let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-"let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-"let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 "let g:ycm_complete_in_comments = 1 " Completion in comments
 "let g:ycm_complete_in_strings = 1 " Completion in string
 Plug 'scrooloose/nerdtree'
@@ -28,8 +28,11 @@ Plug 'scrooloose/nerdtree'
     let g:NERDTreeHijackNetrw = 1
     au VimEnter NERD_tree_1 enew | execute 'NERDTree '.argv()[0]
     " start nerdtree at startup if no file was specified
+augroup nerdtreehooks
+    au!
     autocmd StdinReadPre * let s:std_in=1
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+augroup END
     " nerdtree shortcut
     map <F2> :NERDTreeToggle<CR>
     " show hidden files
@@ -40,28 +43,28 @@ Plug 'scrooloose/nerdtree'
     let NERDTreeMapOpenSplit ='h'
     let NERDTreeMapOpenExpl = 'y'
 "}
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
 
 Plug 'godlygeek/tabular'
 " < Alignment plugin > {
 " }
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate'
 " < Automatic closing of quotes, brackets, etc > {
-    let g:delimitMate_expand_cr = 2
-    let g:delimitMate_expand_space = 1
-    let g:delimitMate_expand_inside_quotes = 1
-    let g:delimitMate_balance_matchpairs = 1
-    let g:delimitMate_jump_expansion = 1
-    au FileType python let b:delimitMate_nesting_quotes = ['"']
+""    let g:delimitMate_expand_cr = 2
+""    let g:delimitMate_expand_space = 1
+""    let g:delimitMate_expand_inside_quotes = 1
+""    let g:delimitMate_balance_matchpairs = 1
+""    let g:delimitMate_jump_expansion = 1
+""    au FileType python let b:delimitMate_nesting_quotes = ['"']
 " }
 
-Plug 'mattn/gist-vim'
-" < Vimscript for creating gists (http://gist.github.com) > {
-    let g:gist_update_on_write = 2
-    let g:gist_clip_command = 'xclip -selection clipboard'
-    let g:gist_detect_filetype = 1
-    let g:gist_open_browser_after_post = 1
-    let g:gist_update_on_write = 2
+"Plug 'mattn/gist-vim'
+"" < Vimscript for creating gists (http://gist.github.com) > {
+"    let g:gist_update_on_write = 2
+"    let g:gist_clip_command = 'xclip -selection clipboard'
+"    let g:gist_detect_filetype = 1
+"    let g:gist_open_browser_after_post = 1
+"    let g:gist_update_on_write = 2
     " Only :w! updates a gist
 " }
 "Plug 'mattn/webapi-vim'
@@ -75,6 +78,7 @@ Plug 'simnalamburt/vim-mundo'
 " < Undo tree >{
 " Enable persistent undo so that undo history persists across vim sessions
     set undofile
+
     set undodir=~/.vim/undo
     nnoremap <leader>u :MundoToggle<CR>
     let g:mundo_map_move_newer = "i"
@@ -93,20 +97,20 @@ Plug 'simnalamburt/vim-mundo'
 "    " endif
 "    " let g:XkbSwitchIMappings = ['ru(typewriter)']
 "" }
-"Plug 'SirVer/ultisnips'
-" < Snippets engine > {
-"let g:UltiSnipsExpandTrigger       = "<c-e>"
-"   let g:UltiSnipsJumpForwardTrigger  = "<c-e>"
-"    let g:UltiSnipsJumpBackwardTrigger = "<c-n>"
-"    let g:UltiSnipsListSnippets        = "<c-i>" "List possible snippets based on current file
+Plug 'SirVer/ultisnips'
+"" < Snippets engine > {
+let g:UltiSnipsExpandTrigger       = ",o"
+let g:UltiSnipsJumpForwardTrigger  = ",e"
+let g:UltiSnipsJumpBackwardTrigger = ",i"
+let g:UltiSnipsListSnippets        = ",n" "List possible snippets based on current file
 " }
 
 
-Plug 'garbas/vim-snipmate'
-"dependencies{
-  Plug 'MarcWeber/vim-addon-mw-utils'
-  Plug 'tomtom/tlib_vim'
-"}
+"Plug 'garbas/vim-snipmate'
+""dependencies{
+"  Plug 'MarcWeber/vim-addon-mw-utils'
+"  Plug 'tomtom/tlib_vim'
+""}
 Plug 'honza/vim-snippets'
 " < Snippets for ultisnips > {
 " }
@@ -146,11 +150,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tmhedberg/SimpylFold'
-Plug 'vimwiki/vimwiki'
+nnoremap <space> za
+vnoremap <space> zf
+"Plug 'vimwiki/vimwiki'
 
 " https://github.com/fisadev/fisa-vim-config/blob/master/.vimrc {
 " Code commenter
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
 " Class/module browser
 Plug 'majutsushi/tagbar'
 " toggle tagbar display

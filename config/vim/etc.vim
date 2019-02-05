@@ -22,34 +22,37 @@ set nowrap
 set number relativenumber
 
 " https://code.djangoproject.com/wiki/UsingVimWithDjango
-autocmd FileType python set sw=4
-autocmd FileType python set ts=4
-autocmd FileType python set sts=4
+augroup mypythonhooks
+    au!
+    autocmd FileType python set sw=4
+    autocmd FileType python set ts=4
+    autocmd FileType python set sts=4
+augroup END
 
 "====[ Work out what kind of file this is ]========
-filetype plugin indent on
-augroup FiletypeInference
-    autocmd!
-    autocmd BufNewFile,BufRead  *.t      setfiletype perl
-    autocmd BufNewFile,BufRead  *.pod    setfiletype pod
-    autocmd BufNewFile,BufRead  *.itn    setfiletype itn
-    autocmd BufNewFile,BufRead  *        call s:infer_filetype()
-augroup END
-function! s:infer_filetype ()
-    for line in getline(1,20)
-        if line =~ '^\s*use\s*v\?5\.\S\+\s*;\s*$'
-            setfiletype perl
-            return
-        elseif line =~ '^\s*use\s*v\?6\s*;\s*$'
-            setfiletype perl6
-            return
-        endif
-    endfor
-endfunction
-
-""""" PYTHON DEV CONFIG
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+" filetype plugin indent on
+" augroup FiletypeInference
+"     autocmd!
+"     autocmd BufNewFile,BufRead  *.t      setfiletype perl
+"     autocmd BufNewFile,BufRead  *.pod    setfiletype pod
+"     autocmd BufNewFile,BufRead  *.itn    setfiletype itn
+"     autocmd BufNewFile,BufRead  *        call s:infer_filetype()
+" augroup END
+" function! s:infer_filetype ()
+"     for line in getline(1,20)
+"         if line =~ '^\s*use\s*v\?5\.\S\+\s*;\s*$'
+"             setfiletype perl
+"             return
+"         elseif line =~ '^\s*use\s*v\?6\s*;\s*$'
+"             setfiletype perl6
+"             return
+"         endif
+"     endfor
+" endfunction
+" 
+" """"" PYTHON DEV CONFIG
+" autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+" autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 
 
 
@@ -130,6 +133,7 @@ set ruler
 set noswapfile  " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set history=50
 
+"autocmd! BufReadPost * :if line('$') > 20 | set foldlevel=1;  set foldmethod=indent ; set foldnestmax=2 | endif
 
 " Open new split panes to right and bottom, which feels more natural
 " set splitbelow
@@ -216,7 +220,11 @@ set expandtab
 "------------------------------------------------------------
 
 let g:onedark_termcolors=256
-autocmd BufWritePost .vimrc source %
+" Autoreload vimrc on save
+augroup myvimrchooks
+    au!
+    autocmd BufWritePost ~/dotfiles/config/vim/etc.vim,~/dotfiles/config/vim/plugins.vim,~/dotfiles/config/vim/binds.vim source ~/.nvimrc
+augroup END
 
 
 function! s:DiffWithSaved()
@@ -239,3 +247,21 @@ highlight       Search    ctermfg=White  cterm=bold
 highlight    IncSearch    ctermfg=White  ctermbg=Red    cterm=bold
 
 set nocursorline
+
+
+
+
+" Run xrdb whenever Xdefaults or Xresources are updated.
+augroup myxresourceshooks
+    au!
+    autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
+augroup END
+
+
+augroup myi3confighooks
+    au!
+    autocmd BufWritePost ~/.config/i3/config !i3 restart
+augroup END
+
+" Open corresponding .pdf/.html or preview
+	map <leader>p :!opout <c-r>%<CR><CR>

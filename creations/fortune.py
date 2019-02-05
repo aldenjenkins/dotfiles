@@ -1,4 +1,4 @@
-import sys, random
+import random
 
 fortunes = [
    "A beautiful, smart, and loving person will be coming into your life.",

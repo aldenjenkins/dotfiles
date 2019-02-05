@@ -10,36 +10,112 @@
 # If there is already a running instance, user will be prompted to end it.
 
 updateicon() { \
-	echo "$1" > ~/.recordingicon
+	echo "$1" > /tmp/recordingicon
 	pkill -RTMIN+9 i3blocks
 	}
 
 killrecording() {
-	recpid="$(cat ~/.recordingpid)"
+	recpid="$(cat /tmp/recordingpid)"
 	# kill with SIGTERM, allowing finishing touches.
 	kill -15 "$recpid"
-	rm -f ~/.recordingpid
+        FILENAME=`cat /tmp/recfilename`
+        FILEDIR=`cat /tmp/recdirname`
+        TESTME=$(echo $FILENAME | rev | cut -c 1-3 | rev)
+        EXTENS=$([ "$TESTME" = "mkv" ] && echo ".mkv" || echo ".flac")
+	rm -f /tmp/{recordingpid,recdirname,recfilename}
 	updateicon ""
-	pkill -RTMIN+9 i3blocks
+	######pkill -RTMIN+9 i3blocks
 	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
 	sleep 3
 	kill -9 "$recpid"
+        notify-send "Saved $FILENAME"
+        NEWFILENAME=`rofi -dmenu -p "Enter New Filename"`
+        [ "$NEWFILENAME" != "" ] && echo $FILEDIR$FILENAME => $FILEDIR$NEWFILENAME$EXTENS && mv $FILEDIR$FILENAME $FILEDIR$NEWFILENAME$EXTENS
 	exit
 	}
 
-screencastpulse() { \
+# screencastpulse() { \
+# 	ffmpeg -y \
+# 	-f x11grab \
+# 	-framerate 60 \
+# 	-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
+# 	-i :0.0 \
+# 	-f alsa -i default \
+# 	-r 30 \
+#  	-c:v libx264rgb -crf 0 -preset ultrafast -c:a flac \
+# 	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
+# 	echo $! > ~/.recordingpid
+# 	updateicon "⏺️🎙️"
+#        	}
+screencastpulseFull() { \
+        THETIME=$(date '+%y%m%d-%H%M-%S')
 	ffmpeg -y \
 	-f x11grab \
 	-framerate 60 \
 	-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
 	-i :0.0 \
-	-f alsa -i default \
-	-r 30 \
- 	-c:v libx264rgb -crf 0 -preset ultrafast -c:a flac \
-	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
-	echo $! > ~/.recordingpid
-	updateicon "⏺️🎙️"
+        -thread_queue_size 1024 \
+        -f alsa \
+        -ac 1 \
+        -ar 44100 \
+        -i hw:3 \
+        -r 60 \
+	"$HOME/Videos/screen-recordings/screencast-$THETIME.mkv" &
+	echo $! > /tmp/recordingpid
+        echo $HOME/Videos/screen-recordings/ > /tmp/recdirname 
+        echo screencast-$THETIME.mkv > /tmp/recfilename 
+	updateicon "TOP AND BOTTOM ⏺️🎙️"
        	}
+screencastpulseSelection() { \
+        THETIME=$(date '+%y%m%d-%H%M-%S')
+        notify-send -t 2500 "Please select the part of the screen to record"
+        OUTPUT=$(grabscreenselection)
+        X=$(echo $OUTPUT | awk '{print $1}')
+        Y=$(echo $OUTPUT | awk '{print $2}')
+        WIDTH=$(echo $OUTPUT | awk '{print $3}' )
+        HEIGHT=$(echo $OUTPUT | awk '{print $4}')
+        LOC=':0.0+'$X','$Y 
+        echo $X $Y $WIDTH $HEIGHT
+	ffmpeg -y \
+	-f x11grab \
+	-s $WIDTH'x'$HEIGHT \
+	-i $LOC \
+        -thread_queue_size 1024 \
+        -f alsa \
+        -ac 1 \
+        -ar 44100 \
+        -i hw:3 \
+        -r 60 \
+	"$HOME/Videos/screen-recordings/screencast-$THETIME.mkv" &
+	echo $! > /tmp/recordingpid
+        echo $HOME/Videos/screen-recordings/ > /tmp/recdirname 
+        echo screencast-$THETIME.mkv > /tmp/recfilename 
+	updateicon "SELECTION ⏺️🎙️"
+       	}
+screencastpulseBottom() { \
+        THETIME=$(date '+%y%m%d-%H%M-%S')
+	ffmpeg -y \
+	-f x11grab \
+	-s 1920x1080 \
+	-i :0.0+0,1080 \
+        -thread_queue_size 1024 \
+        -f alsa \
+        -ac 1 \
+        -ar 44100 \
+        -i hw:3 \
+        -r 60 \
+	"$HOME/Videos/screen-recordings/screencast-$THETIME.mkv" &
+	echo $! > /tmp/recordingpid
+        echo $HOME/Videos/screen-recordings/ > /tmp/recdirname 
+        echo screencast-$THETIME.mkv > /tmp/recfilename 
+	updateicon "BOTTOM ⏺️🎙️"
+       	}
+	#-framerate 60 \
+	#-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
+ #	-preset ultrafast \
+	#"/tmp/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
+
+    #ffmpeg -y -f x11grab -s 1920x1080 -i :0.0+0,1080 -f alsa -ar 44100 -i hw:3   -r 60  "$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mkv"
 
 screencastalsa() { \
 	ffmpeg -y \
@@ -50,7 +126,7 @@ screencastalsa() { \
  	-f alsa -ar 44100 -i hw:1 \
  	-c:v libx264 -r 30 -c:a flac \
 	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
-	echo $! > ~/.recordingpid
+	echo $! > /tmp/recordingpid
 	updateicon "⏺️"
 	}
 
@@ -60,16 +136,21 @@ video() { ffmpeg \
 	-i :0.0 \
  	-c:v libx264 -qp 0 -r 30 \
 	"$HOME/video-$(date '+%y%m%d-%H%M-%S').mkv" &
-	echo $! > ~/.recordingpid
+	echo $! > /tmp/recordingpid
 	updateicon "⏺️"
 	}
 
 audiopulse() { \
+        THETIME=$(date '+%y%m%d-%H%M-%S')
 	ffmpeg \
-	-f alsa -i default \
-	-c:a flac \
-	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
-	echo $! > ~/.recordingpid
+        -f alsa \
+        -ac 1 \
+        -ar 44100 \
+        -i hw:3 \
+	"$HOME/Videos/audio-recordings/audio-$THETIME.flac" &
+        echo $HOME/Videos/audio-recordings/ > /tmp/recdirname 
+        echo audio-$THETIME.flac > /tmp/recfilename 
+	echo $! > /tmp/recordingpid
 	updateicon "🎙️"
 	}
 
@@ -77,14 +158,16 @@ audioalsa() { \
 	ffmpeg -y \
 	-f alsa -ar 44100 -i hw:1 \
 	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
-	echo $! > ~/.recordingpid
+	echo $! > /tmp/recordingpid
 	updateicon "🎙️"
 	}
 
 askrecording() { \
-	choice=$(printf "screencast\\nvideo\\naudio" | dmenu -i -p "Select recording style:")
+	choice=$(printf "screencast\\nscreencastSelect\\nscreencastFull\\nvideo\\naudio" | dmenu -i -p "Select recording style:")
 	case "$choice" in
-		screencast) screencastpulse;;
+		screencast) screencastpulseBottom;;
+		screencastSelect) screencastpulseSelection;;
+		screencastFull) screencastpulseFull;;
 		audio) audiopulse;;
 		video) video;;
 	esac
@@ -97,9 +180,11 @@ asktoend() { \
 
 
 case "$1" in
-	screencast) screencastpulse;;
+	screencast) screencastpulseBottom;;
+	screencastSelect) screencastpulseSelection;;
+	screencastFull) screencastpulseFull;;
 	audio) audiopulse;;
 	video) video;;
 	kill) killrecording;;
-	*) ([ -f ~/.recordingpid ] && asktoend && exit) || askrecording;;
+	*) ([ -f /tmp/recordingpid ] && asktoend && exit) || askrecording;;
 esac

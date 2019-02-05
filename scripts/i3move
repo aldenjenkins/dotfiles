@@ -1,0 +1,27 @@
+#!/bin/sh
+# This script was made by `goferito` on Github and then forked from luke smith's version.
+
+[ -z "$1" ] && echo "No direction provided" && exit 1
+[ -z "$2" ] && echo "No amount provided" && exit 1
+
+moveChoice() {
+  for i in {0..$2}; do \
+  i3-msg move "$1" | grep '"success":true' || \
+    i3-msg move "$3" \
+  ; done 
+}
+
+#case $1 in
+#  up)
+#    moveChoice up 
+#    ;;
+#  down)
+#    moveChoice shrink up grow down
+#    ;;
+#  left)
+#    moveChoice shrink right grow left
+#    ;;
+#  right)
+#    moveChoice grow right shrink left
+#    ;;
+#esac

@@ -21,6 +21,7 @@ set $term --no-startup-id st
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
+bindsym $mod+Shift+Return 		exec --no-startup-id samedir
 
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter --timeout 1 
@@ -40,14 +41,15 @@ exec --no-startup-id unclutter --timeout 1
 exec --no-startup-id redshift
 
 exec --no-startup-id nm-applet
-exec --no-startup-id sudo compton --xrender-sync-fence
+exec --no-startup-id compton --xrender-sync-fence
 
-exec --no-startup-id /usr/bin/xrandr --output DP-3 --off --output DP-1 --auto --output DP-2 --auto --output DP-2 --above DP-1 --output DP-1 --primary && /home/alden/creations/random_pywalpaper/run_while.sh > /tmp/wal.log 2>&1
 #exec --no-startup-id compton
 
+bindsym $mod+grave		exec --no-startup-id dmenuunicode
 
-#Starts dunst for notifications:
-exec --no-startup-id dunst
+
+
+
 #Music player daemon:
 exec --no-startup-id mpd
 
@@ -55,23 +57,26 @@ bindsym $mod+a			[instance="math"] scratchpad show; [instance="math"] move posit
 bindsym $mod+Shift+a		exec $term -e ncpamixer
 
 # bindsym $mod+u			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
-# bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
-
 bindsym $mod+l	        	[instance="vpn"] scratchpad show; [instance="vpn"] move position center
+bindsym $mod+Shift+l		exec --no-startup-id "bash ~/.scripts/i3resize left"
+bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
+bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.scripts/i3resize up"
+bindsym $mod+Shift+semicolon	exec --no-startup-id "bash ~/.scripts/i3resize right"
+
 #bindsym $mod+Shift+p		exec --no-startup-id "bash ~/.scripts/i3resize down"
 
 
 # Move any window to the scratchpad
-bindsym $mod+h move scratchpad
+bindsym $mod+m move scratchpad
 bindsym $mod+minus scratchpad show
 
 
-bindsym $mod+w	        	[instance="peek"] scratchpad show; [instance="peek"] move position center
-for_window [instance="peek"] floating enable
-for_window [instance="peek"] resize set 1000 1000
-for_window [instance="peek"] move scratchpad
-for_window [instance="peek"] border pixel 5
-exec --no-startup-id $term -n peek -e peek
+# bindsym $mod+w	        	[instance="peek"] scratchpad show; [instance="peek"] move position center
+# for_window [instance="peek"] floating enable
+# for_window [instance="peek"] resize set 1000 1000
+# for_window [instance="peek"] move scratchpad
+# for_window [instance="peek"] border pixel 5
+# exec --no-startup-id $term -n peek -e peek
 
 
 # # First I have a tmux window used for background scripts.
@@ -80,6 +85,7 @@ exec --no-startup-id $term -n peek -e peek
 # for_window [instance="dropdown"] resize set 625 400
 # for_window [instance="dropdown"] move scratchpad
 # for_window [instance="dropdown"] border pixel 5
+for_window [instance="__scratchpad"] move scratchpad 
 # # Runs the tmuxinit script, which searches for an earlier tmux instance,
 # # otherwise starts a new one (to prevent multiple dropdown sessions).
 # exec --no-startup-id $term -n dropdown -e /home/alden/.scripts/tmuxinit
@@ -130,7 +136,7 @@ exec --no-startup-id greenclip daemon
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 10 
+font pango:monospace 
 
 # Set colors from Xresource6
 # Change 'color7' and 'color2' to whatever colors you want i3 to use
@@ -151,8 +157,19 @@ client.background       $bg
 
 # PROTIP: You can also dynamically set dmenu's colors this way:
 # bindsym $mod+d exec --no-startup-id dmenu_run -fn "terminal-11" -nb "$fg" -nf "$bg" -sb "$bg" -sf "$fg"
-bindsym $mod+d exec rofi -show drun
+bindsym $mod+d exec rofi -show-icons -scroll-method 1 -p "Run" -show drun 
 bindsym $mod+g exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+
+
+for_window [class="mpv"] border pixel 1
+for_window [class="mpv"] floating enable
+for_window [class="mpv"] sticky enable
+
+
+for_window [instance="note"] floating enable
+#bindsym $mod+Shift+t exec st -n note -e sh -c 'vim $HOME/Notes/$(ls $HOME/Notes/ | grep -v "\." | rofi -dmenu -i -only-match -p "Select Note to Edit")/note.md' && [instance="note"] scratchpad show
+bindsym $mod+Shift+t exec st -n note -e sh -c 'notemanager' && [instance="note"] scratchpad show
+
 
 
 # bindsym $mod+n			focus left
@@ -184,7 +201,7 @@ bindsym $mod+g exec rofi -modi "clipboard:greenclip print" -show clipboard -run-
 floating_modifier $mod
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+q exec xcqr
 bindsym $mod+q kill
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -205,7 +222,7 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+n move left
+bindsym $mod+Shift+n move left 10
 bindsym $mod+Shift+e move down
 bindsym $mod+Shift+i move up
 bindsym $mod+Shift+o move right
@@ -217,10 +234,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+h split v
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+v split h
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -232,7 +249,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
 bindsym $mod+Shift+x		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
 
-#bindsym $mod+g exec --no-startup-id dmenurecord
+bindsym $mod+w exec --no-startup-id dmenurecord
 
 
 # toggle tiling / floating
@@ -240,6 +257,8 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+
 
 # focus the parent container
 #bindsym $mod+a focus parent
@@ -258,7 +277,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
+set $ws10 "mail"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -285,7 +304,7 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload ; restart 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 #bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -317,15 +336,13 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode resize
-bindsym $mod+Shift+r		exec $term -e ranger
+#bindsym $mod+r mode resize
+bindsym $mod+r		exec $term -e ranger
 
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
 
-# pywal a random wallpaper in the wallpaper directory
-bindsym $mod+c exec  ~/creations/random_pywalpaper/run_while.sh
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -335,16 +352,25 @@ bindsym $mod+c exec  ~/creations/random_pywalpaper/run_while.sh
 			background $bg
 			statusline #ffffff
 			separator $fg
-			#focused_workspace  $blue $darkblue $darkwhite
-        		#active_workspace   $blue $blue $darkwhite
-      			#inactive_workspace $darkblack $darkblack $white
-        		#urgent_workspace   $darkblack $darkblack $white
+			focused_workspace  $bg $fg $bg
+        		active_workspace    $fg $color8 $bg
+      			inactive_workspace $fg $bg $fg
+        		urgent_workspace   $fg #ff0000 $fg
 		}
         status_command i3blocks
         position top
  	mode dock
  	modifier None
 }
+
+# pywal a random wallpaper in the wallpaper directory
+exec --no-startup-id /usr/bin/xrandr --output DP-3 --off --output DP-1 --auto --output DP-2 --auto --output DP-2 --above DP-1 && sleep 2 && /home/alden/creations/random_pywalpaper/run_while.sh 
+exec --no-startup-id /usr/bin/xrandr --output DP-1 --primary 
+bindsym $mod+Shift+c		exec --no-startup-id camtoggle
+bindsym $mod+c exec --no-startup-id ~/creations/random_pywalpaper/run_while.sh && $HOME/.scripts/genzathurarc && $HOME/.scripts/killdunstandgenrc 
+
+bindsym --release $mod+y exec --no-startup-id takescreenshotandaddtoscreenshotdir >! /tmp/my_screenshotjob.log 2>&1 
+bindsym $mod+u exec viewscreenshots
 
 # Run the script to update the mpd i3block on change.
 exec --no-startup-id "pgrep i3mpdupdate || i3mpdupdate"
@@ -354,8 +380,19 @@ bindsym XF86AudioMute exec --no-startup-id amixer -c 1 sset Master toggle
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 1 sset Master 5%-
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 1 sset Master 5%+
 
-bindsym $mod+Shift+XF86AudioMute exec --no-startup-id xrandr --output DP-3 --off || xrandr --output DP-1 --auto --output DP-2 --auto || xrandr --output DP-2 --above DP-1 || xrandr --output DP-1 --primary >> /home/alden/xrandr_hotkey_log.log 2>&1
 
-bindsym $mod+XF86AudioMute exec --no-startup-id xrandr --output DP-2 --off --output DP-1 --off && xrandr --output DP-3 --auto >> /home/alden/xrandr_hotkey_log.log 2>&1
+bindsym $mod+Shift+XF86AudioMute exec --no-startup-id xrandr --output DP-3 --off --output DP-2 --auto --output DP-1 --auto --output DP-2 --above DP-1
+
+bindsym $mod+XF86AudioMute exec --no-startup-id xrandr --output DP-2 --off --output DP-1 --off --output DP-3 --auto 
 
 
+#Starts dunst for notifications:
+#exec --no-startup-id dunst
+# exec_always --no-startup-id dunst -lb "$bg" -nb "$bg" -cb "#FF0000" -lf "$fg" -bf "$fg" -cf "#000000" -nf "$fg" -fn "ypn envypn 12" -s -geometry "400x60-10+40" -format "<b>%s</b>\n%b" -shrink  -lto 3 -nto 5 -cto 0 -align "left" -transparency 0 -padding 28 -horizontal_padding 28 &
+exec --no-startup-id /home/alden/.scripts/genzathurarc 
+exec --no-startup-id $HOME/.scripts/killdunstandgenrc 
+
+
+#bindsym $mod+Shift+p exec --no-startup-ip camtoggle
+
+exec --no-startup-id thunderbird

@@ -8,6 +8,7 @@ function chpwd() {
 }
 
 export TERM="xterm-256color"
+export TERMINAL="st"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/alden/.oh-my-zsh
@@ -31,9 +32,13 @@ alias runserver="/home/alden/.virtualenvs/metoo/bin/python /home/alden/projects/
 export PATH=$PATH:/usr/local/go/bin:/home/alden/go/binexport
 
 alias k=kubectl
-alias cat="pygmentize -O style=monokai -f console256 -g"
+#alias cat="pygmentize -O style=monokai -f console256 -g"
 alias ls="ls -a --color=auto --group-directories-first"
 alias lsa="ls -la --color=auto --group-directories-first"
+alias suspend="systemctl suspend"
+alias s="sxiv"
+alias kmetoo="k get po | awk '/metoo/ || /celery/ {print $1}' | awk '/metoo/{++cnt} /celery/{++cel} {print} END{printf \"There are %s pods for metoo and %s pods for celery\n\", cnt, cel}'"
+alias open="xdg-open"
 bindkey -v
 export EDITOR='vim'
 
@@ -67,6 +72,7 @@ bindkey -M vicmd 's' vi-insert
 bindkey -M vicmd 'S' vi-insert-bol
 bindkey -M vicmd 'z' undo
 bindkey -M vicmd 'Z' redo
+bindkey  '\C-x\C-e' edit-command-line
 #bindkey -M vicmd 'l' vi-open-line-below
 
 # For vim mappings:
@@ -134,15 +140,20 @@ alias vim=nvim
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/alden/src/node/static-site-form-submission/node_modules/tabtab/.completions/sls.zsh ]] && . /home/alden/src/node/static-site-form-submission/node_modules/tabtab/.completions/sls.zsh
 alias chromium-browser=chromium
-export PATH=~/.local/bin:/home/alden/Downloads/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/home/alden/.gem/ruby/2.5.0/bin:/home/alden/.fzf/bin
+export PATH=~/.local/bin:/home/alden/Downloads/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/home/alden/.fzf/bin:/home/alden/.gem/ruby/2.6.0/bin
 
 alias pycharm='/home/alden/bin/pycharm-2018.1.4/bin/pycharm.sh'
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-
 alias metoo-shell="workon metoo && /home/alden/src/django/metoo-backend/metoo-backend && /home/alden/.virtualenvs/metoo/bin/python manage.py shell"
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
 
 # 10ms for key sequences
 KEYTIMEOUT=1
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
 
 # Fix up down fuzzy search with vim mode make search up and down work, so partially type and hit up/down to find relevant stuff
 # start typing + [Up-Arrow] - fuzzy find history forward
@@ -157,3 +168,26 @@ if [[ "${terminfo[kcud1]}" != "" ]]; then
   zle -N down-line-or-beginning-search
   bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
+
+# for `better_exceptions` https://github.com/Qix-/better-exceptions?utm_source=mybridge&utm_medium=blog&utm_campaign=read_more
+export BETTER_EXCEPTIONS=1
+
+export READER=zathura
+export BROWSER=chromium
+# less/man colors
+
+export LESS=-R
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+alias audiodl="youtube-dl --output $HOME/Music/downloaded/'%(title)'s.'%(ext)'s --extract-audio --audio-format mp3"
+
+alias convert-raw-to-mp3="ffmpeg -f s16le -ar 48000 -ac 2 -i aplay-D_card0-t_raw-f_S16_LE-r48000-c_2.raw"
+alias icp='xclip -selection clipboard -t image/png -i'

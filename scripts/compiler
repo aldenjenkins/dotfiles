@@ -53,4 +53,4 @@ case "$file" in
 	*config.h) make && sudo make install ;;
 	*) sent "$file" 2>/dev/null & ;;
 esac
-cd "$oridir" || exit
+cd "$oridir" #|| exit

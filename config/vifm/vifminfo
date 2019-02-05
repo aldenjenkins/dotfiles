@@ -1,0 +1,123 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'H
+	/home/alden/
+	..
+1547487125
+'b
+	/home/alden/bin/
+	..
+1547487125
+'h
+	/home/alden/
+	..
+1547487125
+'z
+	/home/alden/.config/vifm
+	..
+1547487125
+
+# Bookmarks:
+
+# TUI:
+al
+q1
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/home/alden/Photos/Logos
+	McDonalds.png
+5
+d/home/alden/Photos
+	Logos
+2
+d/home/alden/Photos/Logos
+	CocaCola.png
+2
+d/home/alden/Photos
+	Tiktok
+3
+d/home/alden/Photos/Tiktok
+	1546656510505.jpg
+1
+d/home/alden/Photos
+	screenshots
+6
+d/home/alden/Photos/screenshots
+	Deleteme
+2
+d/home/alden/Photos/screenshots/Deleteme
+	derrr.png
+5
+d/home/alden/Photos/screenshots
+	Photoshop
+7
+d/home/alden/Photos/screenshots/Photoshop
+	..
+0
+d/home/alden/Photos/screenshots
+	Deleteme
+2
+d/home/alden/Photos/screenshots/Deleteme
+	dump.rdb
+6
+d/home/alden/Photos/screenshots
+	Deleteme
+2
+d/home/alden/Photos
+	screenshots
+6
+d/home/alden
+	Photos
+45
+d/home/alden/Photos
+	screenshots
+6
+d/home/alden
+	Photos
+43
+d/home/alden/Photos
+	9O00XKar_400x400.jpg
+8
+d/home/alden
+	Photos
+43
+d
+
+# Right window history (oldest to newest):
+D/home/alden/Photos/Logos
+	..
+0
+D
+
+# Command line history (oldest to newest):
+:! sxiv -t %d &
+:q
+
+# Search history (oldest to newest):
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f
+i1
+[.0
+[F
+F
+I1
+].1
+]F
+s0
