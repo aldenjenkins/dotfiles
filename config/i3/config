@@ -13,9 +13,11 @@ exec --no-startup-id setxkbmap us -variant colemak -option caps:escape
 
 set $mod Mod1
 
-for_window [class="^.*"] border pixel 4
+for_window [class="^.*"] border pixel 2
 gaps inner 15
 gaps outer 20
+
+for_window [class="jetbrains-pycharm"] border pixel 1
 
 set $term --no-startup-id st
 
@@ -170,6 +172,8 @@ for_window [instance="note"] floating enable
 #bindsym $mod+Shift+t exec st -n note -e sh -c 'vim $HOME/Notes/$(ls $HOME/Notes/ | grep -v "\." | rofi -dmenu -i -only-match -p "Select Note to Edit")/note.md' && [instance="note"] scratchpad show
 bindsym $mod+Shift+t exec st -n note -e sh -c 'notemanager' && [instance="note"] scratchpad show
 
+for_window [instance="calendar"] floating enable
+#bindsym $mod+Shift+t exec st -n note -e sh -c 'notemanager' && [instance="note"] scratchpad show
 
 
 # bindsym $mod+n			focus left
@@ -364,8 +368,9 @@ bindsym $mod+Shift+s		gaps inner current minus 5
 }
 
 # pywal a random wallpaper in the wallpaper directory
-exec --no-startup-id /usr/bin/xrandr --output DP-3 --off --output DP-1 --auto --output DP-2 --auto --output DP-2 --above DP-1 && sleep 2 && /home/alden/creations/random_pywalpaper/run_while.sh 
-exec --no-startup-id /usr/bin/xrandr --output DP-1 --primary 
+#exec --no-startup-id /usr/bin/xrandr --output DP-3 --off --output DP-1 --auto --output DP-2 --auto --output DP-2 --above DP-1 && sleep 2 && /home/alden/creations/random_pywalpaper/run_while.sh 
+exec --no-startup-id /usr/bin/xrandr --output DP-3 --off --output DP-4 --auto && sleep 2 && /home/alden/creations/random_pywalpaper/run_while.sh 
+exec --no-startup-id /usr/bin/xrandr --output DP-4 --primary 
 bindsym $mod+Shift+c		exec --no-startup-id camtoggle
 bindsym $mod+c exec --no-startup-id ~/creations/random_pywalpaper/run_while.sh && $HOME/.scripts/genzathurarc && $HOME/.scripts/killdunstandgenrc 
 

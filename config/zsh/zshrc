@@ -103,7 +103,6 @@ source $HOME/.config/zsh/prompt.sh
 
 
 export PATH=$PATH:$HOME/.scripts
-alias cal=gcalcli
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:~/.gem/ruby/2.5.0/bin
 
 #[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
@@ -188,3 +187,8 @@ alias audiodl="youtube-dl --output $HOME/Music/downloaded/'%(title)'s.'%(ext)'s 
 
 alias convert-raw-to-mp3="ffmpeg -f s16le -ar 48000 -ac 2 -i aplay-D_card0-t_raw-f_S16_LE-r48000-c_2.raw"
 alias icp='xclip -selection clipboard -t image/png -i'
+
+
+if [ -n "$VIRTUAL_ENV" ]; then
+  . "$VIRTUAL_ENV/bin/activate"
+fi

@@ -98,7 +98,7 @@ screencastpulseBottom() { \
 	-f x11grab \
 	-s 1920x1080 \
 	-i :0.0+0,1080 \
-        -thread_queue_size 1024 \
+        -thread_queue_size 4096 \
         -f alsa \
         -ac 1 \
         -ar 44100 \

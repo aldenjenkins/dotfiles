@@ -297,3 +297,7 @@ vnoremap  <leader>t :w ! python3 -m timeit<CR>
 nnoremap  <leader>t :%w ! python3 -m timeit<CR>
 vnoremap  <leader>u :w ! python3  -m unittest -v<CR>
 nnoremap  <leader>u :%w ! python3  -m unittest -v<CR>
+
+" Doesnt work. I disable nerdtree closing when no panes present to achieve being able to close a single buffer without it closing all of vim
+"nnoremap \d :bp<cr>:bd #<cr>
+

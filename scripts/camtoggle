@@ -5,6 +5,7 @@ then
     pkill -f /dev/video || mpv --untimed --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-110-16 --autofit=20%  --title="mpvfloat" /dev/video2
 else
     notify-send "not docked"
+    #todo: use webcam here (super easy, im just in a rush)
 
 fi
 

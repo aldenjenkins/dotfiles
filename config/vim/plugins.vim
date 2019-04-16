@@ -2,6 +2,12 @@
 Plug 'joshdick/onedark.vim'
 
 Plug 'vim-airline/vim-airline'
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 
 "Plug 'laurentgoudet/vim-howdoi'
 "{
@@ -25,11 +31,12 @@ let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language
 "let g:ycm_complete_in_strings = 1 " Completion in string
 Plug 'scrooloose/nerdtree'
 " Nerdtree config{
-    let g:NERDTreeHijackNetrw = 1
+    let g:NERDTreeHijackNetrw = 0
     au VimEnter NERD_tree_1 enew | execute 'NERDTree '.argv()[0]
     " start nerdtree at startup if no file was specified
 augroup nerdtreehooks
     au!
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | bprevious | endif
     autocmd StdinReadPre * let s:std_in=1
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 augroup END
@@ -148,7 +155,11 @@ Plug 'tmhedberg/matchit'
 " }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'jistr/vim-nerdtree-tabs'
+"let g:nerdtree_tabs_autoclose = 0
+"let g:nerdtree_tabs_open_on_console_startup=1
+
+
 Plug 'tmhedberg/SimpylFold'
 nnoremap <space> za
 vnoremap <space> zf
@@ -251,7 +262,8 @@ let g:syntastic_enable_signs = 0
 "let g:syntastic_style_warning_symbol = '⚠'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
-Plug 'christoomey/vim-tmux-navigator' "{
+"Plug 'christoomey/vim-tmux-navigator' "{
+Plug 'aldenjenkins/vim-tmux-navigator'
 " Write all buffers before navigating from Vim to tmux pane
 let g:tmux_navigator_save_on_switch = 2
 
