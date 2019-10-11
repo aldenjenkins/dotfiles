@@ -1,5 +1,5 @@
-"Plug 'crusoexia/vim-monokai'
-Plug 'joshdick/onedark.vim'
+" Plug 'crusoexia/vim-monokai'
+" Plug 'joshdick/onedark.vim'
 
 Plug 'vim-airline/vim-airline'
 " Enable the list of buffers
@@ -23,7 +23,7 @@ Plug 'https://github.com/junegunn/vim-plug.git'
 Plug 'sheerun/vim-polyglot'
 "Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 "let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
 let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
@@ -36,7 +36,7 @@ Plug 'scrooloose/nerdtree'
     " start nerdtree at startup if no file was specified
 augroup nerdtreehooks
     au!
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | bprevious | endif
+    "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | bprevious | endif
     autocmd StdinReadPre * let s:std_in=1
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 augroup END
@@ -262,8 +262,9 @@ let g:syntastic_enable_signs = 0
 "let g:syntastic_style_warning_symbol = '⚠'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
-"Plug 'christoomey/vim-tmux-navigator' "{
-Plug 'aldenjenkins/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator' "{
+"The changes I have in my fork are no longer needed because I mainly use pycharm now for developing
+"Plug 'aldenjenkins/vim-tmux-navigator'
 " Write all buffers before navigating from Vim to tmux pane
 let g:tmux_navigator_save_on_switch = 2
 

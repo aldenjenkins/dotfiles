@@ -1,0 +1,6 @@
+#!/bin/sh
+THE_FILE=`fzf` && vim $THE_FILE
+
+
+
+

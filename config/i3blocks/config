@@ -26,7 +26,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=$HOME/.config/i3blocks/scripts/$BLOCK_NAME
+command=/home/alden/dotfiles/config/i3blocks/scripts/$BLOCK_NAME
 separator_block_width=20
 markup=pango
 
@@ -35,10 +35,9 @@ interval=once
 signal=9
 
 [currentsong]
-label=♪
+#label=♪
 align=left
 interval=1
-
 
 [i3volume]
 interval=1

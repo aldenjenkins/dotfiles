@@ -1,0 +1,56 @@
+source ~/.vim/etc.vim
+source ~/.vim/binds.vim
+" nnoremap E :action VimMotionPreviousTab<CR>
+" nnoremap I :action VimMotionNextTab<CR>
+nnoremap <C-e> :action VimMotionPreviousTab<CR>
+nnoremap <C-i> :action VimMotionNextTab<CR>
+nnoremap <C-n> :action VimWindowLeft<CR>
+nnoremap <C-o> :action VimWindowRight<CR>
+"nnoremap <C-e> :action VimWindowDown<CR>
+"nnoremap <C-i> :action VimWindowUp<CR>
+
+vnoremap e j
+vnoremap i k
+vnoremap n h
+vnoremap o l
+
+vnoremap O g_
+vnoremap N g0
+
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" Map inSide to new colemak binds
+onoremap s i
+onoremap c c
+
+onoremap p t
+onoremap P T
+onoremap b ;
+onoremap B ,
+
+onoremap l b
+onoremap L B
+onoremap u e
+onoremap U E
+onoremap y w
+onoremap Y W
+
+onoremap h o
+onoremap H O
+            
+onoremap n h
+onoremap e j
+onoremap i k
+onoremap o l
+
+" this lets us use vim c-f for enabling distractionfreemode in editor while using c-f for
+" its default function in menus. This couldn't be the case if we changed the
+" defautl keymap in the pycharm settings
+" Unfortunately, it's still buggy where it won't work if your calling from the
+" context of a toolmenu
+" map <C-f> :action ToggleDistractionFreeMode<CR>
+
+" Command help page http://vimdoc.sourceforge.net/htmldoc/usr_40.html#40.2
+command -nargs=1 w :action Macro.reformatandsave<CR>
+command -nargs=+ wq :action Macro.reformatandsave, CloseActiveTab<CR>

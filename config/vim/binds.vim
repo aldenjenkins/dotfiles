@@ -38,18 +38,18 @@ onoremap c c
 "MARKDOWN
 augroup mymarkdownhooks
         au!
-	autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
-	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
-	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
-	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
-	autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
-	autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
-	autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
-	autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-	autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc><Up>A
-	autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc><Up>A
-	autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc><Up>A
-	autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
+	autocmd Filetype rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
+	autocmd Filetype rmd inoremap ,n ---<Enter><Enter>
+	autocmd Filetype rmd inoremap ,b ****<++><Esc>F*hi
+	autocmd Filetype rmd inoremap ,s ~~~~<++><Esc>F~hi
+	autocmd Filetype rmd inoremap ,e **<++><Esc>F*i
+	autocmd Filetype rmd inoremap ,h ====<Space><++><Esc>F=hi
+	autocmd Filetype rmd inoremap ,i ![](<++>)<++><Esc>F[a
+	autocmd Filetype rmd inoremap ,a [](<++>)<++><Esc>F[a
+	autocmd Filetype rmd inoremap ,1 #<Space><Enter><++><Esc><Up>A
+	autocmd Filetype rmd inoremap ,2 ##<Space><Enter><++><Esc><Up>A
+	autocmd Filetype rmd inoremap ,3 ###<Space><Enter><++><Esc><Up>A
+	autocmd Filetype rmd inoremap ,l --------<Enter>
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
@@ -57,7 +57,7 @@ augroup mymarkdownhooks
 augroup END
 
 
-nmap <silent>  ;v    :split ~/.vim/<CR>
+" nmap <silent>  ;v    :split ~/.vim/<CR>
 "Nmap <silent>  ;v   [Edit .vimrc]          :next $MYVIMRC<CR>
 "Nmap           ;vv  [Edit .vim/plugin/...] :next ~/.vim/plugin/
 
@@ -212,9 +212,9 @@ vnoremap <silent> <C-S>         <C-C>:update<CR>
 " Also map leader + s
 map <leader>s <C-S>
 
-" Quickly close windows
-nnoremap <leader>x :x<cr>
-nnoremap <leader>X :q!<cr>
+"" Quickly close windows
+"nnoremap <leader>x :x<cr>
+"nnoremap <leader>X :q!<cr>
 
 " zoom a vim pane, <C-w>= to re-balance
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>

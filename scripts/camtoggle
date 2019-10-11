@@ -1,8 +1,9 @@
 #!/bin/sh
 
-if [ -e `lsusb -d 413c:2513 2>&1 >/dev/null` ]
+# to find correct camera, run lsusb and take the xxxx:xxxx id and replace below
+if [ -e `lsusb -d $(lsusb | grep "Logitech.*Webcam" | awk '{print $6}') 2>&1 >/dev/null` ]
 then
-    pkill -f /dev/video || mpv --untimed --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-110-16 --autofit=20%  --title="mpvfloat" /dev/video2
+    pkill -f /dev/video || mpv --untimed --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-110-16 --autofit=20%  --title="mpvfloat" /dev/video4
 else
     notify-send "not docked"
     #todo: use webcam here (super easy, im just in a rush)

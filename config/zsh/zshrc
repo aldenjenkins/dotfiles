@@ -1,11 +1,28 @@
-python $HOME/creations/fortune.py | cowsay
 #KEYMAP=colemak
 
 
-function chpwd() {
-    emulate -L zsh
-    ls -a --color=auto --group-directories-first
-}
+# Show vi mode in terminal
+# function zle-line-init zle-keymap-select {
+#     RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+#     RPS2=$RPS1
+#     zle reset-prompt
+# }
+# 
+#     zle -N zle-line-init
+#     zle -N zle-keymap-select
+
+if [[ -z "$TMUX" ]]; then
+    /usr/bin/python $HOME/creations/fortune.py | cowsay
+    function chpwd() {
+        emulate -L zsh
+        ls --color=auto --group-directories-first
+    };
+else
+    export TERM="screen-256color"
+    echo "Tmux session $TMUX"
+fi
+
+alias vim=nvim
 
 export TERM="xterm-256color"
 export TERMINAL="st"
@@ -17,7 +34,7 @@ export ZSH=/home/alden/.oh-my-zsh
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, zsh-syntax-highlighting)
+#plugins=(git, zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -27,17 +44,17 @@ export WORKON_HOME=$HOME/.virtualenvs
 source /usr/bin/virtualenvwrapper.sh
 
 export PATH=$PATH:/usr/local/go/bin:/home/alden/go/binexport
+export EDITOR='vim'
 
 alias k=kubectl
 #alias cat="pygmentize -O style=monokai -f console256 -g"
-alias ls="ls -a --color=auto --group-directories-first"
+alias ls="ls --color=auto --group-directories-first"
 alias lsa="ls -la --color=auto --group-directories-first"
 alias suspend="systemctl suspend"
 alias s="sxiv"
 alias kmetoo="k get po | awk '/metoo/ || /celery/ {print $1}' | awk '/metoo/{++cnt} /celery/{++cel} {print} END{printf \"There are %s pods for metoo and %s pods for celery\n\", cnt, cel}'"
 alias open="xdg-open"
 bindkey -v
-export EDITOR='vim'
 
 # Don't allow overwrite redirection ">" unless forced with ">|" as a safeguard.
 set -o noclobber
@@ -69,17 +86,29 @@ bindkey -M vicmd 's' vi-insert
 bindkey -M vicmd 'S' vi-insert-bol
 bindkey -M vicmd 'z' undo
 bindkey -M vicmd 'Z' redo
+
+# Fix to ensure delete actualy deletes characters instead of uppercasing them
+bindkey "^[[3~" delete-char
+bindkey "^[3;5~" delete-char
+bindkey "^[[P" delete-char
+bindkey -M vicmd "^[[3~" delete-char
+bindkey -M vicmd "^[3;5~" delete-char
+bindkey -M vicmd "^[[P" delete-char
 bindkey  '\C-x\C-e' edit-command-line
 #bindkey -M vicmd 'l' vi-open-line-below
 
+
 # For vim mappings:
-	stty -ixon
+    stty -ixon
 
 alias bell='echo'
 alias zshrc='vim /home/alden/.zshrc'
 
  # Do menu-driven completion.
  zstyle ':completion:*' menu select=2
+
+# Prompt
+source $HOME/.config/zsh/prompt.sh;
 
  # Color completion for some things.
  # http://linuxshellaccount.blogspot.com/2008/12/color-completion-using-zsh-modules-on.html
@@ -99,11 +128,11 @@ alias inst='sudo pacman -S $@'
 alias search='sudo pacman -Ss $@'
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.config/zsh/prompt.sh
+source $HOME/.oh-my-zsh/plugins/fzf/fzf.plugin.zsh
 
 
 export PATH=$PATH:$HOME/.scripts
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:~/.gem/ruby/2.5.0/bin
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:~/.gem/ruby/2.5.0/bin
 
 #[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
@@ -112,6 +141,7 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/us
 if [ -f '/home/alden/Downloads/google-cloud-sdk/path.zsh.inc' ]; then 
     source '/home/alden/Downloads/google-cloud-sdk/path.zsh.inc';
 fi
+
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/alden/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then
@@ -125,9 +155,8 @@ alias k=kubectl
 export JIRA_HOME='/home/alden/etc/jira_home'
 alias scrotclip= 'scrot -s ~/foo.png && xclip ~/foo.png && rm ~/foo.png'
 
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias vim=nvim
+# History fuzzy search (EPIC)
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -138,7 +167,7 @@ alias vim=nvim
 alias chromium-browser=chromium
 export PATH=~/.local/bin:/home/alden/Downloads/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/home/alden/.fzf/bin:/home/alden/.gem/ruby/2.6.0/bin
 
-alias pycharm='/home/alden/bin/pycharm-2018.1.4/bin/pycharm.sh'
+alias pycharm='/home/alden/bin/pycharm-2019.1.1/bin/pycharm.sh'
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias metoo-shell="workon metoo && /home/alden/src/django/metoo-backend/metoo-backend && /home/alden/.virtualenvs/metoo/bin/python manage.py shell"
 alias grep="grep --color=auto"
@@ -170,8 +199,8 @@ export BETTER_EXCEPTIONS=1
 
 export READER=zathura
 export BROWSER=chromium
-# less/man colors
 
+# less/man colors
 export LESS=-R
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
@@ -182,6 +211,7 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
 alias audiodl="youtube-dl --output $HOME/Music/downloaded/'%(title)'s.'%(ext)'s --extract-audio --audio-format mp3"
 
@@ -190,5 +220,20 @@ alias icp='xclip -selection clipboard -t image/png -i'
 
 
 if [ -n "$VIRTUAL_ENV" ]; then
-  . "$VIRTUAL_ENV/bin/activate"
+  # $VIRTUAL_ENV looks like /home/alden/.virtualenvs/name and we just want to source `name`
+  ENV=`echo $VIRTUAL_ENV | sed 's/\//\ /g' | awk '{print $4}'`
+  workon "$VIRTUAL_ENV"
 fi
+
+# Start x org once path has been declared fully because it catches path at the scope of when its executed.
+#[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x i3 >/dev/null && exec startx
+
+
+# This env var is set in the pycharm settings
+#if ! [[ -z "$IS_PYCHARM_TERM" ]]; then
+#    if [[ -z "$TMUX" ]]; then
+#        tmux;
+#    else
+#        workon ff;
+#    fi
+#fi

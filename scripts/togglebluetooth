@@ -1,0 +1,10 @@
+XDG_RUNTIME_DIR=/run/user/$(id -u)
+if ! sudo systemctl status bluetooth.service >/dev/null; then 
+    notify-send "Bluetooth Daemon" "Turning on"
+    sudo systemctl start bluetooth.service >/dev/null
+    blueman-applet > /dev/null &
+else 
+    notify-send "Bluetooth Daemon" "Turning off"
+    pkill blueman-applet
+    sudo systemctl stop bluetooth.service >/dev/null
+fi

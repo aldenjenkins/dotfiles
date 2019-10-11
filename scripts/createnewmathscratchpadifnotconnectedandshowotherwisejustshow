@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# if scratchpad doesn't exist:
+i3-msg "[instance=\"math\"] scratchpad show" | grep -i "false" && 
+    i3-msg "exec --no-startup-id st -n math -e qalc" &&
+    # takes a bit to startup
+    sleep 0.1 &&
+    i3-msg "[instance=\"math\"] scratchpad show"

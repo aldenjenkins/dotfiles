@@ -1,4 +1,4 @@
-colorscheme onedark
+"colorscheme onedark
 " Attempt to determine the type of a file based on its name and possibly its
 " contents. Use this to allow intelligent auto-indenting for each filetype,
 " and for plugins that are filetype specific.
@@ -131,7 +131,7 @@ set nostartofline
 set ruler
 
 set noswapfile  " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set history=50
+set history=500
 
 "autocmd! BufReadPost * :if line('$') > 20 | set foldlevel=1;  set foldmethod=indent ; set foldnestmax=2 | endif
 
@@ -265,3 +265,4 @@ augroup END
 
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
+

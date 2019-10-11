@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
 #------------------------------------------------------------------------
 
 case $BLOCK_BUTTON in
-  1) st -n calendar -g '66x35' -e sh -c 'cal -y; read';;  # right click, show yearly calendar
+  1) st -n calendar -g '66x35' -e bash -c 'cal -y; read';;  # right click, show yearly calendar
 esac
 
 date '+%a, %b %-d %-I:%M:%S '

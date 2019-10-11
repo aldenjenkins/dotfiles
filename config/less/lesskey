@@ -6,8 +6,8 @@
     \kd    forw-line
     ^E        forw-line
     ^N        forw-line
-    k        back-line
     i        back-line
+    k        back-line
     y        back-line
     ^Y        back-line
     ^K        back-line
@@ -72,7 +72,6 @@
     \eN        reverse-search-all
     &        filter
     m        set-mark
-    '        goto-mark
     ^X^X        goto-mark
     E        examine
     :e        examine

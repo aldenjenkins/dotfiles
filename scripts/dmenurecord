@@ -29,7 +29,7 @@ killrecording() {
 	sleep 3
 	kill -9 "$recpid"
         notify-send "Saved $FILENAME"
-        NEWFILENAME=`rofi -dmenu -p "Enter New Filename"`
+        NEWFILENAME=`rofi -dpi 1 -dmenu -p "Enter New Filename"`
         [ "$NEWFILENAME" != "" ] && echo $FILEDIR$FILENAME => $FILEDIR$NEWFILENAME$EXTENS && mv $FILEDIR$FILENAME $FILEDIR$NEWFILENAME$EXTENS
 	exit
 	}
@@ -163,7 +163,7 @@ audioalsa() { \
 	}
 
 askrecording() { \
-	choice=$(printf "screencast\\nscreencastSelect\\nscreencastFull\\nvideo\\naudio" | dmenu -i -p "Select recording style:")
+	choice=$(printf "screencast\\nscreencastSelect\\nscreencastFull\\nvideo\\naudio" | rofi -dpi 1 -dmenu -i -p "Select recording style:")
 	case "$choice" in
 		screencast) screencastpulseBottom;;
 		screencastSelect) screencastpulseSelection;;
@@ -174,7 +174,7 @@ askrecording() { \
 	}
 
 asktoend() { \
-	response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?") &&
+	response=$(printf "No\\nYes" | rofi -dpi 1 -dmenu -i -p "Recording still active. End recording?") &&
 	[ "$response" = "Yes" ] &&  killrecording
 	}
 

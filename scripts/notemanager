@@ -1,9 +1,12 @@
 #!/bin/bash
-NOTE_DIR_NAME=$(ls $HOME/Notes/ | grep -v "\." | rofi -dmenu -i -p "Select Note to Edit")
+NOTE_DIR_NAME=$(ls "$HOME/Notes/" | grep -v "\." | rofi -dpi 1 -dmenu -i -p "Select Note to Edit")
 NOTE_DIR=$HOME/Notes/$NOTE_DIR_NAME
 if  [ ! -d "$NOTE_DIR" ]
 then
-   mkdir $NOTE_DIR
-   figlet $NOTE_DIR_NAME > $NOTE_DIR/note.md
+   mkdir "$NOTE_DIR"
+   figlet "$NOTE_DIR_NAME" > "$NOTE_DIR/note.md"
 fi
-vim $NOTE_DIR/note.md
+echo "$NOTE_DIR_NAME"
+echo "$NOTE_DIR"
+i3-msg "exec --no-startup-id st -n note -e sh -c 'vim \"$NOTE_DIR/note.md\"'"
+

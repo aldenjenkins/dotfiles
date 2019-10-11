@@ -1,17 +1,3 @@
-😀 grinning face; U+1F600
-😃 grinning face with big eyes; U+1F603
-😄 grinning face with smiling eyes; U+1F604
-😁 beaming face with smiling eyes; U+1F601
-😆 grinning squinting face; U+1F606
-😅 grinning face with sweat; U+1F605
-🤣 rolling on the floor laughing; U+1F923
-😂 face with tears of joy; U+1F602
-🙂 slightly smiling face; U+1F642
-🙃 upside-down face; U+1F643
-😉 winking face; U+1F609
-😊 smiling face with smiling eyes; U+1F60A
-😇 smiling face with halo; U+1F607
-🥰 smiling face with 3 hearts; U+1F970
 😍 smiling face with heart-eyes; U+1F60D
 🤩 star-struck; U+1F929
 😘 face blowing a kiss; U+1F618
@@ -125,12 +111,12 @@
 💔 broken heart; U+1F494
 ❤ red heart; U+2764
 🧡 orange heart; U+1F9E1
-💛 yellow heart; U+1F49B
+💛 yellow heart love; U+1F49B
 💚 green heart; U+1F49A
 💙 blue heart; U+1F499
 💜 purple heart; U+1F49C
 🖤 black heart; U+1F5A4
-💯 hundred points; U+1F4AF
+💯 100 one hundred points; U+1F4AF
 💢 anger symbol; U+1F4A2
 💥 collision; U+1F4A5
 💫 dizzy; U+1F4AB
@@ -1642,3 +1628,4 @@
 🏴󠁧󠁢󠁥󠁮󠁧󠁿 flag: England; U+1F3F4 U+E0067 U+E0062 U+E0065 U+E006E U+E0067 U+E007F
 🏴󠁧󠁢󠁳󠁣󠁴󠁿 flag: Scotland; U+1F3F4 U+E0067 U+E0062 U+E0073 U+E0063 U+E0074 U+E007F
 🏴󠁧󠁢󠁷󠁬󠁳󠁿 flag: Wales; U+1F3F4 U+E0067 U+E0062 U+E0077 U+E006C U+E0073 U+E007F
+á a accent; U+1F511
