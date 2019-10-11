@@ -12,7 +12,7 @@
 #     zle -N zle-keymap-select
 
 if [[ -z "$TMUX" ]]; then
-    /usr/bin/python $HOME/creations/fortune.py | cowsay
+    # /usr/bin/python $HOME/creations/fortune.py | cowsay
     function chpwd() {
         emulate -L zsh
         ls --color=auto --group-directories-first
