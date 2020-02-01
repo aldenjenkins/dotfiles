@@ -1,0 +1,4 @@
+map n updir
+map e down
+map i up
+map o open

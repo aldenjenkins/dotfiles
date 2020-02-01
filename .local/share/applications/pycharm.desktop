@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Pycharm IDEA Ultimate Edition
+Icon=/home/alden/bin/pycharm-2019.1.1/bin/pycharm.png
+Exec="/home/alden/bin/pycharm-2019.1.1/bin/pycharm.sh" %f
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=pycharm-idea

@@ -1,6 +1,40 @@
 #!/bin/sh
-# Alden's first i3block! :)
+# Alden's first custom i3block! :)
+# Last edited 2019-11-02
 
-#dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'
+function get_dbus_info() (
+    dbus-send                                   \
+    --print-reply                               \
+    --session                                   \
+    --dest=org.mpris.MediaPlayer2.spotify       \
+    /org/mpris/MediaPlayer2                     \
+    org.freedesktop.DBus.Properties.Get         \
+        string:'org.mpris.MediaPlayer2.Player'  \
+        string:'Metadata'
+)
 
-echo "$(playerctl metadata artist)" "|" "$(playerctl metadata title)"
+function print_default_and_exit() (
+    echo "No song playing" 
+    exit
+)
+
+if get_dbus_info &> /dev/null; 
+then
+    DBUS_INFO=$(get_dbus_info)
+else
+    print_default_and_exit
+fi
+
+SONG_TITLE="$(echo "$DBUS_INFO" | grep "xesam:title" -A 1 | grep -v "xesam:title" | xargs | cut -d " " -f3-)"
+SONG_ARTIST="$(echo "$DBUS_INFO" | grep "xesam:artist" -A 2 | grep -v "xesam:artist" | xargs | cut -d " " -f5-)"
+
+if [ ! -z "$SONG_TITLE" -a "$SONG_TITLE" != " " ]; 
+then
+    echo "🎵" "`echo $SONG_ARTIST`" "|　`echo "'"$SONG_TITLE"'"　`"
+else
+    print_default_and_exit
+fi
+
+# This was the command since i had this x1 extreme laptop until today: 2019-11-02. changing back to the above (as im not sure why this was changed in the first place)h
+# The reason I'm changing it back is because the playerctl would show things like youtube videos names, or chromium advertisement names, which I don't want.
+# echo "$(playerctl metadata artist)" "|" "$(playerctl metadata title)"

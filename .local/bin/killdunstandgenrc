@@ -5,14 +5,13 @@
  # Source generated colors.
 . $HOME/.cache/wal/colors.sh
 
- kill_dunst() {
-    pids=( $(pgrep -f dunst) )
-    for pid in "${pids[@]}"; do
-      if [[ $pid != $$ ]]; then
-        kill "$pid"
-      fi
-    done
-    
+kill_dunst() {
+   pids=( $(pgrep -f dunst) )
+   for pid in "${pids[@]}"; do
+     if [[ $pid != $$ ]]; then
+       kill "$pid"
+     fi
+   done
 }
 
 kill_dunst

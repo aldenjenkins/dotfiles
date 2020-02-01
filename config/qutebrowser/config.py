@@ -420,7 +420,7 @@ c.completion.timestamp_format = '%Y-%m-%d'
 ## How many URLs to show in the web history. 0: no history / -1:
 ## unlimited
 ## Type: Int
-c.completion.web_history_max_items = -1
+c.completion.web_history.max_items = -1
 
 ## Whether quitting the application requires a confirmation.
 ## Type: ConfirmQuit

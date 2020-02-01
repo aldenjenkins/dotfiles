@@ -41,3 +41,13 @@ kritarc
 **/libreoffice
 **/zoomus.conf
 **/discord
+**/gpick
+**/gtk-*
+.netrwhist
+**/*redshift*
+**/*transmission*
+
+.local/share/*
+!.local/share/applications
+.local/share/applications/chrome*
+

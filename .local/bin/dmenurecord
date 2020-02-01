@@ -60,11 +60,11 @@ screencastpulseFull() { \
         -ar 44100 \
         -i hw:3 \
         -r 60 \
-	"$HOME/Videos/screen-recordings/screencast-$THETIME.mkv" &
+	"$HOME/media/videos/screen-recordings/screencast-$THETIME.mkv" &
 	echo $! > /tmp/recordingpid
-        echo $HOME/Videos/screen-recordings/ > /tmp/recdirname 
+        echo $HOME/media/videos/screen-recordings/ > /tmp/recdirname 
         echo screencast-$THETIME.mkv > /tmp/recfilename 
-	updateicon "TOP AND BOTTOM ⏺️🎙️"
+	updateicon "LEST AND RIGHT ⏺️🎙️"
        	}
 screencastpulseSelection() { \
         THETIME=$(date '+%y%m%d-%H%M-%S')
@@ -86,9 +86,9 @@ screencastpulseSelection() { \
         -ar 44100 \
         -i hw:3 \
         -r 60 \
-	"$HOME/Videos/screen-recordings/screencast-$THETIME.mkv" &
+	"$HOME/media/videos/screen-recordings/screencast-$THETIME.mkv" &
 	echo $! > /tmp/recordingpid
-        echo $HOME/Videos/screen-recordings/ > /tmp/recdirname 
+        echo $HOME/media/videos/screen-recordings/ > /tmp/recdirname 
         echo screencast-$THETIME.mkv > /tmp/recfilename 
 	updateicon "SELECTION ⏺️🎙️"
        	}
@@ -104,9 +104,9 @@ screencastpulseBottom() { \
         -ar 44100 \
         -i hw:3 \
         -r 60 \
-	"$HOME/Videos/screen-recordings/screencast-$THETIME.mkv" &
+	"$HOME/media/videos/screen-recordings/screencast-$THETIME.mkv" &
 	echo $! > /tmp/recordingpid
-        echo $HOME/Videos/screen-recordings/ > /tmp/recdirname 
+        echo $HOME/media/videos/screen-recordings/ > /tmp/recdirname 
         echo screencast-$THETIME.mkv > /tmp/recfilename 
 	updateicon "BOTTOM ⏺️🎙️"
        	}
@@ -123,7 +123,7 @@ screencastalsa() { \
 	-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
 	-i :0.0 \
 	-thread_queue_size 1024 \
- 	-f alsa -ar 44100 -i hw:1 \
+ 	-f alsa -ar 44100 -i hw:3 \
  	-c:v libx264 -r 30 -c:a flac \
 	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
 	echo $! > /tmp/recordingpid
@@ -147,8 +147,8 @@ audiopulse() { \
         -ac 1 \
         -ar 44100 \
         -i hw:3 \
-	"$HOME/Videos/audio-recordings/audio-$THETIME.flac" &
-        echo $HOME/Videos/audio-recordings/ > /tmp/recdirname 
+	"$HOME/media/videos/audio-recordings/audio-$THETIME.flac" &
+        echo $HOME/media/videos/audio-recordings/ > /tmp/recdirname 
         echo audio-$THETIME.flac > /tmp/recfilename 
 	echo $! > /tmp/recordingpid
 	updateicon "🎙️"
@@ -156,14 +156,14 @@ audiopulse() { \
 
 audioalsa() { \
 	ffmpeg -y \
-	-f alsa -ar 44100 -i hw:1 \
+	-f alsa -ar 44100 -i hw:3 \
 	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
 	echo $! > /tmp/recordingpid
 	updateicon "🎙️"
 	}
 
 askrecording() { \
-	choice=$(printf "screencast\\nscreencastSelect\\nscreencastFull\\nvideo\\naudio" | rofi -dpi 1 -dmenu -i -p "Select recording style:")
+	choice=$(printf "screencast\\nscreencastSelect\\nscreencastFull\\nvideo\\naudio" | rofi -dpi 1 -dmenu -i -p "Select recording style")
 	case "$choice" in
 		screencast) screencastpulseBottom;;
 		screencastSelect) screencastpulseSelection;;

@@ -1,0 +1,4 @@
+#!/bin/bash
+# I made this on 2019-11-02 just so that it would be verbose and clear what was happening when i'd use it in other scripts
+
+sed -e 's/^[ \t]*//'

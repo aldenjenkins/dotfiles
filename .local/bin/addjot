@@ -1,0 +1,14 @@
+#!/bin/bash
+JOT=$(rofi -dpi 1 -dmenu -i -p "Write a Jot" -l 0)
+if [ -z "$JOT" ]
+then
+    exit
+fi
+TODAY=$(date '+%Y-%m-%d')
+JOT_FILE=$HOME/doc/Jots/$TODAY
+if test -f "$JOT_NAME";
+then
+    echo "$JOT" > "$JOT_FILE"
+else
+    echo "$JOT" >> "$JOT_FILE"
+fi

@@ -1,0 +1,2 @@
+#!/bin/bash
+cat $HOME/doc/Jots/* | rofi -dpi 1 -dmenu -i -p "fzf" | tr -d '\n' | xclip -selection clipboard

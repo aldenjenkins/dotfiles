@@ -55,9 +55,9 @@ onoremap o l
 command -nargs=1 w :action Macro.reformatandsave<CR>
 command -nargs=+ wq :action Macro.reformatandsave, CloseActiveTab<CR>
 
-
 " Don't automatically copy whats being deleted, so that we can maintain what we have from the yank register
-nnoremap x "_x
-nnoremap d "_d
-nnoremap D "_D
-vnoremap d "_d
+" nnoremap x "_x
+" nnoremap d "_d
+" nnoremap d "_d
+" nnoremap D "_D
+" vnoremap d "_d

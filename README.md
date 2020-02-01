@@ -32,3 +32,7 @@ My current hardware setup:
  -   `cd ~`
  -   `git clone`
  -   `cd dotfiles && ./install.sh`
+
+
+## General Thoughts
+- I recommend leaving Ctrl+$Mod+<any key> unbound so that you can use ctrl as the differentiator with hotkeys between i3 and other applications.

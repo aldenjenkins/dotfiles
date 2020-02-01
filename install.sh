@@ -11,12 +11,10 @@ ln -s `pwd`/config/vim $HOME/.vim
 ln -s `pwd`/scripts $HOME/.scripts
 ln -s `pwd`/creations $HOME/creations
 ln -s `pwd`/zsh/zshrc $HOME/.zshrc
-ln -s `pdw`/config/emoji.emoji $HOME/.emoji
+ln -s `pwd`/config/emoji.emoji $HOME/.emoji
 mkdir -p ~/Photos/{wallpapers,screenshots}
 mkdir -p ~/Videos/{audio-recordings,Youtube,screen-recordings,memes,nonmemes}
 
 # ssh-agent service will now start at startup
-systemctl --user enable ssh-agent
-
-ln -s /bin/dash /usr/bin/sh
-ln -s /bin/dash /bin/sh
+systemctl --user enable ssh-agent.service
+systemctl --user enable clipmenud.service

@@ -17,12 +17,12 @@ set $mod Mod1
 # DPI settings
 # ----------------------------
 # 2k
-#set $FONTSIZE 4
-#set $RES 3440x1440
+set $FONTSIZE 6
+set $RES 3440x1440
 
 # 4k
-set $FONTSIZE 12
-set $RES 3840x2160
+# set $FONTSIZE 14
+# set $RES 3840x2160
 
 
 # KEYBOARD SETTINGS 
@@ -30,10 +30,10 @@ exec --no-startup-id setxkbmap us -variant colemak -option caps:escape
 exec --no-startup-id xrdb ~/.Xresources
 
 for_window [class="^.*"] border pixel 1
-# gaps inner 15
-# gaps outer 1
-gaps inner 0
-gaps outer 0
+gaps inner 15
+gaps outer 1
+#gaps inner 0
+#gaps outer 0
 
 for_window [class="jetbrains-pycharm"] border pixel 1
 
@@ -42,7 +42,7 @@ bindsym $mod+Return 		exec $term
 bindsym $mod+Shift+Return 	exec --no-startup-id samedir
 
 # Unclutter makes the mouse invisible after a brief period
-exec --no-startup-id            unclutter --timeout 1 
+#exec --no-startup-id            unclutter --timeout 1 
 
 # exec --no-startup-id /usr/bin/xrandr --output DP-5 --above DP-3
 # exec --no-startup-id /usr/bin/xrandr --output DP-3 --primary
@@ -56,11 +56,13 @@ exec --no-startup-id            unclutter --timeout 1
 # exec --no-startup-id /usr/bin/xrandr --output DP-2 --above DP-1
 # exec --no-startup-id /usr/bin/xrandr --output DP-1 --primary
 
-# exec --no-startup-id            redshift
-exec --no-startup-id            compton --xrender-sync-fence
+##exec --no-startup-id            redshift
+
+# New Compton
+#exec --no-startup-id            picom
 
 # Music player daemon:
-exec --no-startup-id            mpd
+##exec --no-startup-id            mpd
 bindsym $mod+Shift+a		exec $term -e ncpamixer
 
 # Emoji rofi menu
@@ -73,10 +75,10 @@ bindsym $mod+a			exec --no-startup-id createnewmathscratchpadifnotconnectedandsh
 bindsym $mod+l	        	exec --no-startup-id createnewvpnscratchpadifnotconnectedandshowotherwisejustshow
 
 # Move floating windows
-bindsym $mod+Shift+l		exec --no-startup-id "bash ~/.scripts/i3resize left"
-bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
-bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.scripts/i3resize up"
-bindsym $mod+Shift+semicolon	exec --no-startup-id "bash ~/.scripts/i3resize right"
+bindsym $mod+Shift+l		exec --no-startup-id "bash ~/.local/bin/i3resize left"
+bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.local/bin/i3resize down"
+bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.local/bin/i3resize up"
+bindsym $mod+Shift+semicolon	exec --no-startup-id "bash ~/.local/bin/i3resize right"
 
 # bindsym $mod+Shift+p		exec --no-startup-id "bash ~/.scripts/i3resize down"
 
@@ -149,8 +151,7 @@ set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 set $hibernate sudo systemctl suspend
 
 # keyboard repeat rate
-exec --no-startup-id xset r rate 290 25
-exec --no-startup-id greenclip daemon
+#exec --no-startup-id xset r rate 200 40
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -176,7 +177,7 @@ client.background       $bg
 # PROTIP: You can also dynamically set dmenu's colors this way:
 # bindsym $mod+d exec --no-startup-id dmenu_run -fn "terminal-11" -nb "$fg" -nf "$bg" -sb "$bg" -sf "$fg"
 bindsym $mod+d exec rofi -dpi 1 -show-icons -scroll-method 1 -p "Run" -show drun 
-bindsym $mod+g exec rofi -dpi 1 -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+bindsym $mod+g exec clipmenu -dpi 1 -p "Clipboard" -scroll-method 1
 
 
 for_window [class="mpv"] border pixel 1
@@ -238,10 +239,10 @@ bindsym $mod+i focus up
 bindsym $mod+o focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+n move left 10
@@ -273,6 +274,9 @@ bindsym $mod+Shift+x		exec --no-startup-id prompt "Are you sure you want to shut
 
 bindsym $mod+w exec --no-startup-id dmenurecord
 
+bindsym $mod+j       exec --no-startup-id addjot
+bindsym $mod+Shift+j exec --no-startup-id jotstofzfthrough
+
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -290,11 +294,11 @@ bindsym $mod+space focus mode_toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
+set $ws1 "1 Mail"
+set $ws2 "2 Spotify"
+set $ws3 "3 Slack"
+set $ws4 "4 Web"
+set $ws5 "5 Pycharm"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -387,27 +391,31 @@ bindsym $mod+Shift+s		gaps inner current minus 5
 }
 
 # pywal a random wallpaper in the wallpaper directory
-#exec --no-startup-id /usr/bin/xrandr --output DP-3 --off --output DP-1 --auto --output DP-2 --auto --output DP-2 --above DP-1 && sleep 2 && /home/alden/creations/random_pywalpaper/run_while.sh 
-exec --no-startup-id ~/creations/random_pywalpaper/run_while.sh && $HOME/.scripts/genzathurarc && $HOME/.scripts/killdunstandgenrc 
+#exec --no-startup-id /usr/bin/xrandr --output DP-3 --off --output DP-1 --auto --output DP-2 --auto --output DP-2 --above DP-1 && sleep 2 && /home/alden/creations/random_pywalpaper/run.sh
+#exec --no-startup-id ~/src/creations/random_pywalpaper/run.sh > /dev/null
 #exec --no-startup-id /usr/bin/xrandr --output DP-4 --primary 
 bindsym $mod+Shift+c		exec --no-startup-id camtoggle
-bindsym $mod+c exec --no-startup-id ~/creations/random_pywalpaper/run_while.sh $RES && $HOME/.scripts/genzathurarc && $HOME/.scripts/killdunstandgenrc 
+bindsym $mod+c                  exec --no-startup-id ~/src/creations/random_pywalpaper/run.sh > /dev/null
 
-bindsym $mod+y exec --no-startup-id /home/alden/.scripts/takescreenshotandaddtoscreenshotdir >! /tmp/my_screenshotjob.log 2>&1 
-bindsym $mod+u exec --no-startup-id /home/alden/.scripts/viewscreenshots
+# Select wallpaper for pywal to use
+bindsym $mod+Shift+m            exec --no-startup-id /home/alden/.local/bin/selectwallpaperdirforpywal
 
-# Run the script to update the mpd i3block on change.
-exec --no-startup-id "pgrep i3mpdupdate || i3mpdupdate"
+bindsym $mod+y                  exec --no-startup-id /home/alden/.local/bin/takescreenshotandaddtoscreenshotdir > /tmp/my_screenshotjob.log 2>&1 
+bindsym $mod+u                  exec --no-startup-id /home/alden/.local/bin/viewscreenshots
+
 
 bindsym XF86AudioMute exec --no-startup-id "lmc mute &>> /tmp/out"
-bindsym XF86AudioLowerVolume exec --no-startup-id lmc down 1
-bindsym XF86AudioRaiseVolume exec --no-startup-id lmc up 1
+bindsym XF86AudioLowerVolume    exec --no-startup-id lmc down 1
+bindsym XF86AudioRaiseVolume    exec --no-startup-id lmc up 1
 
 bindsym Shift+XF86AudioLowerVolume exec --no-startup-id lmc down 10
 bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id lmc up 10
 
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 1
+bindsym XF86MonBrightnessUp     exec --no-startup-id xbacklight -inc 1
+
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym Shift+XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 10
 
 #bindsym $mod+Shift+XF86AudioMute exec --no-startup-id xrandr --output DP-3 --off --output DP-2 --auto --output DP-1 --auto --output DP-2 --above DP-1
 
@@ -417,12 +425,15 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 #Starts dunst for notifications:
 #exec --no-startup-id dunst
 # exec_always --no-startup-id dunst -lb "$bg" -nb "$bg" -cb "#FF0000" -lf "$fg" -bf "$fg" -cf "#000000" -nf "$fg" -fn "ypn envypn 12" -s -geometry "400x60-10+40" -format "<b>%s</b>\n%b" -shrink  -lto 3 -nto 5 -cto 0 -align "left" -transparency 0 -padding 28 -horizontal_padding 28 &
-exec --no-startup-id /home/alden/.scripts/genzathurarc 
-exec --no-startup-id /home/alden/.scripts/killdunstandgenrc 
 
+##exec --no-startup-id /home/alden/.scripts/genzathurarc 
+##exec --no-startup-id /home/alden/.scripts/killdunstandgenrc 
 
 #bindsym $mod+Shift+p exec --no-startup-ip camtoggle
 
 # Workspaces
 # exec --no-startup-id i3-msg 'workspace 1; exec thunderbird; exec slack;'
-exec_always --no-startup-id /usr/bin/nm-applet
+##exec_always --no-startup-id "pgrep nm-applet || nm-applet"
+
+# Run the script to update the mpd i3block on change.
+##exec_always --no-startup-id "pgrep i3mpdupdate || i3mpdupdate"

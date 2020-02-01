@@ -1,0 +1,20 @@
+#!/bin/bash
+
+DIR=$(ls ~/media/photos/screenshots | grep -v "\." | rofi -dpi 1 -dmenu -i -p "Select Screenshots to View")
+# Debugging bash
+# set -x
+echo "roadtriplandscapeorultrawide" >! /tmp/wallpaperdir
+
+if [ -n "$DIR" ]
+then
+    IMAGE=$(sxiv -fto $(find /home/alden/media/photos/screenshots/$DIR -maxdepth 1 -type f))
+    # There are two photos in the selection, so there must be two /home/alden/'s
+    if [[ $IMAGE == */alden/*/alden/* ]] 
+    then
+        prompt "You have selected multiple photos, would you like to delete them?" "rm $IMAGE"
+    elif [[ -e "$IMAGE" ]] 
+    then
+        notify-send "$IMAGE copied to clipboard"  
+        xclip -selection clipboard -t image/png -i $IMAGE
+    fi
+fi

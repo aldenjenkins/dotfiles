@@ -1628,4 +1628,13 @@
 🏴󠁧󠁢󠁥󠁮󠁧󠁿 flag: England; U+1F3F4 U+E0067 U+E0062 U+E0065 U+E006E U+E0067 U+E007F
 🏴󠁧󠁢󠁳󠁣󠁴󠁿 flag: Scotland; U+1F3F4 U+E0067 U+E0062 U+E0073 U+E0063 U+E0074 U+E007F
 🏴󠁧󠁢󠁷󠁬󠁳󠁿 flag: Wales; U+1F3F4 U+E0067 U+E0062 U+E0077 U+E006C U+E0073 U+E007F
-á a accent; U+1F511
+á a accent; U+00E1
+é e accent; U+00E9
+í i accent; U+00ED
+ó o accent; U+00F3
+ñ n accent squiggle tilde; U+00F1
+ú u accent tick; U+00FA
+ü u accent uber; U+00FC
+¡ upside down inverted exclamation; U+00A1
+¿ upside down inverted question mark; U+00BF
+

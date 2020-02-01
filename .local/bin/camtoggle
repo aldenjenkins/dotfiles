@@ -5,8 +5,7 @@ if [ -e `lsusb -d $(lsusb | grep "Logitech.*Webcam" | awk '{print $6}') 2>&1 >/d
 then
     pkill -f /dev/video || mpv --untimed --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-110-16 --autofit=20%  --title="mpvfloat" /dev/video4
 else
-    notify-send "not docked"
-    #todo: use webcam here (super easy, im just in a rush)
-
+    # use webcam here
+    pkill -f /dev/video || mpv --untimed --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-16-16 --autofit=20%  --title="mpvfloat" /dev/video0
 fi
 

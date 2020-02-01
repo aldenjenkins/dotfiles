@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=CSV
+Exec=/usr/bin/env vd %u

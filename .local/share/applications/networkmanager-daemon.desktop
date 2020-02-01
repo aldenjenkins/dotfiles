@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=NetworkManager Applet
+Icon=/usr/share/icons/Adwaita/16x16/legacy/network-idle.png
+Exec="/usr/bin/nm-applet" %f
+Categories=Applet;i3blocks;
+Terminal=false

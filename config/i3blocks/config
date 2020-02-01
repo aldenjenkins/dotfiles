@@ -59,7 +59,7 @@ interval=1
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM:
+label=🧠 MEM:
 interval=30
 
 # [memory]
@@ -103,7 +103,7 @@ interval=30
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=CPU:
+label=⚙ CPU:
 interval=1
 min_width=CPU:100.0%
 #separator=false
@@ -116,7 +116,7 @@ min_width=CPU:100.0%
 # The battery instance defaults to 0.
 [battery]
 #label=BAT
-label=⚡
+label=⚡ 
 #instance=1
 interval=30
 
@@ -124,12 +124,10 @@ interval=30
 #interval=10
 
 [vpn_status]
-label=VPN
 interval=2
 color=#FF0000
 
 [vpn_status_down]
-label=VPN
 interval=2
 color=#00FF00
 
@@ -139,4 +137,5 @@ color=#00FF00
 #
 [calendar]
 #command=date '+%a, %b %-d %-I:%M:%S '
+label=📅 
 interval=1

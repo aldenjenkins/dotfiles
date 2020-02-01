@@ -160,7 +160,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 "let g:nerdtree_tabs_open_on_console_startup=1
 
 
-Plug 'tmhedberg/SimpylFold'
+"Plug 'tmhedberg/SimpylFold'
 nnoremap <space> za
 vnoremap <space> zf
 "Plug 'vimwiki/vimwiki'
