@@ -19,17 +19,12 @@ timeout="10000"
 #}
 
 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
-scrot /tmp/head.png
-#Combine all screen images into one big image
-#convert +append /tmp/head_*.png /tmp/screen.png
-convert +append /tmp/head.png -paint 2 -swirl 360 /tmp/screen.png
-
-# Pause music (mocp and mpd):
-#mocp -P
-#mpc pause
+#scrot /tmp/head.png
+#convert +append /tmp/head.png -paint 2 -swirl 360 /tmp/screen.png
 
 # Lock it up!
-i3lock  -e -f -c 000000 -i /tmp/screen.png
+#i3lock  -e -f -c 000000 -i /tmp/screen.png
+slock
 
 # If still locked after $timeout milliseconds, turn off screen.
 while [[ $(pgrep -x i3lock) ]]; do

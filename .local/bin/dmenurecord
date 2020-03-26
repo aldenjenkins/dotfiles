@@ -146,7 +146,7 @@ audiopulse() { \
         -f alsa \
         -ac 1 \
         -ar 44100 \
-        -i hw:3 \
+        -i hw:2 \
 	"$HOME/media/videos/audio-recordings/audio-$THETIME.flac" &
         echo $HOME/media/videos/audio-recordings/ > /tmp/recdirname 
         echo audio-$THETIME.flac > /tmp/recfilename 

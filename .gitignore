@@ -51,3 +51,5 @@ kritarc
 !.local/share/applications
 .local/share/applications/chrome*
 
+.secrets
+!.secrets.example

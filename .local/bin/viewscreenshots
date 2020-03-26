@@ -5,7 +5,7 @@ DIR=$(ls -t ~/media/photos/screenshots | grep -v "\." | rofi -dpi 1 -dmenu -i -p
 # set -x
 if [ -n "$DIR" ]
 then
-    IMAGE=$(sxiv -fto $(find $HOME/media/photos/screenshots/$DIR -maxdepth 1 -type f))
+    IMAGE=$(sxiv -fto $(find $HOME/media/photos/screenshots/$DIR -maxdepth 1 -type f -printf "%T+\t%p\n" | sort -r | awk '{print $2}'))
     if [[ $IMAGE == */alden/*/alden/* ]] 
     then
         prompt "You have selected multiple photos, would you like to delete them?" "rm $IMAGE"

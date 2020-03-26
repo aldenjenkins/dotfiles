@@ -37,6 +37,17 @@ for_window [class="mpv"] floating enable
 for_window [class="mpv"] sticky enable
 for_window [instance="calendar"] floating enable
 
+# Assign Workspaces:
+assign [class="^Thunderbird$"] $ws1
+assign [class="^Spotify$"] $ws2
+assign [class="^Slack$"] $ws3
+assign [class="^Chromium$"] $ws4
+assign [class="^qutebrowser$"] $ws4
+assign [class="calibre"] $ws5
+assign [class="Foliate"] $ws5
+assign [class="^jetbrains-pycharm$"] $ws5
+assign [class="^zoom$"] $ws9
+
 ### ----------------------------------------------------------
 ### Basic Binds
 ### ----------------------------------------------------------

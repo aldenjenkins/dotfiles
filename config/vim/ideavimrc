@@ -1,11 +1,14 @@
 source ~/.vim/etc.vim
 source ~/.vim/binds.vim
+
+set easymotion  " Implements the EasyMotion and AceJump plugins
+
 " nnoremap E :action VimMotionPreviousTab<CR>
 " nnoremap I :action VimMotionNextTab<CR>
-nnoremap <C-e> :action VimMotionPreviousTab<CR>
-nnoremap <C-i> :action VimMotionNextTab<CR>
-nnoremap <C-n> :action VimWindowLeft<CR>
-nnoremap <C-o> :action VimWindowRight<CR>
+nnoremap <C-e> :action PreviousTab<CR>
+nnoremap <C-i> :action NextTab<CR>
+nnoremap <C-n> :action WindowLeft<CR>
+nnoremap <C-o> :action WindowRight<CR>
 "nnoremap <C-e> :action VimWindowDown<CR>
 "nnoremap <C-i> :action VimWindowUp<CR>
 
@@ -52,8 +55,8 @@ onoremap o l
 " map <C-f> :action ToggleDistractionFreeMode<CR>
 
 " Command help page http://vimdoc.sourceforge.net/htmldoc/usr_40.html#40.2
-command -nargs=1 w :action Macro.reformatandsave<CR>
-command -nargs=+ wq :action Macro.reformatandsave, CloseActiveTab<CR>
+"command -nargs=1 w :action Macro.reformatandsave<CR>
+"command -nargs=+ wq :action Macro.reformatandsave, CloseActiveTab<CR>
 
 " Don't automatically copy whats being deleted, so that we can maintain what we have from the yank register
 " nnoremap x "_x

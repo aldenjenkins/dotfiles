@@ -35,7 +35,6 @@ export PATH=$PATH:$HOME/.scripts
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:~/.gem/ruby/2.5.0/bin
 export JIRA_HOME='/home/alden/etc/jira_home'
 export PATH=~/.local/bin:/home/alden/Downloads/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/home/alden/.fzf/bin:/home/alden/.gem/ruby/2.6.0/bin
-#export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/anaconda/lib/"
 
 # less/man colors
 export LESS=-R
