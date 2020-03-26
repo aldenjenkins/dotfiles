@@ -29,7 +29,7 @@ My current hardware setup:
 ![preview](preview.png)
 
 ## Install
-See ![INSTALL.md](INSTALL.md)
+See [INSTALL.md](INSTALL.md)
 
 ## General Thoughts
 - I recommend leaving Ctrl+$Mod+<any key> unbound so that you can use ctrl as the differentiator with hotkeys between i3 and other applications.

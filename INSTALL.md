@@ -1,6 +1,6 @@
 # Installation
 * This repository should be used as a `git --bare` repository because bare repos are the supreme endgame of config management 😎
-    - ![see here](https://www.atlassian.com/git/tutorials/dotfiles) for related details 
+    - [see here](https://www.atlassian.com/git/tutorials/dotfiles) for related details 
 
 ## Setup
 ```bash
