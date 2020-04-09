@@ -53,3 +53,4 @@ kritarc
 
 .secrets
 !.secrets.example
+**/gnupg

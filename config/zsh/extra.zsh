@@ -61,16 +61,16 @@ zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
 # allows typing ..[TAB] for auto completion of / just like in bash
 zstyle ':completion:*' special-dirs true
 
-if [[ -z "$TMUX" ]]; then
-    # /usr/bin/python $HOME/creations/fortune.py | cowsay
-    function chpwd() {
-        emulate -L zsh
-        ls --color=auto --group-directories-first
-    };
-else
-    export TERM="screen-256color"
-    echo "Tmux session $TMUX"
-fi
+#if [[ -z "$TMUX" ]]; then
+#    # /usr/bin/python $HOME/creations/fortune.py | cowsay
+#    function chpwd() {
+#        emulate -L zsh
+#        ls --color=auto --group-directories-first
+#    };
+#else
+#    export TERM="screen-256color"
+#    echo "Tmux session $TMUX"
+#fi
 
 # Fix up down fuzzy search with vim mode make search up and down work, so partially type and hit up/down to find relevant stuff
 # start typing + [Up-Arrow] - fuzzy find history forward
@@ -96,3 +96,24 @@ fi
 echo -ne '\e[5 q'
 # Use beam shape cursor for each new prompt.
 preexec() { echo -ne '\e[5 q' ;}
+
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+
+bindkey -s '^o' 'lfcd\n'  # zsh
+
+# pip autocompletion
+eval "`pip completion --zsh`"
+compctl -K _pip_completion pip3

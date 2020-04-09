@@ -1,9 +1,0 @@
-source $HOME/.config/zsh/prompt.sh
-source $ZSH/oh-my-zsh.sh
-source $HOME/.aliases
-source $HOME/.functions
-source $HOME/.extra
-source $HOME/.oh-my-zsh/plugins/fzf/fzf.plugin.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/bin/virtualenvwrapper.sh

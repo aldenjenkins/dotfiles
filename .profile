@@ -2,79 +2,138 @@
 
 source $HOME/.secrets
 
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
+
+# Export XDG environmental variables from '~/.config/user-dirs.dirs'
+eval "$(sed 's/^[^#].*/export &/g;t;d' ~/.config/user-dirs.dirs)"
+
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
-
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:$HOME/.gem/ruby/2.5.0/bin:/home/alden/tmp/downloads/google-cloud-sdk/bin
 export KEYMAP="colemak"
 
 # 10ms for key sequences. makes hitting escape in vim work instantly.
 export KEYTIMEOUT=1
 
-export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=10000000
-export SAVEHIST=10000000
-export DEFAULT_USER="alden"
-
-export TERM="xterm-256color"
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
 # for `better_exceptions` https://github.com/Qix-/better-exceptions?utm_source=mybridge&utm_medium=blog&utm_campaign=read_more
 export BETTER_EXCEPTIONS=1
 
+# Path to your oh-my-zsh installation.
+export ZSH="$XDG_CONFIG_HOME/zsh/oh-my-zsh"
+
+# Default Programs:
+export TERM="xterm-256color"
 export READER="zathura"
 export BROWSER="chromium"
 export EDITOR="nvim"
+export OPENER="xdg-open"
 export TERMINAL="st"
 
-export WORKON_HOME="$HOME/.virtualenvs"
-export PATH=$PATH:/usr/local/go/bin:/home/alden/go/binexport
-export EDITOR='vim'
-export PATH=$PATH:$HOME/.scripts
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:~/.gem/ruby/2.5.0/bin
-export JIRA_HOME='/home/alden/etc/jira_home'
-export PATH=~/.local/bin:/home/alden/Downloads/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/usr/local/go/bin:/home/alden/go/binexport:/home/alden/.scripts:/home/alden/.fzf/bin:/home/alden/.gem/ruby/2.6.0/bin
-
-# less/man colors
-export LESS=-R
-export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
-export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
-export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
-export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
+export HISTFILE="$XDG_DATA_HOME/.zsh_history"
+export HISTSIZE=10000000
+export SAVEHIST=10000000
+export DEFAULT_USER="alden"
+export WORKON_HOME="$XDG_DATA_HOME/.virtualenvs"
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
+export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export ELINKS_CONFDIR="$XDG_CONFIG_HOME"/elinks
+export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
+export GEM_HOME="$XDG_DATA_HOME"/gem
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 export CM_LAUNCHER=rofi
-
-# Default programs:
-
-# ~/ Clean-up:
-export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="-"
-export INPUTRC="$HOME/.config/inputrc"
-#export ZDOTDIR="$HOME/.config/zsh"
-export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
-
-# Other program settings:
+export LESSKEY="$XDG_CONFIG_HOME/lesskey"
+export INPUTRC="$XDG_CONFIG_HOME/inputrc"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export DICS="/usr/share/stardict/dic/"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
-#export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
+
+# less/man colors
 export LESS=-R
-#export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
-#export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
-#export LESS_TERMCAP_me="$(printf '%b' '[0m')"
-#export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
-#export LESS_TERMCAP_se="$(printf '%b' '[0m')"
-#export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
-#export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
+export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
+export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
+export LESS_TERMCAP_me="$(printf '%b' '[0m')"
+export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
+export LESS_TERMCAP_se="$(printf '%b' '[0m')"
+export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
+export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
+
+# This is the list for lf icons:
+export LF_ICONS="di=📁:\
+fi=📃:\
+tw=🤝:\
+ow=📂:\
+ln=⛓:\
+or=❌:\
+ex=🎯:\
+*.txt=✍:\
+*.mom=✍:\
+*.me=✍:\
+*.ms=✍:\
+*.png=🖼:\
+*.ico=🖼:\
+*.jpg=📸:\
+*.jpeg=📸:\
+*.gif=🖼:\
+*.svg=🗺:\
+*.xcf=🖌:\
+*.html=🌎:\
+*.xml=📰:\
+*.gpg=🔒:\
+*.css=🎨:\
+*.pdf=📚:\
+*.djvu=📚:\
+*.epub=📚:\
+*.csv=📓:\
+*.xlsx=📓:\
+*.tex=📜:\
+*.md=📘:\
+*.r=📊:\
+*.R=📊:\
+*.rmd=📊:\
+*.Rmd=📊:\
+*.mp3=🎵:\
+*.opus=🎵:\
+*.ogg=🎵:\
+*.m4a=🎵:\
+*.flac=🎼:\
+*.mkv=🎥:\
+*.mp4=🎥:\
+*.webm=🎥:\
+*.mpeg=🎥:\
+*.zip=📦:\
+*.rar=📦:\
+*.7z=📦:\
+*.tar.gz=📦:\
+*.z64=🎮:\
+*.v64=🎮:\
+*.n64=🎮:\
+*.1=ℹ:\
+*.nfo=ℹ:\
+*.info=ℹ:\
+*.log=📙:\
+*.iso=📀:\
+*.img=📀:\
+*.bib=🎓:\
+*.ged=👪:\
+*.part=💔:\
+*.torrent=🔽:\
+*.py=🐍:\
+"
 
 [ ! -f ~/.config/shortcutrc ] && shortcuts >/dev/null 2>&1
 
-export LF_ICONS="di=:fi=:ln=:or=:ex=:*.c=:*.cc=:*.clj=:*.coffee=:*.cpp=:*.css=:*.d=:*.dart=:*.erl=:*.exs=:*.fs=:*.go=:*.h=:*.hh=:*.hpp=:*.hs=:*.html=:*.java=:*.jl=:*.js=:*.json=:*.lua=:*.md=:*.php=:*.pl=:*.pro=:*.py=:*.rb=:*.rs=:*.scala=:*.ts=:*.vim=:*.cmd=:*.ps1=:*.sh=:*.bash=:*.zsh=:*.fish=:*.tar=:*.tgz=:*.arc=:*.arj=:*.taz=:*.lha=:*.lz4=:*.lzh=:*.lzma=:*.tlz=:*.txz=:*.tzo=:*.t7z=:*.zip=:*.z=:*.dz=:*.gz=:*.lrz=:*.lz=:*.lzo=:*.xz=:*.zst=:*.tzst=:*.bz2=:*.bz=:*.tbz=:*.tbz2=:*.tz=:*.deb=:*.rpm=:*.jar=:*.war=:*.ear=:*.sar=:*.rar=:*.alz=:*.ace=:*.zoo=:*.cpio=:*.7z=:*.rz=:*.cab=:*.wim=:*.swm=:*.dwm=:*.esd=:*.jpg=:*.jpeg=:*.mjpg=:*.mjpeg=:*.gif=:*.bmp=:*.pbm=:*.pgm=:*.ppm=:*.tga=:*.xbm=:*.xpm=:*.tif=:*.tiff=:*.png=:*.svg=:*.svgz=:*.mng=:*.pcx=:*.mov=:*.mpg=:*.mpeg=:*.m2v=:*.mkv=:*.webm=:*.ogm=:*.mp4=:*.m4v=:*.mp4v=:*.vob=:*.qt=:*.nuv=:*.wmv=:*.asf=:*.rm=:*.rmvb=:*.flc=:*.avi=:*.fli=:*.flv=:*.gl=:*.dl=:*.xcf=:*.xwd=:*.yuv=:*.cgm=:*.emf=:*.ogv=:*.ogx=:*.aac=:*.au=:*.flac=:*.m4a=:*.mid=:*.midi=:*.mka=:*.mp3=:*.mpc=:*.ogg=:*.ra=:*.wav=:*.oga=:*.opus=:*.spx=:*.xspf=:*.pdf="
-
 # Start graphical server on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx
+

@@ -1,0 +1,49 @@
+#!/usr/bin/env zsh
+
+if [[ $LBUFFER[-1] != ' ' ]]; then
+    zle expand-or-complete
+    return
+fi
+
+local tokens=(${(z)$(extend_alias $LBUFFER)})
+if (( $#tokens < 1 )); then
+    zle expand-or-complete
+    return
+fi
+
+local pre_cmd_flag
+while (( $#tokens > 0 )); do
+    if [[ $tokens[1] == sudo ]]; then
+        pre_cmd_flag=true
+        shift tokens
+        if [[ $tokens[1] == -* ]]; then
+            shift tokens
+        fi
+        continue
+    elif [[ $tokens[1] == command ]]; then
+        pre_cmd_flag=true
+        shift tokens
+        continue
+    else
+        break;
+    fi
+done
+
+if [[ -n $pre_cmd_flag ]]; then
+    tokens=(${(z)$(extend_alias $tokens[1])} $tokens[2,-1])
+fi
+
+local cmd=$tokens[1]
+if eval "type fzf-complete-$cmd > /dev/null"; then
+    eval "fzf-complete-$cmd $tokens"
+    local ret=$?
+    case $ret in
+        0 | 130 | 141)
+            zle reset-prompt
+            return
+            ;;
+        99)
+            ;;
+    esac
+fi
+zle expand-or-complete
