@@ -44,7 +44,7 @@ c.bindings.key_mappings = {
     '<Ctrl-[>': '<Escape>',
     '<Ctrl-6>': '<Ctrl-^>',
     '<Ctrl-M>': '<Return>',
-    '<Ctrl-J>': '<Return>',
+    # '<Ctrl-J>': '<Return>',
     '<Shift-Return>': '<Return>',
     '<Enter>': '<Return>',
     '<Shift-Enter>': '<Return>',
@@ -437,7 +437,7 @@ c.confirm_quit = ['downloads']
 ## loader engine will first ask the application cache for the contents,
 ## before hitting the network.
 ## Type: Bool
-c.content.cache.appcache = True
+#c.content.cache.appcache = True
 
 ## The maximum number of pages to hold in the global memory page cache.
 ## The Page Cache allows for a nicer user experience when navigating
@@ -446,7 +446,7 @@ c.content.cache.appcache = True
 ## please refer to: http://webkit.org/blog/427/webkit-page-cache-i-the-
 ## basics/
 ## Type: Int
-c.content.cache.maximum_pages = 0
+#c.content.cache.maximum_pages = 0
 
 ## Size of the HTTP network cache. Null to use the default value. With
 ## QtWebEngine, the maximum supported value is 2147483647 (~2 GB).
@@ -472,13 +472,6 @@ c.content.cookies.store = True
 ## Type: String
 c.content.default_encoding = 'iso-8859-1'
 
-## Enable extra tools for Web developers. This needs to be enabled for
-## `:inspector` to work and also adds an _Inspect_ entry to the context
-## menu. For QtWebEngine, see `--enable-webengine-inspector` in
-## `qutebrowser --help` instead.
-## Type: Bool
-c.content.developer_extras = False
-
 ## Try to pre-fetch DNS entries to speed up browsing.
 ## Type: Bool
 c.content.dns_prefetch = True
@@ -486,7 +479,7 @@ c.content.dns_prefetch = True
 ## Expand each subframe to its contents. This will flatten all the frames
 ## to become one scrollable page.
 ## Type: Bool
-c.content.frame_flattening = False
+#c.content.frame_flattening = False
 
 ## Allow websites to request geolocations.
 ## Type: BoolAsk
@@ -521,11 +514,11 @@ c.content.headers.referer = 'same-domain'
 
 ## User agent to send. Unset to send the default.
 ## Type: String
-c.content.headers.user_agent = None
+#c.content.headers.user_agent = False
 
 ## Whether host blocking is enabled.
 ## Type: Bool
-c.content.host_blocking.enabled = True
+c.content.host_blocking.enabled = False
 
 ## List of URLs of lists which contain hosts to block.  The file can be
 ## in one of the following formats:  - An `/etc/hosts`-like file - One
@@ -561,7 +554,7 @@ c.content.javascript.can_access_clipboard = False
 
 ## Whether JavaScript can close tabs.
 ## Type: Bool
-c.content.javascript.can_close_tabs = False
+#c.content.javascript.can_close_tabs = False
 
 ## Whether JavaScript can open new tabs without user interaction.
 ## Type: Bool
@@ -650,7 +643,7 @@ c.content.proxy = 'system'
 
 ## Send DNS requests over the configured proxy.
 ## Type: Bool
-c.content.proxy_dns_requests = True
+#c.content.proxy_dns_requests = True
 
 ## Validate SSL handshakes.
 ## Type: BoolAsk
@@ -719,7 +712,7 @@ c.downloads.remove_finished = 20000
 ## The editor (and arguments) to use for the `open-editor` command. `{}`
 ## gets replaced by the filename of the file to be edited.
 ## Type: ShellCommand
-c.editor.command = ['gvim', '-f', '{}']
+c.editor.command = ['st', '-n', 'note', '-e', 'vim', '{}']
 
 ## Encoding to use for the editor.
 ## Type: Encoding
@@ -747,7 +740,7 @@ c.fonts.hints = 'bold 10pt monospace'
 
 ## Font used in the keyhint widget.
 ## Type: Font
-c.fonts.keyhint = '10pt monospace'
+c.fonts.keyhint = '10pt monosprce'
 
 ## Font used for error messages.
 ## Type: Font
@@ -764,7 +757,7 @@ c.fonts.messages.warning = '10pt monospace'
 ## Default monospace fonts. Whenever "monospace" is used in a font
 ## setting, it's replaced with the fonts listed here.
 ## Type: Font
-c.fonts.monospace = '"xos4 Terminus", Terminus, Monospace, "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+#c.fonts.monospace = 'Terminus, Monospace, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", Fixed, Consolas, Terminal'
 
 ## Font used for prompts.
 ## Type: Font
@@ -850,7 +843,7 @@ c.hints.dictionary = '/usr/share/dict/words'
 ## Valid values:
 ##   - javascript: Better but slower
 ##   - python: Slightly worse but faster
-c.hints.find_implementation = 'python'
+#c.hints.find_implementation = 'python'
 
 ## Hide unmatched hints in rapid mode.
 ## Type: Bool
@@ -958,7 +951,7 @@ c.keyhint.delay = 500
 ## Time (in ms) to show messages in the statusbar for. Set to 0 to never
 ## clear messages.
 ## Type: Int
-c.messages.timeout = 2000
+c.messages.timeout = 6000
 
 ## How to open links in an existing instance if a new one is launched.
 ## This happens when e.g. opening a link from a terminal. See
@@ -1004,15 +997,9 @@ c.qt.args = []
 ## Type: String
 c.qt.force_platform = None
 
-## Force software rendering for QtWebEngine. This is needed for
-## QtWebEngine to work with Nouveau drivers. This setting requires a
-## restart.
-## Type: Bool
-c.qt.force_software_rendering = True
-
 ## Show a scrollbar.
 ## Type: Bool
-c.scrolling.bar = True
+c.scrolling.bar = 'always'
 
 ## Enable smooth scrolling for web pages. Note smooth scrolling does not
 ## work with the `:scroll-px` command.
@@ -1202,7 +1189,7 @@ c.tabs.title.alignment = 'left'
 ## Either ''webkit'' or ''webengine'' * `{private}` : Indicates when
 ## private mode is enabled.
 ## Type: FormatString
-c.tabs.title.format = '{index}: {title}'
+#c.tabs.title.format = '{index}: {title}'
 
 ## The format to use for the tab title for pinned tabs. The same
 ## placeholders like for `tabs.title.format` are defined.
@@ -1234,7 +1221,8 @@ c.url.auto_search = 'naive'
 ## `about:blank` for a blank page.
 ## Type: FuzzyUrl
 #c.url.default_page = '~/.config/startpage/startpage.html'
-c.url.default_page = 'https://start.duckduckgo.com'
+#c.url.default_page = 'https://start.duckduckgo.com'
+c.url.default_page = 'https://news.ycombinator.com'
 
 ## The URL segments where `:navigate increment/decrement` will search for
 ## a number.
@@ -1257,9 +1245,11 @@ c.url.incdec_segments = ['path', 'query']
 ## Type: Dict
 c.url.searchengines = {
         'DEFAULT': 'https://duckduckgo.com/?q={}',
+        'g': 'https://google.com/search?q={}',
         'i': 'https://duckduckgo.com/?q={}&iar=images&iax=images&ia=images',
         'i3': 'https://github.com/LukeSmithxyz/voidrice/blob/master/.config/i3/config{}',
         'l': 'https://github.com/LukeSmithxyz/{}',
+        'gh': 'https://github.com/search?q={}',
         'vic': 'https://la.wikipedia.org/w/index.php?search={}&title=Specialis%3AQuaerere',
         'red': 'https://reddit.com/r/{}',
         'wt': 'http://en.wiktionary.org/?search={}',
@@ -1295,7 +1285,7 @@ c.url.searchengines = {
 ## The page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
 #c.url.start_pages = ['~/.config/startpage/startpage.html']
-c.url.start_pages = ['https://start.duckduckgo.com']
+c.url.start_pages = ['https://news.ycombinator.com']
 
 ## The URL parameters to strip with `:yank url`.
 ## Type: List of String
@@ -1314,7 +1304,7 @@ c.window.hide_decoration = False
 ## the current web page. * `{backend}`: Either ''webkit'' or
 ## ''webengine'' * `{private}` : Indicates when private mode is enabled.
 ## Type: FormatString
-c.window.title_format = '{perc}{title}{title_sep}qutebrowser'
+#c.window.title_format = '{perc}{title}{title_sep}qutebrowser'
 
 ## The default zoom level.
 ## Type: Perc
@@ -1332,7 +1322,7 @@ c.zoom.mouse_divider = 512
 ## Whether the zoom factor on a frame applies only to the text or to all
 ## content.
 ## Type: Bool
-c.zoom.text_only = False
+#c.zoom.text_only = False
 
 ## Bindings for normal mode
 config.bind("'", 'enter-mode jump_mark')
@@ -1409,7 +1399,6 @@ config.bind('K', 'search-prev')
 config.bind('H', 'set-cmd-text -s :open -t')
 config.bind('PP', 'open -t -- {primary}')
 config.bind('Pp', 'open -t -- {clipboard}')
-config.bind('R', 'reload -f')
 config.bind('Sb', 'open qute://bookmarks#bookmarks')
 config.bind('Sh', 'open qute://history')
 config.bind('Sq', 'open qute://bookmarks')
@@ -1456,7 +1445,6 @@ config.bind('h', 'set-cmd-text -s :open')
 config.bind('pP', 'open -- {primary}')
 config.bind('pp', 'open -- {clipboard}')
 config.bind('q', 'record-macro')
-config.bind('r', 'reload')
 config.bind('sf', 'save')
 config.bind('sk', 'set-cmd-text -s :bind')
 config.bind('sl', 'set-cmd-text -s :set -t')
@@ -1474,6 +1462,8 @@ config.bind('wb', 'set-cmd-text -s :quickmark-load -w')
 config.bind('wf', 'hint all window')
 config.bind('wh', 'back -w')
 config.bind('wi', 'inspector')
+config.bind('<Ctrl-i>', 'inspector')
+config.bind('<Ctrl-j>', 'spawn --userscript qute-lastpass')
 config.bind('wl', 'forward -w')
 config.bind('wo', 'set-cmd-text -s :open -w')
 config.bind('wp', 'open -w -- {clipboard}')
@@ -1554,6 +1544,8 @@ config.bind('<Up>', 'command-history-prev', mode='command')
 ## Bindings for hint mode
 config.bind('<Ctrl-B>', 'hint all tab-bg', mode='hint')
 config.bind('<Ctrl-F>', 'hint links', mode='hint')
+#config.bind('<Ctrl-R>', 'reload')
+config.bind('<Ctrl-R>', 'reload -f')
 config.bind('<Ctrl-R>', 'hint --rapid links tab-bg', mode='hint')
 config.bind('<Escape>', 'leave-mode', mode='hint')
 config.bind('<Return>', 'follow-hint', mode='hint')
@@ -1593,3 +1585,29 @@ config.bind('y', 'prompt-accept yes', mode='prompt')
 
 ## Bindings for register mode
 config.bind('<Escape>', 'leave-mode', mode='register')
+
+# jblock
+import sys, os
+sys.path.append(os.path.join(sys.path[0], "jblock"))
+config.source("jblock/jblock/integrations/qutebrowser.py")
+config.set(
+    "content.host_blocking.lists",
+    [
+        # Blocks google
+        #"https://easylist.to/easylist/easylist.txt",
+
+        "https://easylist.to/easylist/easyprivacy.txt",
+        "https://easylist.to/easylist/fanboy-annoyance.txt",
+        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
+        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt",
+        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt",
+        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt",
+        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt",
+
+        # Blocks Atlassian
+        #"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt",
+
+        "https://www.malwaredomainlist.com/hostslist/hosts.txt",
+        "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext",
+    ]
+)

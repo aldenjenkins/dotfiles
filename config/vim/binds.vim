@@ -15,20 +15,17 @@ augroup myautocommentdisablehooks
 augroup END
 " }
 
-
-
-
 " Leader - ( Spacebar )
 let mapleader = "," 
 " Enable folding with the spacebar
 nnoremap "  " za
 
-
-
 onoremap c c
 
 " Compile document
-	map <leader>c :!compiler <c-r>%<CR>
+	nnoremap <leader>c :w! \| !compiler <c-r>%<CR><CR>
+        vnoremap <leader>c :%w ! compiler <c-r><CR><CR>
+
 
 " Navigating with guides
 	inoremap ;<Space> <Esc>/<++><Enter>"_c4l
@@ -289,15 +286,10 @@ nnoremap K N
 "     endif
 " endfunction "}
 
-
-
 vnoremap  <leader>r :w ! python3<CR>
 nnoremap  <leader>r :%w ! python3<CR>
 vnoremap  <leader>t :w ! python3 -m timeit<CR>
 nnoremap  <leader>t :%w ! python3 -m timeit<CR>
 vnoremap  <leader>u :w ! python3  -m unittest -v<CR>
 nnoremap  <leader>u :%w ! python3  -m unittest -v<CR>
-
-" Doesnt work. I disable nerdtree closing when no panes present to achieve being able to close a single buffer without it closing all of vim
-"nnoremap \d :bp<cr>:bd #<cr>
 

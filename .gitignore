@@ -54,3 +54,5 @@ kritarc
 .secrets
 !.secrets.example
 **/gnupg
+**/oh-my-zsh
+privaterc

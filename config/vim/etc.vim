@@ -20,6 +20,8 @@ set encoding=utf-8
 set nowrap
 
 set number relativenumber
+set clipboard+=unnamedplus
+set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
 
 " https://code.djangoproject.com/wiki/UsingVimWithDjango
 augroup mypythonhooks
@@ -265,4 +267,44 @@ augroup END
 
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
+
+
+" Use lf to select and open file(s) in vim (adapted from ranger).
+"
+" You need to either copy the content of this file to your ~/.vimrc or source
+" this file directly:
+"
+"     let lfvim = "/path/to/lf.vim"
+"     if filereadable(lfvim)
+"         exec "source " . lfvim
+"     endif
+"
+" You may also like to assign a key to this command:
+"
+"     nnoremap <leader>l :LF<cr>
+"
+
+"function! LF()
+"    let temp = tempname()
+"    exec 'silent !lf -selection-path=' . shellescape(temp)
+"    if !filereadable(temp)
+"        redraw!
+"        return
+"    endif
+"    let names = readfile(temp)
+"    if empty(names)
+"        redraw!
+"        return
+"    endif
+"    exec 'edit ' . fnameescape(names[0])
+"    for name in names[1:]
+"        exec 'argadd ' . fnameescape(name)
+"    endfor
+"    redraw!
+"endfunction
+"command! -bar LF call LF()
+
+nnoremap <leader>l :LF
+
+
 

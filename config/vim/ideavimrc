@@ -1,5 +1,5 @@
-source ~/.vim/etc.vim
-source ~/.vim/binds.vim
+source ~/.config/vim/etc.vim
+source ~/.config/vim/binds.vim
 
 set easymotion  " Implements the EasyMotion and AceJump plugins
 

@@ -1102,7 +1102,6 @@
 ✂ scissors; U+2702
 🗃 card file box; U+1F5C3
 🗄 file cabinet; U+1F5C4
-🗑 wastebasket; U+1F5D1
 🔒 locked; U+1F512
 🔓 unlocked; U+1F513
 🔏 locked with pen; U+1F50F
@@ -1637,4 +1636,4 @@
 ü u accent uber; U+00FC
 ¡ upside down inverted exclamation; U+00A1
 ¿ upside down inverted question mark; U+00BF
-
+🗑️ trash wastebasket delete; U+FE0F
