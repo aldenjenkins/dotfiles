@@ -81,28 +81,6 @@ bindsym $mod+v split h
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# Show audio mixer
-#bindsym $mod+Shift+a		exec $term -e ncpamixer
-
-# Volume control
-#bindsym XF86AudioMute exec --no-startup-id "lmc mute &>> /tmp/out"
-#bindsym XF86AudioLowerVolume    exec --no-startup-id lmc down 1
-#bindsym XF86AudioRaiseVolume    exec --no-startup-id lmc up 1
-#bindsym Shift+XF86AudioLowerVolume exec --no-startup-id lmc down 10
-#bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id lmc up 10
-#
-## Brightness control
-#bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 1
-#bindsym XF86MonBrightnessUp     exec --no-startup-id xbacklight -inc 1
-#bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-#bindsym Shift+XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 10
-
-# Move floating windows
-#bindsym $mod+Shift+l		exec --no-startup-id "bash ~/.local/bin/i3resize left"
-#bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.local/bin/i3resize down"
-#bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.local/bin/i3resize up"
-#bindsym $mod+Shift+semicolon	exec --no-startup-id "bash ~/.local/bin/i3resize right"
-
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -152,59 +130,6 @@ bindsym $mod+Shift+r reload ; restart
 # Move any window to the scratchpad
 bindsym $mod+m move scratchpad
 bindsym $mod+minus scratchpad show
-
-### ----------------------------------------------------------
-### Custom Binds
-### ----------------------------------------------------------
-
-# Qalc popup window
-#bindsym $mod+a exec --no-startup-id createnewmathscratchpadifnotconnectedandshowotherwisejustshow
-
-# VPN floating console
-#bindsym $mod+l exec --no-startup-id createnewvpnscratchpadifnotconnectedandshowotherwisejustshow
-
-# Emoji rofi menu
-#bindsym $mod+grave		exec --no-startup-id dmenuunicode
-
-# SPOTIFY BINDS
-#bindsym $mod+z exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-#bindsym $mod+b exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-#bindsym $mod+p exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-
-# Application launching
-#bindsym $mod+d exec rofi -dpi 1 -show-icons -scroll-method 1 -p "Run" -show drun 
-#bindsym $mod+g exec clipmenu -dpi 1 -p "Clipboard" -scroll-method 1
-
-# Spawn popup window to create/edit notes
-#bindsym $mod+Shift+k exec notemanager 
-
-# Quick countdown script I made
-#bindsym $mod+Shift+t exec timer 
-
-# Lock screen
-#bindsym --release $mod+x	exec --no-startup-id lock
-
-# Shutdown
-#bindsym $mod+Shift+x		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
-
-# Run screen recording script
-#bindsym $mod+w exec --no-startup-id dmenurecord
-
-# Run lastpass script
-#bindsym $mod+j exec --no-startup-id getpassword
-
-#bindsym $mod+r		exec $term -e lf
-
-# pywal a random wallpaper in the wallpaper directory
-#bindsym $mod+c                  exec --no-startup-id ~/src/creations/random_pywalpaper/run.sh > /dev/null
-
-# Run script to select the correct camera and show on the corner of screen
-#bindsym $mod+Shift+c		exec --no-startup-id camtoggle
-
-
-# Screenshot managers
-#bindsym $mod+y                  exec --no-startup-id /home/alden/.local/bin/takescreenshotandaddtoscreenshotdir > /tmp/my_screenshotjob.log 2>&1 
-#bindsym $mod+u                  exec --no-startup-id /home/alden/.local/bin/viewscreenshots
 
 ### ------------------------------------------
 ### Colors and Font
