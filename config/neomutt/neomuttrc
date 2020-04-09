@@ -1,116 +1,213 @@
-# paths
-set folder = ~/Mail
-set message_cachedir = ~/.neomutt/cache/bodies
-#set certificate_file = ~/dotfiles/office/certificates.crt
-set mailcap_path = ~/.neomutt/mailcap
-set tmpdir = ~/.neomutt/tmp
-
-
-# basic options
-set wait_key = no
+# vim: filetype=neomuttrc
+set folder = $XDG_DATA_HOME/mail
 set mbox_type = Maildir
-set timeout = 3
-set mail_check = 0
-set delete
-set quit
-set thorough_search
-unset confirmappend
-unset move
-unset mark_old
-unset beep_new
+set message_cachedir = $XDG_CACHE_HOME/neomutt/bodies
 
-
-# compose View Options
-set envelope_from                    # which from?
-set edit_headers                     # show headers when composing
-set fast_reply                       # skip to compose when replying
-set askcc                            # ask for CC:
-set fcc_attach                       # save attachments with the body
-set forward_format = "Fwd: %s"       # format of subject when forwarding
-set forward_decode                   # decode when forwarding
-set attribution = "On %d, %n wrote:" # format of quoting header
-set reply_to                         # reply to Reply to: field
-set reverse_name                     # reply as whomever it was to
-set include                          # include message in replies
-set forward_quote                    # include message in forwards
-set editor = "vim"
-set text_flowed
-unset sig_dashes                     # no dashes before sig
-unset mime_forward                   # forward attachments as part of body
-
-
-# status bar, date format, finding stuff etc.
-set status_chars = " *%A"
-set status_format = "[ Folder: %f ] [%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>─%?p?( %p postponed )?"
-set date_format = "%d.%m.%Y %H:%M"
-set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %s"
-set sort = threads
-set sort_aux = reverse-last-date-received
-set uncollapse_jump
-set sort_re
-set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
-set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set mailcap_path = $XDG_CONFIG_HOME/neomutt/mailcap
+set date_format="%y/%m/%d %I:%M%p"
+set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
 set send_charset = "utf-8:iso-8859-1:us-ascii"
 set charset = "utf-8"
+set sort = 'reverse-date'
+set smtp_authenticators = 'gssapi:login'
+set query_command = "abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile="$XDG_DATA_HOME"/abook/addressbook --mutt-query '%s'"
+set rfc2047_parameters = yes
+set sleep_time = 0		# Pause 0 seconds for informational messages
+set markers = no		# Disables the `+` displayed at line wraps
+set mark_old = no		# Unread mail stay unread until read
+set envelope_from
+set mime_forward = yes		# attachments are forwarded with mail
+set wait_key = no		# mutt won't ask "press key to continue"
+set fast_reply			# skip to compose when replying
+set fcc_attach			# save attachments with the body
+set forward_format = "Fwd: %s"	# format of subject when forwarding
+set forward_quote		# include message in forwards
+set reverse_name		# reply as whomever it was to
+set include			# include message in replies
 
+set mail_check = 0              # to avoid lags using IMAP with some email providers (yahoo for example)
+set quit
+set delete
+set timeout = 3
+set wait_key = no
+set uncollapse_jump
+unset beep_new
+unset mark_old
+unset move
 
-# sidebar patch config
-set sidebar_visible
+set menu_scroll
+set pager_context = 3
+set pager_index_lines = 5
+set pager_stop
+set tilde
+
+set editor = "nvim"
+
+set edit_headers
+set askcc
+set text_flowed
+
+auto_view text/html		# automatically show html (mailcap uses elinks)
+auto_view application/pgp-encrypted
+alternative_order text/html text/enriched text/plain
+bind index,pager i noop
+bind index,pager g noop
+bind index \Cf noop
+bind pager \\ noop
+bind index,pager \\u noop
+
+# General rebindings
+bind index,attach e next-entry
+bind index,attach i previous-entry
+bind attach <return> view-mailcap
+bind attach o view-mailcap
+bind editor <space> noop
+bind index G last-entry
+bind index gg first-entry
+bind pager,attach n exit
+bind pager e next-line
+bind pager i previous-line
+bind pager o view-attachments
+bind index D delete-message
+bind index U undelete-message
+bind index O limit
+bind index n noop
+bind index o display-message
+bind index <space> tag-entry
+#bind browser h goto-parent
+macro browser n '<change-dir><kill-line>..<enter>' "Go to parent folder"
+bind index,pager N view-raw-message
+bind browser o select-entry
+bind pager,browser gg top-page
+bind pager,browser G bottom-page
+bind index,pager,browser d half-down
+bind index,pager,browser u half-up
+#bind index,pager S sync-mailbox
+bind index,pager R group-reply
+bind index \031 previous-undeleted	# Mouse wheel
+bind index \005 next-undeleted		# Mouse wheel
+bind pager \031 previous-line		# Mouse wheel
+bind pager \005 next-line		# Mouse wheel
+bind editor <Tab> complete-query
+
+macro index,pager a "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode<return><pipe-message>abook --add-email<return><enter-command>set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<return>" "add the sender address to abook"
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+#macro index O "<shell-escape>mbsync -a<enter>" "run mbsync to sync all mail"
+macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>read -p 'Enter a search term to find with notmuch: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;s/\^id:// for@a;$,=\"|\";print@a' | perl -le '@a=<>; chomp@a; s/\\+/\\\\+/ for@a;print@a' \`\"<enter>" "show only messages matching a notmuch pattern"
+macro index A "<limit>all\n" "show all messages (undo limit)"
+
+# email headers and attachments
+ignore *
+unignore from: to: cc: bcc: date: subject:
+unhdr_order *
+hdr_order from: to: cc: bcc: date: subject:
+
+# Sidebar mappings
+set sidebar_visible = yes
+set sidebar_width = 30
 set sidebar_short_path
-set sidebar_folder_indent
-set sidebar_width = 25
-set sidebar_divider_char = ' | '
-set sidebar_indent_string = '  ''
+set sidebar_next_new_wrap
+#set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
 set sidebar_format = "%B %* [%?N?%N / ?%S]"
+set sidebar_divider_char = '8 '
+set sidebar_folder_indent = yes
+set sidebar_indent_string = '    '
 set mail_check_stats
+bind index,pager \Ci sidebar-prev
+bind index,pager \Ce sidebar-next
+bind index,pager \Co sidebar-open
+bind index,pager \Cp sidebar-prev-new
+bind index,pager \Cn sidebar-next-new
+bind index,pager B sidebar-toggle-visible
+macro index,pager \\u "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>" "view URLs"
 
+# Default index colors:
+color index yellow default '.*'
+color index_author red default '.*'
+color index_number blue default
+color index_subject cyan default '.*'
 
+# New mail is boldened:
+color index brightyellow black "~N"
+color index_author brightred black "~N"
+color index_subject brightcyan black "~N"
 
+# Tagged mail is highlighted:
+color index brightyellow blue "~T"
+color index_author brightred blue "~T"
+color index_subject brightcyan blue "~T"
 
-# Mailboxes to show in the sidebar.
-mailboxes =aldenhjenkins
-mailboxes =aldenhjenkins/INBOX =aldenhjenkins/archive =aldenhjenkins/sent =aldenhjenkins/drafts =aldenhjenkins/junk =aldenhjenkins/trash
-# mailboxes =viu
-# mailboxes =viu/INBOX =viu/archive =viu/sent =viu/drafts =viu/junk =viu/trash
-# mailboxes =mf
-# mailboxes =mf/INBOX =mf/archive =mf/sent =mf/drafts =mf/junk =mf/trash
-# mailboxes =kfi
-# mailboxes =kfi/INBOX =kfi/archive =kfi/sent =kfi/drafts =kfi/junk =kfi/trash
-# mailboxes =hsv
-# mailboxes =hsv/INBOX =hsv/archive =hsv/sent =hsv/drafts =hsv/junk =hsv/trash
+# Other colors and aesthetic settings:
+mono bold bold
+mono underline underline
+mono indicator reverse
+mono error bold
+color normal default default
+color indicator brightblack white
+color sidebar_highlight red default
+color sidebar_divider brightblack black
+color sidebar_flagged red black
+color sidebar_new green black
+color normal brightyellow default
+color error red default
+color tilde black default
+color message cyan default
+color markers red white
+color attachment white default
+color search brightmagenta default
+color status brightyellow black
+color hdrdefault brightgreen default
+color quoted green default
+color quoted1 blue default
+color quoted2 cyan default
+color quoted3 yellow default
+color quoted4 red default
+color quoted5 brightred default
+color signature brightgreen default
+color bold black default
+color underline black default
+color normal default default
 
+# Regex highlighting:
+color header blue default ".*"
+color header brightmagenta default "^(From)"
+color header brightcyan default "^(Subject)"
+color header brightwhite default "^(CC|BCC)"
+color body brightred default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
+color body brightblue default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
+color body green default "\`[^\`]*\`" # Green text between ` and `
+color body brightblue default "^# \.*" # Headings as bold blue
+color body brightcyan default "^## \.*" # Subheadings as bold cyan
+color body brightgreen default "^### \.*" # Subsubheadings as bold green
+color body yellow default "^(\t| )*(-|\\*) \.*" # List items as yellow
+color body brightcyan default "[;:][-o][)/(|]" # emoticons
+color body brightcyan default "[;:][)(|]" # emoticons
+color body brightcyan default "[ ][*][^*]*[*][ ]?" # more emoticon?
+color body brightcyan default "[ ]?[*][^*]*[*][ ]" # more emoticon?
+color body red default "(BAD signature)"
+color body cyan default "(Good signature)"
+color body brightblack default "^gpg: Good signature .*"
+color body brightyellow default "^gpg: "
+color body brightyellow red "^gpg: BAD signature from.*"
+mono body bold "^gpg: Good signature"
+mono body bold "^gpg: BAD signature from.*"
+color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
 
-source ~/.config/neomutt/colors
+# GPG/PGP
+set pgp_sign_as = 284A8D14
+set crypt_use_gpgme = yes
+set crypt_autosign = no
+set crypt_verify_sig = yes
+set crypt_replysign = yes
+set crypt_replyencrypt = yes
+set crypt_replysignencrypted = yes
+unset sidebar_new_mail_only
 
-# by default, use mailbox
-set realname = "Alden Jenkins"
-set spoolfile = "+aldenhjenkins/INBOX"
-#source ~/.neomutt/account_configs/aldenhjenkins
+set sidebar_component_depth = 0
 
+set sidebar_delim_chars = '/'
 
-folder-hook "$MUTT_ACCOUNT_1" 'source ~/.neomutt/account.$MUTT_ACCOUNT_1'
-folder-hook "$MUTT_ACCOUNT_2" 'source ~/.neomutt/account.$MUTT_ACCOUNT_2'
-folder-hook "$MUTT_ACCOUNT_3" 'source ~/.neomutt/account.$MUTT_ACCOUNT_3'
-folder-hook "$MUTT_ACCOUNT_4" 'source ~/.neomutt/account.$MUTT_ACCOUNT_4'
-folder-hook "$MUTT_ACCOUNT_5" 'source ~/.neomutt/account.$MUTT_ACCOUNT_5'
-folder-hook "$MUTT_ACCOUNT_6" 'source ~/.neomutt/account.$MUTT_ACCOUNT_6'
-folder-hook "$MUTT_ACCOUNT_7" 'source ~/.neomutt/account.$MUTT_ACCOUNT_7'
+unmailboxes *
+set virtual_spoolfile
 
-# Default account
-#source ~/Mail/account.$MUTT_ACCOUNT_1
-source ~/.neomutt/account_configs/aldenhjenkins.account
-source ~/.config/neomutt/bindings
-
-# Switching account
-macro index <f2> '<sync-mailbox><enter-command>source ~/.neomutt/account_configs/$MUTT_ACCOUNT_1_ALIAS<enter><change_folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.neomutt/account.$MUTT_ACCOUNT_2<enter><change_folder>!<enter>'
-macro index <f4> '<sync-mailbox><enter-command>source ~/.neomutt/account.$MUTT_ACCOUNT_3<enter><change_folder>!<enter>'
-macro index <f5> '<sync-mailbox><enter-command>source ~/.neomutt/account.$MUTT_ACCOUNT_4<enter><change_folder>!<enter>'
-macro index <f6> '<sync-mailbox><enter-command>source ~/.neomutt/account.$MUTT_ACCOUNT_5<enter><change_folder>!<enter>'
-macro index <f7> '<sync-mailbox><enter-command>source ~/.neomutt/account.$MUTT_ACCOUNT_6<enter><change_folder>!<enter>'
-macro index <f8> '<sync-mailbox><enter-command>source ~/.neomutt/account.$MUTT_ACCOUNT_7<enter><change_folder>!<enter>'
-
-
-
-# Fetch mail shortcut
-bind index G imap-fetch-mail
+source $XDG_CONFIG_HOME/neomutt/privaterc

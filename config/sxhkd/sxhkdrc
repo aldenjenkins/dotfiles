@@ -1,0 +1,133 @@
+# The Simple X Hotkey Daemon is the program used by LARBS to map most of the
+# dwm-independent commands.  This file is pretty readable, so I'll let you read
+# it.
+
+# The keys NOT bound here by sxhkd, but by dwm or i3 are:
+# The t thru p keys on the top row
+# The f thru ; keys on the home row
+# The b key on the bottom row (hides the bar in either case)
+
+alt + Return
+	$TERMINAL
+
+alt + shift + a
+	$TERMINAL -e ncpamixer
+
+alt + a
+        createnewmathscratchpad
+
+alt + l
+        createnewvpnscratchpad
+
+alt + grave
+        dmenuunicode
+
+# Application Launching
+alt + d
+        rofi -dpi 1 -show-icons -scroll-method 1 -p "Run" -show drun
+
+# Clipboard script
+alt + g
+        clipmenu -dpi 1 -p "Clipboard" -scroll-method 1
+
+alt + shift + k
+        notemanager
+
+@alt + x
+        lock
+
+alt + shift + x
+        prompt "Shutdown computer?" "sudo shutdown -h now"
+
+alt + shift + Escape
+        prompt "Leave Xorg?" "killall Xorg"
+
+alt + shift + BackSpace
+        prompt "Reboot computer?" "sudo -A reboot"
+
+alt + w
+        dmenurecord
+
+alt + r
+        $TERMINAL -e lf
+
+alt + j
+        getpassword
+
+alt + c
+        ~/src/creations/random_pywalpaper/run.sh
+
+alt + shift + c
+        camtoggle
+
+alt + shift + m
+        selectwallpaperdirforpywal
+
+alt + u 
+        viewscreenshots
+
+alt + y
+        takescreenshot
+
+alt + p
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+alt + b
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+
+alt + z
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+
+alt + shift + l
+        i3resize left
+        
+alt + shift + u
+        i3resize down
+
+alt + shift + q
+	xcqr
+
+alt + shift + y
+        i3resize up
+
+alt + shift + semicolon
+        i3resize right
+
+XF86AudioMute 
+        amixer sset Master toggle
+
+XF86AudioLowerVolume    
+        lmc down 1
+
+XF86AudioRaiseVolume
+        lmc up 1
+
+shift + XF86AudioLowerVolume
+        lmc down 10
+
+shift + XF86AudioRaiseVolume 
+        lmc up 10
+
+XF86MonBrightnessDown   
+        xbacklight -dec 1
+
+XF86MonBrightnessUp 
+        xbacklight -inc 1
+
+shift + XF86MonBrightnessDown 
+        xbacklight -dec 10
+
+shift + XF86MonBrightnessUp 
+        xbacklight -inc 10
+
+#alt + n
+#        i3_tmux_vim_focus left
+#
+#alt + e
+#        i3_tmux_vim_focus down
+#
+#alt + i
+#        i3_tmux_vim_focus up
+#
+#alt + o
+#        i3_tmux_vim_focus right

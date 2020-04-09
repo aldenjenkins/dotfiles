@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 # This script was made by `goferito` on Github and then forked from luke smith's version.
 
 [ -z "$1" ] && echo "No direction provided" && exit 1
 distanceStr="10 px or 10 ppt"
 
 moveChoice() {
-  i3-msg resize "$1" "$2" "$distanceStr" | grep '"success":true' || \
+    i3-msg resize "$1" "$2" "$distanceStr" | grep '"success":true' || \
     i3-msg resize "$3" "$4" "$distanceStr"
 }
 

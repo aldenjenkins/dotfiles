@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # to find correct camera, run lsusb and take the xxxx:xxxx id and replace below
-if [ -e `lsusb -d $(lsusb | grep "Logitech.*Webcam" | awk '{print $6}') 2>&1 >/dev/null` ]
+if [ -e `lsusb -d $(lsusb | grep "Logitech.*Webcam" | awk '{print $6}') 2>&1 >/dev/null` ];
 then
-    pkill -f /dev/video || mpv  --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-70-170 --autofit=20%  --title="mpvfloat" /dev/video0
+    pkill -f /dev/video || mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-70-170 --autofit=20% --title="mpvfloat" /dev/video0
 else
     # use webcam here
-    pkill -f /dev/video || mpv --untimed --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-16-16 --autofit=20%  --title="mpvfloat" /dev/video2
+    pkill -f /dev/video || mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-16-16 --autofit=20% --title="mpvfloat" /dev/video0
 fi
 

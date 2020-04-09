@@ -8,5 +8,5 @@ then
 fi
 echo "$NOTE_DIR_NAME"
 echo "$NOTE_DIR"
-i3-msg "exec --no-startup-id st -n note -e sh -c 'vim \"$NOTE_DIR/note.md\"'"
+i3-msg "exec --no-startup-id st -n note -e sh -c 'nvim \"$NOTE_DIR/note.md\"'"
 

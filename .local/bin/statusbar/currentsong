@@ -2,7 +2,7 @@
 # Alden's first custom i3block! :)
 # Last edited 2019-11-02
 
-function get_dbus_info() (
+get_dbus_info() {
     dbus-send                                   \
     --print-reply                               \
     --session                                   \
@@ -11,14 +11,14 @@ function get_dbus_info() (
     org.freedesktop.DBus.Properties.Get         \
         string:'org.mpris.MediaPlayer2.Player'  \
         string:'Metadata'
-)
+}
 
-function print_default_and_exit() (
+print_default_and_exit() {
     echo "No song playing" 
     exit
-)
+}
 
-if get_dbus_info &> /dev/null; 
+if get_dbus_info >/dev/null 2>&1; 
 then
     DBUS_INFO=$(get_dbus_info)
 else
@@ -30,7 +30,7 @@ SONG_ARTIST="$(echo "$DBUS_INFO" | grep "xesam:artist" -A 2 | grep -v "xesam:art
 
 if [ ! -z "$SONG_TITLE" -a "$SONG_TITLE" != " " ]; 
 then
-    echo "🎵" "`echo $SONG_ARTIST`" "|　`echo "'"$SONG_TITLE"'"　`"
+    echo "🎵 $SONG_ARTIST |　$SONG_TITLE　"
 else
     print_default_and_exit
 fi

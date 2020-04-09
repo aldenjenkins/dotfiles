@@ -105,7 +105,7 @@ cat << EOF > $HOME/.config/dunst/dunstrc
 
     ### Text ###
 
-    font = ypn envypn 12
+    font = inconsolata 12
 
 
     geometry="400x60-10+40"

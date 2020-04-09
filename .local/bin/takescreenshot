@@ -1,8 +1,7 @@
 #!/bin/bash
 notify-send -t 1000 "Please drag your mouse over the screenshot selection"
-pkill escrotum
-#scrot -s "/tmp/mostrecentscrot.png"  #|  tr -s '[[:punct:][:space:]]' '\n' |  sed -n 's/[^0-9]*//p' | xargs -n1 notify-send -u normal
-escrotum -s --selection-delay=500 /tmp/mostrecentscrot.png  # 300 milliseconds to ensure no gray or border on screenshot
+pkill maim
+maim -s /tmp/mostrecentscrot.png
 NEW_NAME=$(rofi -dpi 1 -dmenu -i -p "Set File Name")
 if [[ $NEW_NAME != *.png ]] 
 then
@@ -16,8 +15,11 @@ fi
 FILE_LOCATION=$SHOT_DIR/$NEW_NAME
 mv /tmp/mostrecentscrot.png "$FILE_LOCATION"
 # Allow us to mark the file if the screenshot didn't come out right and delete it upon sxiv exit
-sxiv -o "$FILE_LOCATION" | xargs -I{} rm {}
+sxiv -o "$FILE_LOCATION" | xargs -I{} rm {} 
 if [[ -e $FILE_LOCATION ]]
 then
     xclip -selection clipboard -t image/png -i "$FILE_LOCATION"
+    notify-send "📋 Copied screenshot"
+else
+    notify-send "🗑️ Deleted screenshot"
 fi

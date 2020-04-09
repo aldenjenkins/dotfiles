@@ -47,7 +47,7 @@ textype() { \
 	}
 
 case "$file" in
-	*\.rmd) echo "require(rmarkdown); render('$file')" | R --vanilla ;;
+	*\.rmd) echo "require(rmarkdown); render('$file')" | sudo R --vanilla ;;
 	*\.tex) textype "$file" ;;
 	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
 	*config.h) make && sudo make install ;;

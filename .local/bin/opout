@@ -4,8 +4,20 @@
 
 basename="${1%.*}"
 
+open_browser() {
+        setsid "$BROWSER" --new-window "$basename".html >/dev/null 2>&1 &
+}
+
+open_zathura() {
+        setsid "$READER" "$basename".pdf >/dev/null 2>&1 &
+}
+
+open_sent() {
+        setsid sent "$1" >/dev/null 2>&1 &
+}
+
 case "$1" in
-	*.tex|*.md|*.rmd|*.ms|*.me|*.mom) setsid "$READER" "$basename".pdf >/dev/null 2>&1 & ;;
-	*.html) setsid "$BROWSER" --new-window "$basename".html >/dev/null 2>&1 & ;;
+	*.tex|*.md|*.rmd|*.ms|*.me|*.mom) open_zathura ;;
+        *.html) open_browser ;;
 	*.sent) setsid sent "$1" >/dev/null 2>&1 & ;;
 esac
