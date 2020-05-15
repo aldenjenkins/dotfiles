@@ -117,3 +117,8 @@ bindkey -s '^o' 'lfcd\n'  # zsh
 # pip autocompletion
 eval "`pip completion --zsh`"
 compctl -K _pip_completion pip3
+
+# Fix systemctl completion
+_systemctl_unit_state() {
+  typeset -gA _sys_unit_state
+  _sys_unit_state=( $(__systemctl list-unit-files "$PREFIX*" | awk '{print $1, $2}') ) }

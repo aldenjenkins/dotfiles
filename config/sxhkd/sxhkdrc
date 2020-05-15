@@ -7,90 +7,90 @@
 # The f thru ; keys on the home row
 # The b key on the bottom row (hides the bar in either case)
 
-alt + Return
+super + Return
 	$TERMINAL
 
-alt + shift + a
+super + shift + a
 	$TERMINAL -e ncpamixer
 
-alt + a
+super + a
         createnewmathscratchpad
 
-alt + l
+super + l
         createnewvpnscratchpad
 
-alt + grave
+super + grave
         dmenuunicode
 
 # Application Launching
-alt + d
+super + d
         rofi -dpi 1 -show-icons -scroll-method 1 -p "Run" -show drun
 
 # Clipboard script
-alt + g
+super + g
         clipmenu -dpi 1 -p "Clipboard" -scroll-method 1
 
-alt + shift + k
+super + shift + k
         notemanager
 
-@alt + x
+@super + x
         lock
 
-alt + shift + x
+super + shift + x
         prompt "Shutdown computer?" "sudo shutdown -h now"
 
-alt + shift + Escape
+super + shift + Escape
         prompt "Leave Xorg?" "killall Xorg"
 
-alt + shift + BackSpace
+super + shift + BackSpace
         prompt "Reboot computer?" "sudo -A reboot"
 
-alt + w
+super + w
         dmenurecord
 
-alt + r
+super + r
         $TERMINAL -e lf
 
-alt + j
+super + j
         getpassword
 
-alt + c
-        ~/src/creations/random_pywalpaper/run.sh
+super + c
+        ~/dotfiles/creations/random_pywalpaper/run.sh
 
-alt + shift + c
+super + shift + c
         camtoggle
 
-alt + shift + m
+super + shift + m
         selectwallpaperdirforpywal
 
-alt + u 
+super + u 
         viewscreenshots
 
-alt + y
+super + y
         takescreenshot
 
-alt + p
+super + p
         dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
-alt + b
+super + b
         dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
-alt + z
+super + z
         dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
-alt + shift + l
+super + shift + l
         i3resize left
         
-alt + shift + u
+super + shift + u
         i3resize down
 
-alt + shift + q
+super + shift + q
 	xcqr
 
-alt + shift + y
+super + shift + y
         i3resize up
 
-alt + shift + semicolon
+super + shift + semicolon
         i3resize right
 
 XF86AudioMute 
@@ -120,14 +120,14 @@ shift + XF86MonBrightnessDown
 shift + XF86MonBrightnessUp 
         xbacklight -inc 10
 
-#alt + n
+#super + n
 #        i3_tmux_vim_focus left
 #
-#alt + e
+#super + e
 #        i3_tmux_vim_focus down
 #
-#alt + i
+#super + i
 #        i3_tmux_vim_focus up
 #
-#alt + o
+#super + o
 #        i3_tmux_vim_focus right

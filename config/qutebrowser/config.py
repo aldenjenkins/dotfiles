@@ -460,7 +460,7 @@ c.content.cache.size = None
 ##   - no-3rdparty: Accept cookies from the same origin only.
 ##   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain.
 ##   - never: Don't accept cookies at all.
-c.content.cookies.accept = 'no-3rdparty'
+c.content.cookies.accept = 'all'
 
 ## Store cookies. Note this option needs a restart with QtWebEngine on Qt
 ## < 5.9.
@@ -797,15 +797,15 @@ c.fonts.web.family.standard = ''
 
 ## The default font size for regular text.
 ## Type: Int
-c.fonts.web.size.default = 16
+c.fonts.web.size.default = 20
 
 ## The default font size for fixed-pitch text.
 ## Type: Int
-c.fonts.web.size.default_fixed = 13
+c.fonts.web.size.default_fixed = 20
 
 ## The hard minimum font size.
 ## Type: Int
-c.fonts.web.size.minimum = 0
+c.fonts.web.size.minimum = 1
 
 ## The minimum logical font size that is applied when zooming out.
 ## Type: Int
@@ -1586,28 +1586,28 @@ config.bind('y', 'prompt-accept yes', mode='prompt')
 ## Bindings for register mode
 config.bind('<Escape>', 'leave-mode', mode='register')
 
-# jblock
-import sys, os
-sys.path.append(os.path.join(sys.path[0], "jblock"))
-config.source("jblock/jblock/integrations/qutebrowser.py")
-config.set(
-    "content.host_blocking.lists",
-    [
-        # Blocks google
-        #"https://easylist.to/easylist/easylist.txt",
-
-        "https://easylist.to/easylist/easyprivacy.txt",
-        "https://easylist.to/easylist/fanboy-annoyance.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt",
-
-        # Blocks Atlassian
-        #"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt",
-
-        "https://www.malwaredomainlist.com/hostslist/hosts.txt",
-        "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext",
-    ]
-)
+## jblock
+#import sys, os
+#sys.path.append(os.path.join(sys.path[0], "jblock"))
+#config.source("jblock/jblock/integrations/qutebrowser.py")
+#config.set(
+#    "content.host_blocking.lists",
+#    [
+#        # Blocks google
+#        #"https://easylist.to/easylist/easylist.txt",
+#
+#        "https://easylist.to/easylist/easyprivacy.txt",
+#        "https://easylist.to/easylist/fanboy-annoyance.txt",
+#        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
+#        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt",
+#        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt",
+#        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt",
+#        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt",
+#
+#        # Blocks Atlassian
+#        #"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt",
+#
+#        "https://www.malwaredomainlist.com/hostslist/hosts.txt",
+#        "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext",
+#    ]
+#)

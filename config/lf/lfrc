@@ -9,6 +9,7 @@ set icons		# Enable icons. Requires nerd fonts and LF_ICONS variable.
 set drawbox
 set dircounts
 set dirfirst
+set info size:time
 
 # cmds/functions
 cmd open ${{

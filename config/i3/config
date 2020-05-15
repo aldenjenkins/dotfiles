@@ -1,12 +1,16 @@
 # Alden's config last updated 2020-03-12
 
 set $term --no-startup-id st
-set $mod Mod1
+set $mod Mod4
+
 
 # DPI settings
+# 1080p
+set $FONTSIZE 13
+set $RES 1920*1080
 # 2k
-set $FONTSIZE 10
-set $RES 3440x1440
+#set $FONTSIZE 10
+#set $RES 3440x1440
 # 4k
 #set $FONTSIZE 14
 #set $RES 3840x2160
@@ -199,5 +203,4 @@ mode "resize" {
 
 set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
-set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 set $hibernate sudo systemctl suspend
