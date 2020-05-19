@@ -21,3 +21,4 @@ alias \
     convertrawtomp3="ffmpeg -f s16le -ar 48000 -ac 2 -i aplay-D_card0-t_raw-f_S16_LE-r48000-c_2.raw" \
     icp="xclip -selection clipboard -t image/png -i" \
     ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"' \
+    mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc' \

@@ -1,6 +1,6 @@
 # Profile file. Runs on login. Environmental variables are set here.
 
-source $HOME/.secrets
+source $HOME/.secrets/.env
 
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 
@@ -9,7 +9,7 @@ eval "$(sed 's/^[^#].*/export &/g;t;d' ~/.config/user-dirs.dirs)"
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:$HOME/.gem/ruby/2.5.0/bin:/home/alden/tmp/downloads/google-cloud-sdk/bin
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:$HOME/.local/share/gem/bin:/home/alden/tmp/downloads/google-cloud-sdk/bin
 export KEYMAP="colemak"
 
 # 10ms for key sequences. makes hitting escape in vim work instantly.
@@ -58,6 +58,7 @@ export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 
 # less/man colors
 export LESS=-R
