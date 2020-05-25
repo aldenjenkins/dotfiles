@@ -64,3 +64,4 @@ onoremap o l
 " nnoremap d "_d
 " nnoremap D "_D
 " vnoremap d "_d
+set ideajoin

@@ -30,7 +30,7 @@ fi
 syncandnotify() {
     acc="$(echo "$account" | sed "s/.*\///")"
     mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc "$acc"
-    new=$(find "$XDG_DATA_HOME/mail/$acc/INBOX/new/" "$XDG_DATA_HOME/mail/$acc/Inbox/new/" "$XDG_DATA_HOME/mail/$acc/inbox/new/" -type f -newer "$XDG_CONFIG_HOME/neomutt/.mailsynclastrun" 2> /dev/null)
+    new=$(find "$XDG_DATA_HOME/mail/$acc/INBOX/new/" "$XDG_DATA_HOME/mail/$acc/Inbox/new/" "$XDG_DATA_HOME/mail/$acc/inbox/new/" "$XDG_DATA_HOME/mail/$acc/Github/new/" "$XDG_DATA_HOME/mail/$acc/Jira/new/" -type f -newer "$XDG_CONFIG_HOME/neomutt/.mailsynclastrun" 2> /dev/null)
     newcount=$(echo "$new" | sed '/^\s*$/d' | wc -l)
     if [ "$newcount" -gt "0" ]; then
         notify "$acc" "$newcount" &

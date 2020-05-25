@@ -22,6 +22,8 @@ set nowrap
 set number relativenumber
 set clipboard+=unnamedplus
 set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 
 " https://code.djangoproject.com/wiki/UsingVimWithDjango
 augroup mypythonhooks
@@ -225,7 +227,7 @@ let g:onedark_termcolors=256
 " Autoreload vimrc on save
 augroup myvimrchooks
     au!
-    autocmd BufWritePost ~/dotfiles/config/vim/etc.vim,~/dotfiles/config/vim/plugins.vim,~/dotfiles/config/vim/binds.vim source ~/.nvimrc
+    autocmd BufWritePost ~/dotfiles/config/vim/etc.vim,~/dotfiles/config/vim/plugins.vim,~/dotfiles/config/vim/binds.vim source ~/.config/nvim/init.vim
 augroup END
 
 
@@ -256,7 +258,7 @@ set nocursorline
 " Run xrdb whenever Xdefaults or Xresources are updated.
 augroup myxresourceshooks
     au!
-    autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
+    autocmd BufWritePost ~/.config/X11/Xresources,~/.Xdefaults !xrdb %
 augroup END
 
 

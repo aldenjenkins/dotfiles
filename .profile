@@ -21,6 +21,9 @@ export BETTER_EXCEPTIONS=1
 # Path to your oh-my-zsh installation.
 export ZSH="$XDG_CONFIG_HOME/zsh/oh-my-zsh"
 
+# Openssl random file
+export RANDFILE="$XDG_CACHE_HOME/.rnd"
+
 # Default Programs:
 export TERM="xterm-256color"
 export READER="zathura"
@@ -28,6 +31,9 @@ export BROWSER="chromium"
 export EDITOR="nvim"
 export OPENER="xdg-open"
 export TERMINAL="st"
+
+#export WINEARCH=""
+export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
 export HISTFILE="$XDG_DATA_HOME/.zsh_history"
@@ -59,6 +65,7 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
 # less/man colors
 export LESS=-R

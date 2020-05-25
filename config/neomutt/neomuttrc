@@ -119,7 +119,18 @@ bind index,pager \Co sidebar-open
 bind index,pager \Cp sidebar-prev-new
 bind index,pager \Cn sidebar-next-new
 bind index,pager B sidebar-toggle-visible
-macro index,pager \\u "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>" "view URLs"
+macro index,pager ,u "\
+    :set my_tmp_pipe_decode=\$pipe_decode\n\
+    :set pipe_decode\n\
+    |urlview\n\
+    :set pipe_decode=\$my_tmp_pipe_decode\n\
+    :unset my_tmp_pipe_decode\n" \
+    'call urlview to extract URLs out of a message'
+#macro index,pager ,u "\
+#    <enter-command>set pipe_decode = yes<enter>\n\
+#    <pipe-message>urlview<enter>\n\
+#    <enter-command> set pipe_decode = no<enter>\n" \
+#    'view URLs'
 
 # Default index colors:
 color index yellow default '.*'

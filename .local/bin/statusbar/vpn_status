@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if ! ip route show | grep -q tun0 ; then
-echo "👃 DOWN"
+    echo "👃 DOWN"
 fi

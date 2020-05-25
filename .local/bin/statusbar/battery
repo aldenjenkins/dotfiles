@@ -42,7 +42,7 @@ if ($status eq 'Discharging') {
 	$full_text .= ' DIS';
 } elsif ($status eq 'Charging') {
 	$full_text .= ' CHR';
-} elsif ($status eq 'Unknown') {
+} elsif ($status eq 'Not Charging') {
 	open (AC_ADAPTER, "acpi -a |") or die;
 	$ac_adapt = <AC_ADAPTER>;
 	close(AC_ADAPTER);
