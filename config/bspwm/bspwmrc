@@ -1,0 +1,42 @@
+#!/bin/sh
+
+bspc monitor eDP-1-0 -d Mail Spotify 
+bspc monitor HDMI-A-1-0 -d Krita
+bspc monitor DP-0 -d Slack Web Pycharm tmp1 tmp2 tmp3 Zoom
+
+bspc config border_width         3
+bspc config window_gap          20
+bspc config focus_follows_pointer true
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config ignore_ewmh_fullscreen all
+
+#bspc rule -a krita desktop= state=floating follow=on
+bspc rule -a krita desktop=Krita
+bspc rule -a spotify desktop=Spotify
+bspc rule -a Slack desktop=Slack
+bspc rule -a Chromium desktop=Web
+bspc rule -a qutebrowser desktop=Web
+bspc rule -a jetbrains-pycharm desktop=Pycharm
+bspc rule -a zoom desktop=Zoom
+
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
+#bspc config external_rules_command "$(which external_rules)"
+
+# source the colors.
+. "${HOME}/.cache/wal/colors.sh"
+## Set the border colors.
+bspc config normal_border_color "$color1"
+bspc config active_border_color "$color2"
+bspc config focused_border_color "$color15"
+## Use the line below if you are on bspwm >= 0.9.4
+bspc config presel_feedback_color "$color1"
+## Use the line below if you are on bspwm < 0.9.4
+bspc config presel_border_color "$color1"
+. /home/alden/.config/polybar/launch.sh
+

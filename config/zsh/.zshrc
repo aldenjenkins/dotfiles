@@ -1,5 +1,5 @@
 export ZGEN_DIR=${XDG_DATA_HOME:-$HOME/.local/share}/zgen
-#export ZSH_LPLUG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/zsh/lplug
+export ZSH_LPLUG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/zsh/lplug
 
 source $ZGEN_DIR/zgen.zsh
 # if the init script doesn't exist
@@ -27,4 +27,5 @@ source $XDG_CONFIG_HOME/zsh/prompt.zsh
 source $XDG_CONFIG_HOME/zsh/extra.zsh
 source /usr/bin/virtualenvwrapper.sh
 source $XDG_CONFIG_HOME/zsh/various_plugins/fzf-cd.zsh
+source $ZSH_LPLUG_DIR/fzf-plugin.zsh
 #source $XDG_CONFIG_HOME/zsh/various_plugins/marker-tweak-fzf.zsh

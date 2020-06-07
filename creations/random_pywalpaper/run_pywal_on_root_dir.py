@@ -37,8 +37,9 @@ if __name__ == "__main__":
         completed_process = subprocess.run(['wal', '-n', '-i', selected_file])
         if completed_process.returncode == 0:
             successfully_changed = True
-    subprocess.run(['feh', '--bg-scale', selected_file])
+    subprocess.run(['feh', '--no-fehbg', '--bg-scale', selected_file])
     subprocess.run(['/home/alden/.local/bin/genzathurarc', '2>&1' '/dev/null'])
     subprocess.run(['/home/alden/.local/bin/killdunstandgenrc', '2>&1' '/dev/null'])
     subprocess.run(['notify-send', '-t', '2500', f'Using wallpaper {selected_file}'])
+    subprocess.run(['bspc', 'wm', '-r'])
 
