@@ -1,0 +1,14 @@
+#!/bin/bash
+#sxhkd -m -1     &
+redshift        &
+dunst           &
+nm-applet       &
+clipmenud       &
+unclutter --timeout 1                               &
+xrandr --output DP-0 --primary --mode 3440x1440 --pos 1920x0 --rotate normal --output DP-1 --off --output eDP-1-0 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-1-0 --mode 1920x1080 --pos 0x1080 --rotate normal 
+setxkbmap us -variant colemak -option caps:escape   
+xmodmap ~/.config/xmodmap/config                    
+xset r rate 200 40                                  &
+. ~/dotfiles/creations/random_pywalpaper/run.sh     &
+xcompmgr 	&
+wmname LG3D     &
