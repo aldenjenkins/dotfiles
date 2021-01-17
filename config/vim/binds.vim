@@ -5,9 +5,6 @@ set pastetoggle=<F8>
 set showmode
 " }
 
-
-
-
 " Disable autocomment new lines below commented lines{
 augroup myautocommentdisablehooks
     au!
@@ -28,13 +25,13 @@ onoremap c c
 
 
 " Navigating with guides
-	inoremap ;<Space> <Esc>/<++><Enter>"_c4l
-	vnoremap ;<Space> <Esc>/<++><Enter>"_c4l
-	nnoremap ;<Space> <Esc>/<++><Enter>"_c4l
+"	"inoremap ;<Space> <Esc>/<++><Enter>"_c4l
+"	"vnoremap ;<Space> <Esc>/<++><Enter>"_c4l
+"	"nnoremap ;<Space> <Esc>/<++><Enter>"_c4l
 
 "MARKDOWN
 augroup mymarkdownhooks
-        au!
+  au!
 	autocmd Filetype rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
 	autocmd Filetype rmd inoremap ,n ---<Enter><Enter>
 	autocmd Filetype rmd inoremap ,b ****<++><Esc>F*hi
@@ -75,33 +72,33 @@ onoremap s i
 " l/L = back word/WORD
 " u/U = end of word/WORD
 " y/Y = forward word/WORD
-nnoremap l b|xnoremap l b|onoremap l b|
-nnoremap L B|xnoremap L B|onoremap L B|
-nnoremap u e|xnoremap u e|onoremap u e|
-nnoremap U E|xnoremap U E|onoremap U E|
-nnoremap y w|xnoremap y w|onoremap y w|
-nnoremap Y W|xnoremap Y W|onoremap Y W|
-cnoremap <C-L> <C-Left>
-cnoremap <C-Y> <C-Right>
+"nnoremap l b|xnoremap l b|onoremap l b|
+"nnoremap L B|xnoremap L B|onoremap L B|
+"nnoremap u e|xnoremap u e|onoremap u e|
+"nnoremap U E|xnoremap U E|onoremap U E|
+"nnoremap y w|xnoremap y w|onoremap y w|
+"nnoremap Y W|xnoremap Y W|onoremap Y W|
+"cnoremap <C-L> <C-Left>
+"cnoremap <C-Y> <C-Right>
 " }}}
 " inSert/Replace/append (T) {{{
 nnoremap s i|
 nnoremap S I|
-nnoremap t a|
-nnoremap T A|
+"nnoremap t a|
+"nnoremap T A|
 " }}}
 " Change {{{
-nnoremap w c|xnoremap w c|
-nnoremap W C|xnoremap W C|
-nnoremap ww cc|
+"nnoremap w c|xnoremap w c|
+"nnoremap W C|xnoremap W C|
+"nnoremap ww cc|
 " }}}
 " Cut/copy/paste {{{
 nnoremap x x|xnoremap x d|
-nnoremap c y|xnoremap c y|
-nnoremap v p|xnoremap v p|
+"nnoremap c y|xnoremap c y|
+"nnoremap v p|xnoremap v p|
 nnoremap X dd|xnoremap X d|
-nnoremap C yy|xnoremap C y|
-nnoremap V P|xnoremap V P|
+"nnoremap C yy|xnoremap C y|
+"nnoremap V P|xnoremap V P|
 nnoremap gv gp|xnoremap gv gp|
 nnoremap gV gP|xnoremap gV gP|
 
@@ -110,13 +107,13 @@ nnoremap gV gP|xnoremap gV gP|
 inoremap <C-t> <C-d>
 inoremap <C-d> <C-t>
 " Undo/redo {{{
-nnoremap z u|xnoremap z :<C-U>undo<CR>|
-nnoremap gz U|xnoremap gz :<C-U>undo<CR>|
-nnoremap Z <C-R>|xnoremap Z :<C-U>redo<CR>|
+"nnoremap z u|xnoremap z :<C-U>undo<CR>|
+"nnoremap gz U|xnoremap gz :<C-U>undo<CR>|
+"nnoremap Z <C-R>|xnoremap Z :<C-U>redo<CR>|
 " }}}
 " Visual mode {{{
-nnoremap a v|xnoremap a v|
-nnoremap A V|xnoremap A V|
+"nnoremap a v|xnoremap a v|
+"nnoremap A V|xnoremap A V|
 nnoremap ga gv
 " Make insert/add work also in visual line mode like in visual block mode
 xnoremap <silent> <expr> s (mode() =~# "[V]" ? "\<C-V>0o$I" : "I")
@@ -126,10 +123,10 @@ xnoremap <silent> <expr> T (mode() =~# "[V]" ? "\<C-V>0o$A" : "A")
 " }}}
 " Search {{{
 " f/F are unchanged
-nnoremap p t|xnoremap p t|onoremap p t|
-nnoremap P T|xnoremap P T|onoremap P T|
-nnoremap b ;|xnoremap b ;|onoremap b ;|
-nnoremap B ,|xnoremap B ,|onoremap B ,|
+"nnoremap p t|xnoremap p t|onoremap p t|
+"nnoremap P T|xnoremap P T|onoremap P T|
+"nnoremap b ;|xnoremap b ;|onoremap b ;|
+"nnoremap B ,|xnoremap B ,|onoremap B ,|
 "nnoremap <C-i> gg|xnoremap <C-i> gg|onoremap <C-i> gg|
 "nnoremap <C-e> G|xnoremap <C-e> G|onoremap <C-e> G|
 " }}}
@@ -151,8 +148,6 @@ noremap gi k
 noremap E G
 noremap I gg
 
-
-
 " make searching better
 nnoremap <silent> <leader>, :noh<cr> " Stop highlight after searching
 set incsearch
@@ -162,17 +157,12 @@ set showmatch
 "set list listchars=tab:»·,trail:·,nbsp:·
 "set list listchars=tab:»·,trail:·,nbsp:·
 
-
-
-
 "set wrapmargin=0
 "set colorcolumn=+1
 
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
-
-
 
 "Use enter to create new lines w/o entering insert mode
 nnoremap <CR> o<Esc>
@@ -238,32 +228,30 @@ nnoremap k n
 nnoremap K N
 
 
-
-
-" "====[ Show when lines extend past column 80 ]=================================>!<============
-" 
-"set colorcolumn=80
-"highlight ColorColumn ctermbg=233
-" highlight ColorColumn ctermfg=Black ctermbg=Green
-" 
-" function! MarkMargin (on)
-"     if exists('b:MarkMargin')
-"         try
-"             call matchdelete(b:MarkMargin)
-"         catch /./
-"         endtry
-"         unlet b:MarkMargin
-"     endif
-"     if a:on
-"         let b:MarkMargin = matchadd('ColorColumn', '\%81v\s*\zs\S', 100)
-"     endif
-" endfunction
-" 
-" augroup MarkMargin
-"     autocmd!
-"     autocmd  BufEnter  *       :call MarkMargin(1)
-"     autocmd  BufEnter  *.vp*   :call MarkMargin(0)
-" augroup END
+"====[ Show when lines extend past column 80 ]=================================>!<============
+ 
+"set colorcolumn=120
+highlight ColorColumn ctermbg=233
+ highlight ColorColumn ctermfg=Black ctermbg=Green
+ 
+ function! MarkMargin (on)
+     if exists('b:MarkMargin')
+         try
+             call matchdelete(b:MarkMargin)
+         catch /./
+         endtry
+         unlet b:MarkMargin
+     endif
+     if a:on
+         let b:MarkMargin = matchadd('ColorColumn', '\%120v\s*\zs\S', 100)
+     endif
+ endfunction
+ 
+ augroup MarkMargin
+     autocmd!
+     autocmd  BufEnter  *       :call MarkMargin(1)
+     autocmd  BufEnter  *.vp*   :call MarkMargin(0)
+ augroup END
 
 " function! FindDjangoSettings2() "{
 "     if strlen($VIRTUAL_ENV) && has('python')
@@ -293,3 +281,7 @@ nnoremap  <leader>t :%w ! python3 -m timeit<CR>
 vnoremap  <leader>u :w ! python3  -m unittest -v<CR>
 nnoremap  <leader>u :%w ! python3  -m unittest -v<CR>
 
+" Open corresponding .pdf/.html or preview
+	map <leader>p :!opout <c-r>%<CR><CR>
+
+nnoremap <leader>f :Lf<CR>

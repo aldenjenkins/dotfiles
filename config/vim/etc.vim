@@ -4,6 +4,9 @@
 " and for plugins that are filetype specific.
 filetype indent plugin on
 
+" Automatically indents vim-surround surroundings
+set smartindent
+
 " Enable syntax highlighting
 syntax on
 
@@ -16,6 +19,7 @@ set nocompatible
 set guioptions+=a
 
 set encoding=utf-8
+set textwidth=119
 
 set nowrap
 
@@ -24,6 +28,29 @@ set clipboard+=unnamedplus
 set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+
+augroup filetype_yaml
+    autocmd!
+    autocmd BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+    autocmd FileType yaml |
+        setl shiftwidth=2 |
+        setl softtabstop=2 |
+        setl tabstop=2
+        setl indentkeys-=<:>
+augroup END
+
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+let g:html_indent_inctags = "address,article,aside,audio,blockquote,canvas,dd,div,dl,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,main,nav,noscript,ol,output,p,pre,section,table,tfoot,ul,video"
+
+autocmd FileType html set ft=htmldjango.html
+
+augroup filetype_html_or_ruby
+    autocmd!
+    autocmd Filetype html setlocal ts=2 sw=2 expandtab
+    autocmd Filetype htmldjango setlocal ai sts=2 ts=2 sw=2 expandtab
+    autocmd Filetype ruby setlocal ts=2 sw=2 expandtab nnoremap <buffer> <localleader>c I/*<space><esc><s-a><space>*/<esc>
+augroup END
 
 " https://code.djangoproject.com/wiki/UsingVimWithDjango
 augroup mypythonhooks
@@ -267,8 +294,9 @@ augroup myi3confighooks
     autocmd BufWritePost ~/.config/i3/config !i3 restart
 augroup END
 
-" Open corresponding .pdf/.html or preview
-	map <leader>p :!opout <c-r>%<CR><CR>
+
+
+
 
 
 " Use lf to select and open file(s) in vim (adapted from ranger).
@@ -306,7 +334,6 @@ augroup END
 "endfunction
 "command! -bar LF call LF()
 
-nnoremap <leader>l :LF
-
+autocmd BufWritePost ~/src/var/dwmblocks/config.h !cd ~/src/var/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 
 
